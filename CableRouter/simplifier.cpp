@@ -30,32 +30,30 @@ int Simplifier::add(point *row) {
     return true;
 }
 
-vector<vector<cell>> *Simplifier::grid(int cell_w, int cell_h) {
-    vector<vector<cell>> grid;
+vector<vector<cell>> Simplifier::grid(int cell_w, int cell_h) {
+    float grid_x = this->min->x;
+    float grid_y = this->min->y;
+    float grid_w = this->max->x - this->min->x;
+    float grid_h = this->max->y - this->min->y;
+    unsigned long count_x = (unsigned long) (grid_w / cell_w);
+    unsigned long count_y = (unsigned long) (grid_h / cell_h);
 
-    /*
-    double grid_x = min.x;
-    double grid_y = min.y;
-    double grid_w = max.x - min.x;
-    double grid_h = max.y - min.y;
-    int count_x = grid_w / GRID_CELL_W;
-    int count_y = grid_h / GRID_CELL_H;
-
-    // Define grid
-    vector<vector<aggregationCell> > grid (count_x, vector<aggregationCell>(count_y, NULL));
-
-    // Snap to grid
-    int s = data.size();
-    for (int i = 0; i < s; i++) {
-        addToGrid(
-                &grid,
-                grid_x, grid_y, grid_w, grid_h,
-                GRID_CELL_W, GRID_CELL_H,
-                &data[i]
-        );
+    // Group points
+    vector<vector<aggregationCell>> g = vector<vector<aggregationCell>>(count_x+1, vector<aggregationCell>(count_y+1, aggregationCell()));
+    for(int i = 0; i < this->data.size(); i++){
+        unsigned long x = (unsigned long) ((this->data[i]->x - grid_x) / cell_w);
+        unsigned long y = (unsigned long) ((this->data[i]->y - grid_y) / cell_h);
+        g.at(x).at(y).addPoint(this->data[i]);
     }
-    */
 
-    return &grid;
+    // Aggregate
+    vector<vector<cell>> r = vector<vector<cell>>(count_x+1, vector<cell>(count_y+1, cell()));
+    for(int x = 0; x < g.size(); x++){
+        for(int y = 0; y < g[x].size(); y++){
+            r[x][y] = g[x][y].toCell();
+        }
+    }
+
+    return r;
 
 }

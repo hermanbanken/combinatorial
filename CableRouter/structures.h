@@ -14,6 +14,7 @@ enum SeaBed {
 };
 
 struct cell {
+    bool mapped = false;
     double z;
     bool builder;
     bool bomb;
@@ -48,6 +49,8 @@ struct aggregationCell {
     void addPoint(point *p);
 
     void addBed(SeaBed b);
+
+    cell toCell();
 
     SeaBed seabed();
 

@@ -15,7 +15,7 @@ string point::toString() {
 }
 
 void aggregationCell::addPoint(point *p) {
-    double factor = ((double) this->count) / (this->count + 1);
+    double factor = ((double) this->count++) / (this->count);
     this->z = this->z * factor + p->z / (this->count + 1);
 
     this->builder = max(this->builder, p->builder);
@@ -43,6 +43,17 @@ SeaBed aggregationCell::seabed() {
         return Rock;
     else
         return Mud;
+}
+
+cell aggregationCell::toCell() {
+    cell c = cell();
+    c.z = this->z;
+    c.bomb = this->bomb;
+    c.builder = this->builder;
+    c.pipeline = this->pipeline;
+    c.seabed = this->seabed();
+    c.mapped = this->count > 0;
+    return c;
 }
 
 point::point() {

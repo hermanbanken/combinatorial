@@ -28,5 +28,5 @@ public:
     /**
     * Generate a simplified grid with the given cell widths and heights
     */
-    vector<vector<cell>> *grid(int cell_w, int cell_h);
+    vector<vector<cell>> grid(int cell_w, int cell_h);
 };
