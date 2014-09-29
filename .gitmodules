@@ -1,0 +1,3 @@
+[submodule "CableRouter/vendor/libcmaes"]
+	path = CableRouter/vendor/libcmaes
+	url = https://github.com/beniz/libcmaes.git
