@@ -16,7 +16,15 @@
 
 using namespace std;
 
-enum SeaBed {sand, rock, mud};
+enum SeaBed {Sand, Rock, Mud};
+
+struct cell {
+  double z      ;
+  bool builder  ;
+  bool bomb     ;
+  bool pipeline ;
+  SeaBed seabed ;
+} ;
 
 struct point {
   double x;
@@ -27,15 +35,19 @@ struct point {
   bool bomb;
   bool pipeline;
   
-  string toString() {
-    char * r = (char*)malloc(100);
-    sprintf(r,
-      "(%f,%f)(dept=%f,seabed=%i,builder=%i,bomb=%i,pipeline=%i)\n",
-      x, y, z, seabed, builder, bomb, pipeline
-    );
-    std::string str(r);
-    return str;
-  }
+  string toString();
+} ;
+
+struct aggregationCell {
+  double z      ;
+  bool builder  ;
+  bool bomb     ;
+  bool pipeline ;
+  int beds[3]   ; // SeaBed.count
+  
+  void addBed(SeaBed b);
+  SeaBed seabed();
+
 } ;
 
 #endif /* defined(____seabed_preprocess__) */

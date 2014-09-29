@@ -16,9 +16,43 @@
 #include <algorithm>
 #include <float.h>
 
+#define GRID_CELL_W 10;
+#define GRID_CELL_H 10;
+
 using namespace std;
 
-// Read a row
+string point::toString()
+{
+  char * r = (char*)malloc(100);
+  sprintf(r,
+    "(%f,%f)(dept=%f,seabed=%i,builder=%i,bomb=%i,pipeline=%i)\n",
+    x, y, z, seabed, builder, bomb, pipeline
+  );
+  std::string str(r);
+  return str;
+}
+
+void aggregationCell::addBed(SeaBed b) {
+  if(b == Sand)
+    this->beds[0]++;
+  else if(b == Rock)
+    this->beds[1]++;
+  else if(b == Mud)
+    this->beds[2]++;
+  else
+    cerr << "Unknown seabed [1]: " << b << " add this type and recompile.\n";
+}
+
+SeaBed aggregationCell::seabed() {
+  if(this->beds[0] > this->beds[1] && this->beds[0] > this->beds[2])
+    return Sand;
+  else if(this->beds[1] > this->beds[2])
+    return Rock;
+  else
+    return Mud;
+}
+
+// Reads a row
 bool cvt (
   point &row,
   std::string const &line, char delimiter,
@@ -33,7 +67,7 @@ bool cvt (
   int obst;
   
   // Parse line
-  int result = sscanf(line.c_str(), "%lf %lf %f %i %i %i", &row.x, &row.y, &z, &d, &sea, &obst);
+  int result = sscanf(line.c_str(), "%lf %lf %f %i.000 %i.000 %i.000", &row.x, &row.y, &z, &d, &sea, &obst);
   if(result < 6)
     return 0;
   
@@ -81,14 +115,22 @@ int main (int argc, char const *argv[])
   ifstream in(filename);
   point row;
   int c = 0;
-  while (std::getline(in, line) && in.good())
+  while (std::getline(in, line) && in.good()){
     if(cvt(row, line, ' ', min, max, avg, count))
       data.push_back(row);
+    else
+      cerr << "Skipped line: " << line;
+  }
   
   cout<<"Read "<<data.size()<<" points\n";
   cout<<"Min:\n\t"<<min.toString()<<"\n";
   cout<<"Max:\n\t"<<max.toString()<<"\n";
   cout<<"Avg:\n\t"<<avg.toString()<<"\n";
+  
+  double grid_x = min.x;
+  double grid_y = min.y;
+  double grid_w = max.x - min.x;
+  double grid_h = max.y - min.y;
   
   // Write
   // ....
