@@ -9,7 +9,7 @@
 
 using namespace std;
 
-enum SeaBed {
+enum SeaBed : char {
     Sand, Rock, Mud
 };
 
