@@ -41,8 +41,10 @@ int main(int argc, char const *argv[]) {
     int mapped = 0;
     for(i=grid.begin(); i!=grid.end(); ++i){
         for(j=i->begin(); j!=i->end(); ++j){
+            // cout << (j->mapped ? "x" : " ");
             if(j->mapped) mapped++;
         }
+        // cout << "\n";
     }
 
     cout << (double)(mapped) / grid.size() / grid.begin()->size() * 100 << "% of grid filled\n";
