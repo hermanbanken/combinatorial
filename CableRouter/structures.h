@@ -4,8 +4,8 @@
 #include <string>
 
 
-#ifndef ____seabed_preprocess__
-#define ____seabed_preprocess__
+#ifndef ___cablerouter_structures___
+#define ___cablerouter_structures___
 
 using namespace std;
 
@@ -56,4 +56,4 @@ struct aggregationCell {
 
 };
 
-#endif /* defined(____seabed_preprocess__) */
+#endif /* defined(___cablerouter_structures___) */

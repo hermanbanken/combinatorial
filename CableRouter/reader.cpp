@@ -5,7 +5,7 @@
 using namespace std;
 
 Reader::Reader(const string filename) {
-    in = ifstream(filename);
+    in.open(filename);
 }
 
 int Reader::next(point *row) {
@@ -14,7 +14,6 @@ int Reader::next(point *row) {
 
     string line;
     std::getline(in, line);
-    std::istringstream rin(line);
     if (line.empty())
         return false;
 
@@ -23,8 +22,12 @@ int Reader::next(point *row) {
     int sea = 0;
     int obst = 0;
 
+// New way of parsing below. However, this is slower than sscanf.
+// Evaluate later to maybe use the newer method
+//
 //  // Parse line
-//    rin >> row->x >> row->y >> z >> d >> sea >> obst;
+//  std::istringstream rin(line);
+//  rin >> row->x >> row->y >> z >> d >> sea >> obst;
 //  // Error checking here
 //    if(false){
 //        cerr << "Skipped line: " << line << "\n";

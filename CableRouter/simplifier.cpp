@@ -2,6 +2,7 @@
 #include <math.h>
 #include "structures.h"
 #include "simplifier.h"
+#include <limits.h>
 
 Simplifier::Simplifier() {
     min = new point(INT_MAX, INT_MAX, INT_MAX);
@@ -40,7 +41,7 @@ vector<vector<cell>> Simplifier::grid(int cell_w, int cell_h) {
 
     // Group points
     vector<vector<aggregationCell>> g = vector<vector<aggregationCell>>(count_x+1, vector<aggregationCell>(count_y+1, aggregationCell()));
-    for(int i = 0; i < this->data.size(); i++){
+    for(unsigned int i = 0; i < this->data.size(); i++){
         unsigned long x = (unsigned long) ((this->data[i]->x - grid_x) / cell_w);
         unsigned long y = (unsigned long) ((this->data[i]->y - grid_y) / cell_h);
         g.at(x).at(y).addPoint(this->data[i]);
@@ -48,12 +49,11 @@ vector<vector<cell>> Simplifier::grid(int cell_w, int cell_h) {
 
     // Aggregate
     vector<vector<cell>> r = vector<vector<cell>>(count_x+1, vector<cell>(count_y+1, cell()));
-    for(int x = 0; x < g.size(); x++){
-        for(int y = 0; y < g[x].size(); y++){
+    for(unsigned int x = 0; x < g.size(); x++){
+        for(unsigned int y = 0; y < g[x].size(); y++){
             r[x][y] = g[x][y].toCell();
         }
     }
 
     return r;
-
 }
