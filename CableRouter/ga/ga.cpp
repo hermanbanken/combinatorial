@@ -18,4 +18,15 @@ FitFunc fsphere = [](const double *x, const int N)
 };
 
 void GA::solve(vector<vector<cell>> &grid, vector<tuple<unsigned long, unsigned long>> &line) {
+    int dim = 10; // problem dimensions.
+    vector<double> x0(dim,10.0);
+    double sigma = 0.1;
+    //int lambda = 100; // offsprings at each generation.
+    CMAParameters<> cmaparams(dim,&x0.front(),sigma);
+    //cmaparams.set_algo(BIPOP_CMAES);
+    CMASolutions cmasols = cmaes<>(fsphere,cmaparams);
+    cout << "best solution: " << cmasols << endl;
+    cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds" << endl;
+    int o = cmasols.run_status();
+    cout << "Result: " << o << endl;
 }

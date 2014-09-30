@@ -2,6 +2,7 @@
 #include "structures.h"
 #include "reader.h"
 #include "simplifier.h"
+#include "ga/ga.h"
 
 #define DEFAULT_GRID_SIZE 5;
 
@@ -58,6 +59,9 @@ int main(int argc, char const *argv[]) {
 
     clock_t stop2 = clock();
     cout << double(stop2 - stop) / CLOCKS_PER_SEC << " seconds for grid\n";
+
+    vector<tuple<unsigned long,unsigned long>> line;
+    (new Solvers::GA)->solve(grid, line);
 
     return 0;
 }

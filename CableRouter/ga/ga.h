@@ -14,7 +14,7 @@ namespace Solvers {
 
     class GA: public Solver {
     public:
-        virtual void solve(vector<vector<cell>> &grid, vector<tuple<unsigned long, unsigned long>> &line) = 0;
+        void solve(vector<vector<cell>> &grid, vector<tuple<unsigned long, unsigned long>> &line);
     };
 
 }
