@@ -5,6 +5,7 @@
 #include "ga/ga.h"
 
 #define DEFAULT_GRID_SIZE 5;
+const int GA_COMPLEXITY = 5;
 
 using namespace std;
 
@@ -36,32 +37,35 @@ int main(int argc, char const *argv[]) {
 
     cout << "Generated grid of " << grid.size() << "x" << grid.begin()->size() << "\n";
 
-//    std::vector<vector<cell>>::const_iterator i;
-//    std::vector<cell>::const_iterator j;
-//    int mapped = 0;
-//    for(i=grid.begin(); i!=grid.end(); ++i){
-//        for(j=i->begin(); j!=i->end(); ++j){
-//            if(j->pipeline)
-//                cout << "|";
-//            else if (j->bomb)
-//                cout << "b";
-//            else if (j->builder)
-//                cout << ".";
-//            else if(j->mapped)
-//                cout << " ";
-//            else
-//                cout << "*";
-//            if(j->mapped) mapped++;
-//        }
-//        cout << "\n";
-//    }
-//    cout << (double)(mapped) / grid.size() / grid.begin()->size() * 100 << "% of grid filled\n";
+    std::vector<vector<cell>>::const_iterator i;
+    std::vector<cell>::const_iterator j;
+    int mapped = 0;
+    for(i=grid.begin(); i!=grid.end(); ++i){
+        for(j=i->begin(); j!=i->end(); ++j){
+            if(j->pipeline)
+                cout << "|";
+            else if (j->bomb)
+                cout << "b";
+            else if (j->builder)
+                cout << ".";
+            else if(j->mapped)
+                cout << " ";
+            else
+                cout << "*";
+            if(j->mapped) mapped++;
+        }
+        cout << "\n";
+    }
+    cout << (double)(mapped) / grid.size() / grid.begin()->size() * 100 << "% of grid filled\n";
 
     clock_t stop2 = clock();
     cout << double(stop2 - stop) / CLOCKS_PER_SEC << " seconds for grid\n";
 
-    vector<tuple<unsigned long,unsigned long>> line;
-    (new Solvers::GA)->solve(grid, line);
+    vector<tuple<unsigned long,unsigned long>> line(2, make_tuple(7, grid.begin()->size() - 3));
+    line[1] = make_tuple(grid.size() - 2, 2);
+
+    Solvers::GA* g = new Solvers::GA(GA_COMPLEXITY);
+    g->solve(grid, line);
 
     return 0;
 }
