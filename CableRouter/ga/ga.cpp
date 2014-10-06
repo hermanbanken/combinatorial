@@ -7,9 +7,6 @@
 #include "cmaes.h"
 #include <math.h>
 
-const double ALLOWED_ANGLE = 5 / 180 * M_PI;
-const double CABLE_COST = 100;
-
 using namespace std;
 using namespace libcmaes;
 using namespace Solvers;
