@@ -70,7 +70,7 @@ point::point(float x, float y, float z) {
 void Grid::plot(ostream &stream) {
     std::vector<vector<cell>>::const_iterator i;
     std::vector<cell>::const_iterator j;
-    for(i=grid.begin(); i!=grid.end(); ++i){
+    for(i=grid->begin(); i!=grid->end(); ++i){
         for(j=i->begin(); j!=i->end(); ++j){
             if(j->pipeline)
                 stream << "|";
@@ -87,9 +87,8 @@ void Grid::plot(ostream &stream) {
     }
 }
 
-Grid::Grid(vector<vector<cell>> grid, Projection fromInputToGrid) : gridProjection(fromInputToGrid) {
+Grid::Grid(vector<vector<cell>>* grid, Projection *fromInputToGrid) : gridProjection(fromInputToGrid) {
     this->grid = grid;
-    this->gridProjection = fromInputToGrid;
 }
 
 void Projection::project(float x, float y, float &out_x, float &out_y) {
@@ -109,12 +108,12 @@ void Projection::projectY(float y, float &out_y) {
     out_y = (y + offset_y) * scale_y;
 }
 
-Projection Grid::to_ZeroToOne_Projection() {
-    return Projection(minX(), minY(),1/(maxX()-minX()), 1/(maxY()-minY()));
+Projection* Grid::to_ZeroToOne_Projection() {
+    return new Projection(minX(), minY(),1/(maxX()-minX()), 1/(maxY()-minY()));
 }
 
-Projection Projection::back() {
-    return Projection(-offset_x*scale_x, -offset_y*scale_y, 1/scale_x, 1/scale_y);
+Projection* Projection::back() {
+    return new Projection(-offset_x*scale_x, -offset_y*scale_y, 1/scale_x, 1/scale_y);
 }
 
 float Grid::angle(float ax, float ay, float bx, float by, Projection &p) {
@@ -122,9 +121,9 @@ float Grid::angle(float ax, float ay, float bx, float by, Projection &p) {
         p.project(ax, ay, ax, ay);
         p.project(bx, by, bx, by);
     }
-    if(!gridProjection.hasEqualScales()){
-        gridProjection.project(ax,ay,ax,ay);
-        gridProjection.project(bx,by,bx,by);
+    if(!gridProjection->hasEqualScales()){
+        gridProjection->project(ax,ay,ax,ay);
+        gridProjection->project(bx,by,bx,by);
     }
     return (float) atan2(by - ay, bx - ax);
 }
@@ -146,12 +145,12 @@ float Grid::cost(float ax, float ay, float bx, float by, Projection &p) {
         double cy = ay + by * p / distance * (ay < by ? 1 : -1);
 
         // Off map
-        if(cx < 0 || cx > this->grid.size())
+        if(cx < 0 || cx > this->grid->size())
             val = FLT_MAX;
-        else if(cy < 0 || cy > this->grid.begin()->size())
+        else if(cy < 0 || cy > this->grid->begin()->size())
             val = FLT_MAX;
         else {
-            cell c = this->grid[(unsigned long)cx][(unsigned long)cy];
+            cell c = this->grid->at((unsigned long)cx).at((unsigned long)cy);
             if(!c.mapped)
                 val = FLT_MAX;
             else {
@@ -173,17 +172,17 @@ float Grid::distance(float ax, float ay, float bx, float by, Projection &p) {
         p.project(ax, ay, ax, ay);
         p.project(bx, by, bx, by);
     }
-    if(!gridProjection.isIdentity()){
-        this->backToInputProjection().project(ax, ay, ax, ay);
-        this->backToInputProjection().project(bx, by, bx, by);
+    if(!gridProjection->isIdentity()){
+        this->backToInputProjection()->project(ax, ay, ax, ay);
+        this->backToInputProjection()->project(bx, by, bx, by);
     }
     return (float) sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
 }
 
-Projection Grid::backToInputProjection() {
-    return gridProjection.back();
+Projection* Grid::backToInputProjection() {
+    return gridProjection->back();
 }
 
-Projection Grid::inputProjection() {
+Projection* Grid::inputProjection() {
     return gridProjection;
 }

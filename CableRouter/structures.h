@@ -79,15 +79,15 @@ public:
     void project(float x, float y, float &out_x, float &out_y);
     void projectX(float x, float &out_x);
     void projectY(float y, float &out_y);
-    Projection back();
-    bool isIdentity() {
+    Projection* back();
+    bool isIdentity()const {
         return is_identity;
     }
     bool hasEqualScales() {
         return is_equalScale;
     }
-    static Projection identity() {
-        return Projection(0, 0, 1, 1);
+    static Projection* identity() {
+        return new Projection(0, 0, 1, 1);
     }
 
 
@@ -95,14 +95,14 @@ public:
 
 class Grid {
 private:
-    vector<vector<cell>> grid;
-    const Projection gridProjection;
+    vector<vector<cell>>* grid;
+    Projection* gridProjection;
 
     float maxX() {
-        return grid.size();
+        return grid->size();
     }
     float maxY() {
-        return grid.begin()->size();
+        return grid->begin()->size();
     }
     float minX() {
         return 0;
@@ -111,14 +111,14 @@ private:
         return 0;
     }
     cell get(float x, float y){
-        return grid.at((unsigned long) x).at((unsigned long) y);
+        return grid->at((unsigned long) x).at((unsigned long) y);
     }
 
 public:
-    Grid(vector<vector<cell>> grid, Projection fromInputToGrid);
-    Projection backToInputProjection();
-    Projection inputProjection();
-    Projection to_ZeroToOne_Projection();
+    Grid(vector<vector<cell>>* grid, Projection *fromInputToGrid);
+    Projection* backToInputProjection();
+    Projection* inputProjection();
+    Projection* to_ZeroToOne_Projection();
     cell getCellFromInputProjection(float x, float y);
     cell getCell(float x, float y, Projection &p);
 

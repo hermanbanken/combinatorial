@@ -55,5 +55,7 @@ vector<vector<cell>> Simplifier::grid(int cell_w, int cell_h) {
         }
     }
 
+    new Grid(&r, new Projection(-grid_x, -grid_y, 1/cell_w, 1/cell_h));
+
     return r;
 }
