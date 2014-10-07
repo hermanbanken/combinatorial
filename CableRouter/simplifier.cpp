@@ -40,26 +40,26 @@ Grid* Simplifier::grid(int cell_w, int cell_h) {
     float grid_y = this->min->y;
     float grid_w = this->max->x - this->min->x;
     float grid_h = this->max->y - this->min->y;
-    unsigned long count_x = (unsigned long) (grid_w / cell_w);
-    unsigned long count_y = (unsigned long) (grid_h / cell_h);
+    unsigned long count_x = (unsigned long) (grid_w / cell_w) + 1;
+    unsigned long count_y = (unsigned long) (grid_h / cell_h) + 1;
 
     // Group points
-    vector<vector<aggregationCell>> g = vector<vector<aggregationCell>>(count_x+1, vector<aggregationCell>(count_y+1, aggregationCell()));
+    vector<vector<aggregationCell>> g = vector<vector<aggregationCell>>(count_x, vector<aggregationCell>(count_y, aggregationCell()));
     vector<point*>::const_iterator it;
     for(it = this->data.begin(); it < this->data.end(); it++){
-        unsigned long x = (unsigned long) (((*it)->x - grid_x) / cell_w);
-        unsigned long y = (unsigned long) (((*it)->y - grid_y) / cell_h);
+        unsigned long x = (unsigned long) floor(((*it)->x - grid_x) / cell_w);
+        unsigned long y = (unsigned long) floor(((*it)->y - grid_y) / cell_h);
         g.at(x).at(y).addPoint(*it);
     }
 
     cout << "Initialized grid vector with " << count_x << " x " << count_y << " cells." << endl << flush;
     // Aggregate
-    vector<vector<cell>> r = vector<vector<cell>>(count_x+1, vector<cell>(count_y+1, cell()));
+    vector<vector<cell>> r = vector<vector<cell>>(count_x, vector<cell>(count_y, cell()));
     for(unsigned int x = 0; x < g.size(); x++){
         for(unsigned int y = 0; y < g[x].size(); y++){
             r.at(x)[y] = g[x][y].toCell();
         }
     }
 
-    return new Grid(r, Projection(-grid_x, -grid_y, 1/cell_w, 1/cell_h));
+    return new Grid(&r, Projection(-grid_x, -grid_y, 1/cell_w, 1/cell_h));
 }

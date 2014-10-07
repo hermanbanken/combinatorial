@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <math.h>
+#include <stdexcept>
+#include <iostream>
 
 #ifndef ___cablerouter_structures___
 #define ___cablerouter_structures___
@@ -96,14 +98,14 @@ public:
 
 class Grid {
 private:
-    vector<vector<cell>> grid;
+    vector<vector<cell>>* grid;
     Projection gridProjection;
 
     float maxX() {
-        return grid.size();
+        return grid->size();
     }
     float maxY() {
-        return grid.at(0).size();
+        return grid->at(0).size();
     }
     float minX() {
         return 0;
@@ -111,19 +113,20 @@ private:
     float minY() {
         return 0;
     }
-    cell* get(unsigned long x, unsigned long y){
-        return &(grid.at(x).at(y));
-    }
 
-    int distanceToMap(unsigned long x, unsigned long y);
+    cell * get(unsigned long x, unsigned long y);
+
+    int distanceToMap(unsigned long x, unsigned long y, unsigned long origin_x, unsigned long origin_y, unsigned int maxRecurse);
 
 
 public:
-    Grid(vector<vector<cell>> grid, Projection fromInputToGrid);
+    Grid(vector<vector<cell>>* grid, Projection fromInputToGrid);
     Projection* backToInputProjection();
     Projection* inputProjection();
     Projection* to_ZeroToOne_Projection();
     cell* getCell(float x, float y, Projection &p);
+
+    int distanceToMap(unsigned long x, unsigned long y);
 
     float maxX(Projection &p) {
         float max;
@@ -166,6 +169,8 @@ public:
 
     void write(string filename);
     static Grid read(string filename);
+
+    vector<pair<unsigned long, unsigned long>> edgeNodes();
 };
 
 #endif /* defined(___cablerouter_structures___) */
