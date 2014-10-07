@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <math.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -68,26 +69,32 @@ point::point(float x, float y, float z) {
 }
 
 void Grid::plot(ostream &stream) {
-    std::vector<vector<cell>>::const_iterator i;
-    std::vector<cell>::const_iterator j;
-    for(i=grid->begin(); i!=grid->end(); ++i){
-        for(j=i->begin(); j!=i->end(); ++j){
-            if(j->pipeline)
+    vector<vector<cell>>::const_iterator i;
+    vector<cell>::const_iterator j;
+    stream << "Outputting grid:" << endl;
+    for(i=grid.begin(); i!=grid.end(); i++){
+        for(j=i->begin(); j!=i->end(); j++) {
+            if (j->pipeline)
                 stream << "|";
             else if (j->bomb)
                 stream << "b";
             else if (j->builder)
                 stream << ".";
-            else if(j->mapped)
+            else if (j->mapped)
                 stream << " ";
-            else
-                stream << "*";
+            else {
+                int d = distanceToMap((unsigned long) (i-grid.begin()), (unsigned long) (j-i->begin()));
+                if(d > 9)
+                    stream << "*";
+                else
+                    stream << d;
+            }
         }
-        stream << "\n";
+        stream << "\n" << flush;
     }
 }
 
-Grid::Grid(vector<vector<cell>>* grid, Projection *fromInputToGrid) : gridProjection(fromInputToGrid) {
+Grid::Grid(vector<vector<cell>> grid, Projection fromInputToGrid) : gridProjection(fromInputToGrid) {
     this->grid = grid;
 }
 
@@ -121,9 +128,9 @@ float Grid::angle(float ax, float ay, float bx, float by, Projection &p) {
         p.project(ax, ay, ax, ay);
         p.project(bx, by, bx, by);
     }
-    if(!gridProjection->hasEqualScales()){
-        gridProjection->project(ax,ay,ax,ay);
-        gridProjection->project(bx,by,bx,by);
+    if(!gridProjection.hasEqualScales()){
+        gridProjection.project(ax,ay,ax,ay);
+        gridProjection.project(bx,by,bx,by);
     }
     return (float) atan2(by - ay, bx - ax);
 }
@@ -136,21 +143,23 @@ float Grid::cost(float ax, float ay, float bx, float by, Projection &p) {
     p.project(bx, by, bx, by);
 
     /* Distance */
-    double distance = sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by)) * COST_CABLE;
+    double distance = COST_CABLE * this->distance(ax, ay, bx, by, *(Projection::identity()));
     val += distance;
 
+    double grid_distance = (float) sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
+
     /* Obstacles and off map */
-    for(double p = 0; p < distance; p++){
-        double cx = ax + bx * p / distance * (ax < bx ? 1 : -1);
-        double cy = ay + by * p / distance * (ay < by ? 1 : -1);
+    for(double p = 0; p < grid_distance; p++){
+        double cx = ax + bx * p / grid_distance * (ax < bx ? 1 : -1);
+        double cy = ay + by * p / grid_distance * (ay < by ? 1 : -1);
 
         // Off map
-        if(cx < 0 || cx > this->grid->size())
+        if(cx < 0 || cx > grid.size())
             val = FLT_MAX;
-        else if(cy < 0 || cy > this->grid->begin()->size())
+        else if(cy < 0 || cy > grid.begin()->size())
             val = FLT_MAX;
         else {
-            cell c = this->grid->at((unsigned long)cx).at((unsigned long)cy);
+            cell c = grid.at((unsigned long)cx).at((unsigned long)cy);
             if(!c.mapped)
                 val = FLT_MAX;
             else {
@@ -163,7 +172,7 @@ float Grid::cost(float ax, float ay, float bx, float by, Projection &p) {
 }
 
 float Grid::cost(float angle) {
-    return (float) (COST_ANGLE * pow(abs(angle/ALLOWED_ANGLE), COST_ANGLE_POW));
+    return (float) (COST_ANGLE * pow(fabs(angle/ALLOWED_ANGLE), COST_ANGLE_POW));
 }
 
 float Grid::distance(float ax, float ay, float bx, float by, Projection &p) {
@@ -172,7 +181,7 @@ float Grid::distance(float ax, float ay, float bx, float by, Projection &p) {
         p.project(ax, ay, ax, ay);
         p.project(bx, by, bx, by);
     }
-    if(!gridProjection->isIdentity()){
+    if(!gridProjection.isIdentity()){
         this->backToInputProjection()->project(ax, ay, ax, ay);
         this->backToInputProjection()->project(bx, by, bx, by);
     }
@@ -180,9 +189,84 @@ float Grid::distance(float ax, float ay, float bx, float by, Projection &p) {
 }
 
 Projection* Grid::backToInputProjection() {
-    return gridProjection->back();
+    return gridProjection.back();
 }
 
 Projection* Grid::inputProjection() {
-    return gridProjection;
+    return &gridProjection;
+}
+
+void Grid::summary(ostream &stream) {
+    stream << "Grid of " << grid.size() << "x" << grid[0].size() << "\n" << flush;
+}
+
+int Grid::distanceToMap(unsigned long x, unsigned long y) {
+    // Not even in grid, this is needed since very stupid recursive call
+    if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size())
+        return INT16_MAX;
+
+    cell* c = this->get(x, y);
+    if(c->mapped)
+        return 0;
+    if(c->distanceToMap == -1)
+        c->distanceToMap = 1+min(
+            min(distanceToMap(x, y-1),distanceToMap(x, y+1)),
+            min(distanceToMap(x-1, y),distanceToMap(x+1, y))
+        );
+
+    cout << "d=" << c->distanceToMap << ";" << flush;
+    return c->distanceToMap;
+}
+
+void Grid::write(string filename) {
+    FILE* pFile;
+    pFile = fopen(filename.c_str(), "wb");
+
+    fwrite(&gridProjection, sizeof(Projection), 1, pFile);
+
+    vector<vector<cell>>::const_iterator i;
+    vector<cell>::const_iterator j;
+    unsigned long x_l = (unsigned long) (grid.end() - grid.begin());
+
+    fwrite(&x_l, sizeof(unsigned long), 1, pFile);
+    for(i = grid.begin(); i < grid.end(); i++){
+        unsigned long y_l = (unsigned long) (i->end() - i->begin());
+        fwrite(&y_l, sizeof(unsigned long), 1, pFile);
+        for(j = i->begin(); j < i->end(); j++){
+            fwrite(&j, sizeof(cell), 1, pFile);
+        }
+    }
+    fclose(pFile);
+}
+
+Grid Grid::read(string filename) {
+    FILE* f = fopen(filename.c_str(), "rb");
+    Projection* p = new Projection(0,0,1,1);
+    fread(p, sizeof(Projection), 1, f);
+
+    unsigned long x_l = 0, y_l = 0;
+
+    fread(&x_l, sizeof(unsigned long), 1, f);
+    vector<vector<cell>> r = vector<vector<cell>>(x_l);
+    for(unsigned long i = 0; i < x_l; i++){
+        fread(&y_l, sizeof(unsigned long), 1, f);
+        r.push_back(vector<cell>(y_l));
+        cell row[y_l];
+        fread(&row, sizeof(cell), y_l, f);
+        vector<cell> v(y_l);
+        for(unsigned long j = 0; j < y_l; j++)
+            v.push_back(row[i]);
+        r.push_back(v);
+    }
+
+    fclose(f);
+    return Grid(r, *p);
+}
+
+cell* Grid::getCell(float x, float y, Projection &p) {
+    // Fix projection
+    if(!p.isIdentity()) {
+        p.project(x, y, x, y);
+    }
+    return this->get((unsigned long) x, (unsigned long) y);
 }

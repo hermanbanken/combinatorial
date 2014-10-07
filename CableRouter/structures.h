@@ -26,6 +26,7 @@ struct cell {
     bool bomb;
     bool pipeline;
     SeaBed seabed;
+    int distanceToMap = -1;
 };
 
 struct point {
@@ -95,14 +96,14 @@ public:
 
 class Grid {
 private:
-    vector<vector<cell>>* grid;
-    Projection* gridProjection;
+    vector<vector<cell>> grid;
+    Projection gridProjection;
 
     float maxX() {
-        return grid->size();
+        return grid.size();
     }
     float maxY() {
-        return grid->begin()->size();
+        return grid.at(0).size();
     }
     float minX() {
         return 0;
@@ -110,17 +111,19 @@ private:
     float minY() {
         return 0;
     }
-    cell get(float x, float y){
-        return grid->at((unsigned long) x).at((unsigned long) y);
+    cell* get(unsigned long x, unsigned long y){
+        return &(grid.at(x).at(y));
     }
 
+    int distanceToMap(unsigned long x, unsigned long y);
+
+
 public:
-    Grid(vector<vector<cell>>* grid, Projection *fromInputToGrid);
+    Grid(vector<vector<cell>> grid, Projection fromInputToGrid);
     Projection* backToInputProjection();
     Projection* inputProjection();
     Projection* to_ZeroToOne_Projection();
-    cell getCellFromInputProjection(float x, float y);
-    cell getCell(float x, float y, Projection &p);
+    cell* getCell(float x, float y, Projection &p);
 
     float maxX(Projection &p) {
         float max;
@@ -158,6 +161,11 @@ public:
     * Plot ASCII art to an output stream
     */
     void plot(ostream& stream);
+
+    void summary(ostream& stream);
+
+    void write(string filename);
+    static Grid read(string filename);
 };
 
 #endif /* defined(___cablerouter_structures___) */

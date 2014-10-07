@@ -3,6 +3,8 @@
 #include "structures.h"
 #include "simplifier.h"
 #include <limits.h>
+#include <stdexcept>
+
 
 Simplifier::Simplifier() {
     min = new point(INT_MAX, INT_MAX, INT_MAX);
@@ -21,7 +23,6 @@ int Simplifier::add(point *row) {
     this->max->y = (float) fmax(this->max->y, row->y);
     this->max->z = (float) fmax(this->max->z, row->z);
 
-
     float factor = ((float) this->count) / (this->count + 1);
     this->avg->x = (this->avg->x * factor) + row->x / (this->count + 1);
     this->avg->y = (this->avg->y * factor) + row->y / (this->count + 1);
@@ -31,7 +32,10 @@ int Simplifier::add(point *row) {
     return true;
 }
 
-vector<vector<cell>> Simplifier::grid(int cell_w, int cell_h) {
+Grid* Simplifier::grid(int cell_w, int cell_h) {
+    if(cell_w < 0 || cell_h < 0)
+        throw invalid_argument("the grid dimensions must be at least 1");
+
     float grid_x = this->min->x;
     float grid_y = this->min->y;
     float grid_w = this->max->x - this->min->x;
@@ -41,21 +45,21 @@ vector<vector<cell>> Simplifier::grid(int cell_w, int cell_h) {
 
     // Group points
     vector<vector<aggregationCell>> g = vector<vector<aggregationCell>>(count_x+1, vector<aggregationCell>(count_y+1, aggregationCell()));
-    for(unsigned int i = 0; i < this->data.size(); i++){
-        unsigned long x = (unsigned long) ((this->data[i]->x - grid_x) / cell_w);
-        unsigned long y = (unsigned long) ((this->data[i]->y - grid_y) / cell_h);
-        g.at(x).at(y).addPoint(this->data[i]);
+    vector<point*>::const_iterator it;
+    for(it = this->data.begin(); it < this->data.end(); it++){
+        unsigned long x = (unsigned long) (((*it)->x - grid_x) / cell_w);
+        unsigned long y = (unsigned long) (((*it)->y - grid_y) / cell_h);
+        g.at(x).at(y).addPoint(*it);
     }
 
+    cout << "Initialized grid vector with " << count_x << " x " << count_y << " cells." << endl << flush;
     // Aggregate
     vector<vector<cell>> r = vector<vector<cell>>(count_x+1, vector<cell>(count_y+1, cell()));
     for(unsigned int x = 0; x < g.size(); x++){
         for(unsigned int y = 0; y < g[x].size(); y++){
-            r[x][y] = g[x][y].toCell();
+            r.at(x)[y] = g[x][y].toCell();
         }
     }
 
-    new Grid(&r, new Projection(-grid_x, -grid_y, 1/cell_w, 1/cell_h));
-
-    return r;
+    return new Grid(r, Projection(-grid_x, -grid_y, 1/cell_w, 1/cell_h));
 }
