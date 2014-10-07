@@ -98,14 +98,14 @@ public:
 
 class Grid {
 private:
-    vector<vector<cell>>* grid;
+    vector<vector<cell>>& grid;
     Projection gridProjection;
 
     float maxX() {
-        return grid->size();
+        return grid.size();
     }
     float maxY() {
-        return grid->at(0).size();
+        return grid.at(0).size();
     }
     float minX() {
         return 0;
@@ -120,7 +120,17 @@ private:
 
 
 public:
-    Grid(vector<vector<cell>>* grid, Projection fromInputToGrid);
+    /**
+    * Returns pointer to internal data
+    */
+    vector<vector<cell>>* data(){
+        return &this->grid;
+    }
+
+    /**
+    * Creates grid, copying the data
+    */
+    Grid(vector<vector<cell>> grid, Projection fromInputToGrid);
     Projection* backToInputProjection();
     Projection* inputProjection();
     Projection* to_ZeroToOne_Projection();

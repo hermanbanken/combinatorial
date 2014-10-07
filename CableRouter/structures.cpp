@@ -71,8 +71,8 @@ point::point(float x, float y, float z) {
 void Grid::plot(ostream &stream) {
     vector<vector<cell>>::const_iterator i;
     vector<cell>::const_iterator j;
-    stream << "Outputting grid(" << grid->size() << "x" << grid->begin()->size() << "):" << endl;
-    for(i=grid->begin(); i<grid->end(); i++){
+    stream << "Outputting grid(" << grid.size() << "x" << grid.begin()->size() << "):" << endl;
+    for(i=grid.begin(); i<grid.end(); i++){
         for(j=i->begin(); j<i->end(); j++) {
             if (j->pipeline)
                 stream << "|";
@@ -94,8 +94,7 @@ void Grid::plot(ostream &stream) {
     }
 }
 
-Grid::Grid(vector<vector<cell>>* grid, Projection fromInputToGrid) : gridProjection(fromInputToGrid) {
-    this->grid = grid;
+Grid::Grid(vector<vector<cell>> grid, Projection fromInputToGrid) : gridProjection(fromInputToGrid), grid(grid) {
 }
 
 void Projection::project(float x, float y, float &out_x, float &out_y) {
@@ -154,12 +153,12 @@ float Grid::cost(float ax, float ay, float bx, float by, Projection &p) {
         double cy = ay + by * p / grid_distance * (ay < by ? 1 : -1);
 
         // Off map
-        if(cx < 0 || cx > grid->size())
+        if(cx < 0 || cx > grid.size())
             val = FLT_MAX;
-        else if(cy < 0 || cy > grid->begin()->size())
+        else if(cy < 0 || cy > grid.begin()->size())
             val = FLT_MAX;
         else {
-            cell c = grid->at((unsigned long)cx).at((unsigned long)cy);
+            cell c = grid.at((unsigned long)cx).at((unsigned long)cy);
             if(!c.mapped)
                 val = FLT_MAX;
             else {
@@ -197,7 +196,7 @@ Projection* Grid::inputProjection() {
 }
 
 void Grid::summary(ostream &stream) {
-    stream << "Grid of " << grid->size() << "x" << grid[0].size() << "\n" << flush;
+    stream << "Grid of " << grid.size() << "x" << grid[0].size() << "\n" << flush;
 }
 
 int Grid::distanceToMap(unsigned long x, unsigned long y, unsigned long origin_x, unsigned long origin_y, unsigned int maxRecurse) {
@@ -208,7 +207,7 @@ int Grid::distanceToMap(unsigned long x, unsigned long y, unsigned long origin_x
     maxRecurse--;
 
     // Not even in grid, this is needed since very stupid recursive call
-    if(x < 0 || y < 0 || x >= grid->size() || y >= grid[0].size())
+    if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size())
         return INT8_MAX;
 
     cell* c = this->get(x, y);
@@ -254,7 +253,7 @@ vector<pair<unsigned long, unsigned long>> Grid::edgeNodes() {
     vector<pair<unsigned long, unsigned long>> edges;
     vector<vector<cell>>::const_iterator x;
     vector<cell>::const_iterator c;
-    for(x = grid->begin() + 1; x < grid->end() - 1; x++) {
+    for(x = grid.begin() + 1; x < grid.end() - 1; x++) {
         for (c = x->begin() + 1; c < x->end() - 1; c++) {
             unsigned long y = c - x->begin();
             if(
@@ -263,7 +262,7 @@ vector<pair<unsigned long, unsigned long>> Grid::edgeNodes() {
                     c->mapped != (c+1)->mapped ||
                     c->mapped != (c-1)->mapped
             ){
-                edges.push_back(make_pair(x - grid->begin(), y));
+                edges.push_back(make_pair(x - grid.begin(), y));
             }
         }
     }
@@ -282,10 +281,10 @@ void Grid::write(string filename) {
 
     vector<vector<cell>>::const_iterator i;
     vector<cell>::const_iterator j;
-    unsigned long x_l = (unsigned long) (grid->end() - grid->begin());
+    unsigned long x_l = (unsigned long) (grid.end() - grid.begin());
 
     fwrite(&x_l, sizeof(unsigned long), 1, pFile);
-    for(i = grid->begin(); i < grid->end(); i++){
+    for(i = grid.begin(); i < grid.end(); i++){
         unsigned long y_l = (unsigned long) (i->end() - i->begin());
         fwrite(&y_l, sizeof(unsigned long), 1, pFile);
         for(j = i->begin(); j < i->end(); j++){
@@ -328,10 +327,10 @@ cell* Grid::getCell(float x, float y, Projection &p) {
 }
 
 cell* Grid::get(unsigned long x, unsigned long y) {
-    if(x < 0 || y < 0 || x >= grid->size() || y >= grid->at(x).size()){
+    if(x < 0 || y < 0 || x >= grid.size() || y >= grid.at(x).size()){
         exit(2);
 //        throw invalid_argument("parameters must match the grid");
     } else {
-        return &grid->at(x).at(y);
+        return &grid.at(x).at(y);
     }
 }
