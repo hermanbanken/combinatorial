@@ -28,5 +28,5 @@ public:
 
     void createAllEdges();
 
-    Graph::Node findNearestNode(std::tuple<unsigned long, unsigned long> &param);
+    Graph::Node findNearestNode(coord &param);
 };

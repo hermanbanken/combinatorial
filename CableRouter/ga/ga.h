@@ -16,14 +16,15 @@ namespace Solvers {
 
     class GA: public Solver {
     private:
-        int points;
+        unsigned int points;
         Grid *grid;
-        tuple<unsigned long, unsigned long> start;
-        tuple<unsigned long, unsigned long> end;
+        coord start;
+        coord end;
+        vector<coord> straightLine(coord start, coord end, unsigned long points);
     public:
-        GA(int points);
+        GA(unsigned int points);
 
-        void solve(Grid* grid, vector<tuple<unsigned long, unsigned long>> &line);
+        void solve(Grid* grid, vector<coord> &line);
     };
 
 }

@@ -16,7 +16,7 @@ namespace Solvers {
 
     class Solver {
     public:
-        virtual void solve(Grid *grid, vector<tuple<unsigned long,unsigned long>> &line) = 0;
+        virtual void solve(Grid *grid, vector<coord> &line) = 0;
     };
 
 }

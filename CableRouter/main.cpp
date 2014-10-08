@@ -62,8 +62,8 @@ int main(int argc, char const *argv[]) {
 
     Projection id = Projection::identity();
 
-    vector<tuple<unsigned long,unsigned long>> line(2, make_tuple(7, grid->maxY(id) - 3));
-    line[1] = make_tuple(grid->maxX(id) - 2, 2);
+    vector<coord> line(2, make_pair(7, grid->maxY(id) - 3));
+    line[1] = make_pair(grid->maxX(id) - 2, 2);
 
     Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver();
     g->solve(grid, line);

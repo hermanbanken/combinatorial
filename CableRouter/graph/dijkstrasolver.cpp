@@ -2,7 +2,7 @@
 #include "dijkstrasolver.h"
 #include "sampler.h"
 
-void Solvers::DijkstraSolver::solve(Grid *grid, vector<tuple<unsigned long, unsigned long>> &line) {
+void Solvers::DijkstraSolver::solve(Grid *grid, vector<coord> &line) {
     Sampler sampler = Sampler(grid);
 
     sampler.sample();

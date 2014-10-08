@@ -81,12 +81,12 @@ void Sampler::createAllEdges() {
     }
 }
 
-Graph::Node Sampler::findNearestNode(tuple<unsigned long, unsigned long> &point) {
-    float x, y;
+Graph::Node Sampler::findNearestNode(coord &point) {
+    double x, y;
     double distance, max_distance;
     Graph::Node nearest;
 
-    this->grid->to_ZeroToOne_Projection().project(get<0>(point), get<1>(point), x, y);
+    this->grid->to_ZeroToOne_Projection().project(point.first, point.second, x, y);
 
     max_distance = DBL_MAX;
     for (vector<Graph::Node>::const_iterator it = this->graph.nodes.begin(); it != this->graph.nodes.end(); ++it)

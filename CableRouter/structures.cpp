@@ -96,7 +96,7 @@ void Grid::plot(ostream &stream) {
 Grid::Grid(vector<vector<cell>> grid, Projection fromInputToGrid) : grid(grid), gridProjection(fromInputToGrid) {
 }
 
-void Projection::project(float x, float y, float &out_x, float &out_y)const {
+void Projection::project(double x, double y, double &out_x, double &out_y)const {
     projectX(x, out_x);
     projectY(y, out_y);
 }
@@ -106,10 +106,10 @@ Projection::Projection(float offset_x, float offset_y, float scale_x, float scal
     is_equalScale = scale_x == scale_y;
 }
 
-void Projection::projectX(float x, float &out_x)const {
+void Projection::projectX(double x, double &out_x)const {
     out_x = (x + offset_x) * scale_x;
 }
-void Projection::projectY(float y, float &out_y)const {
+void Projection::projectY(double y, double &out_y)const {
     out_y = (y + offset_y) * scale_y;
 }
 
@@ -121,7 +121,7 @@ Projection Projection::back() {
     return Projection(-offset_x*scale_x, -offset_y*scale_y, 1/scale_x, 1/scale_y);
 }
 
-float Grid::angle(float ax, float ay, float bx, float by, const Projection &p) {
+double Grid::angle(double ax, double ay, double bx, double by, const Projection &p) {
     if(!p.hasEqualScales()) {
         p.project(ax, ay, ax, ay);
         p.project(bx, by, bx, by);
@@ -130,10 +130,10 @@ float Grid::angle(float ax, float ay, float bx, float by, const Projection &p) {
         gridProjection.project(ax,ay,ax,ay);
         gridProjection.project(bx,by,bx,by);
     }
-    return (float) atan2(by - ay, bx - ax);
+    return atan2(by - ay, bx - ax);
 }
 
-double Grid::cost(float ax, float ay, float bx, float by, const Projection &p) {
+double Grid::cost(double ax, double ay, double bx, double by, const Projection &p, bool gradient) {
     double val = 0;
 
     // Fix projection
@@ -148,33 +148,44 @@ double Grid::cost(float ax, float ay, float bx, float by, const Projection &p) {
 
     /* Obstacles and off map */
     for(double p = 0; p < grid_distance; p++){
-//        double cx = ax + bx * p / grid_distance * (ax < bx ? 1 : -1);
-//        double cy = ay + by * p / grid_distance * (ay < by ? 1 : -1);
-//
-//        // Off map
-//        if(cx < 0 || cx > grid.size())
-//            val = DBL_MAX;
-//        else if(cy < 0 || cy > grid.begin()->size())
-//            val = DBL_MAX;
-//        else {
-//            cell c = grid.at((unsigned long)cx).at((unsigned long)cy);
-//            if(!c.mapped)
-//                val = DBL_MAX;
-//            else {
-//                // obstacles
-//            }
-//        }
+        double cx = ax + bx * p / grid_distance * (ax < bx ? 1 : -1);
+        double cy = ay + by * p / grid_distance * (ay < by ? 1 : -1);
+
+        cell c;
+        bool exists = tryGet(cx, cy, c);
+        if(exists && c.mapped) {
+
+            // Penalties
+            if(c.bomb)
+                val += 50;
+            if(c.pipeline)
+                val += 100;
+            if(c.builder)
+                val += 5;
+
+        } else if(!gradient){
+            // Either not in grid or off map
+            return DBL_MAX;
+        } else if(!c.mapped) {
+            // In grid, of map
+            val += pow(COST_OFFMAP, this->distanceToMap(cx, cy));
+        } else {
+            // Of grid
+            val += pow(COST_OFFMAP, this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()));
+        }
     }
 
     return val;
 }
 
-double Grid::cost(float angle) {
+double Grid::cost(double angle, bool gradient) {
+    if(!gradient)
+        return fabs(angle) - ALLOWED_ANGLE > 0 ? DBL_MAX : 0;
     return (COST_ANGLE * pow(fabs(angle/ALLOWED_ANGLE), COST_ANGLE_POW));
 }
 
 
-double Grid::distance(float ax, float ay, float bx, float by, const Projection &p) {
+double Grid::distance(double ax, double ay, double bx, double by, const Projection &p) {
     // Fix projection
     if(!p.isIdentity()) {
         p.project(ax, ay, ax, ay);
@@ -299,7 +310,7 @@ Grid Grid::read(string filename) {
     return Grid(r, *p);
 }
 
-const cell& Grid::getCell(float x, float y, Projection &p) {
+const cell& Grid::getCell(double x, double y, Projection &p) {
     // Fix projection
     if(!p.isIdentity()) {
         p.project(x, y, x, y);

@@ -16,6 +16,7 @@ const double ALLOWED_ANGLE = 8 / 180 * M_PI;
 const double COST_ANGLE = 100;
 const double COST_ANGLE_POW = 2;
 const double COST_CABLE = 1;
+const double COST_OFFMAP = 100;
 
 using namespace std;
 
@@ -82,9 +83,9 @@ public:
     const float scale_x;
     const float scale_y;
     Projection(float offset_x, float offset_y, float scale_x, float scale_y);
-    void project(float x, float y, float &out_x, float &out_y)const;
-    void projectX(float x, float &out_x)const;
-    void projectY(float y, float &out_y)const;
+    void project(double x, double y, double &out_x, double &out_y)const;
+    void projectX(double x, double &out_x)const;
+    void projectY(double y, double &out_y)const;
     Projection back();
     bool isIdentity()const {
         return is_identity;
@@ -139,27 +140,27 @@ public:
     Projection backToInputProjection();
     const Projection& inputProjection();
     Projection to_ZeroToOne_Projection();
-    const cell& getCell(float x, float y, Projection &p);
+    const cell& getCell(double x, double y, Projection &p);
 
     int distanceToMap(unsigned long x, unsigned long y);
 
-    float maxX(Projection &p) {
-        float max;
+    double maxX(Projection &p) {
+        double max;
         p.projectX(maxX(), max);
         return max;
     }
-    float maxY(Projection &p) {
-        float max;
+    double maxY(Projection &p) {
+        double max;
         p.projectY(maxY(), max);
         return max;
     }
-    float minX(Projection &p) {
-        float min;
+    double minX(Projection &p) {
+        double min;
         p.projectX(minX(), min);
         return min;
     }
-    float minY(Projection &p) {
-        float min;
+    double minY(Projection &p) {
+        double min;
         p.projectY(minY(), min);
         return min;
     }
@@ -167,13 +168,13 @@ public:
     /**
     * Gives the real angle in the input space
     */
-    float angle(float ax, float ay, float bx, float by, const Projection &p);
+    double angle(double ax, double ay, double bx, double by, const Projection &p);
     /**
-     * Gives the real distance in the input space
+     * Gives the real distance (in meters) in the input space
      */
-    double distance(float ax, float ay, float bx, float by, const Projection &p);
-    double cost(float ax, float ay, float bx, float by, const Projection &p);
-    double cost(float angle);
+    double distance(double ax, double ay, double bx, double by, const Projection &p);
+    double cost(double ax, double ay, double bx, double by, const Projection &p, bool gradient = false);
+    double cost(double angle, bool gradient = false);
 
     /**
     * Plot ASCII art to an output stream
