@@ -3,6 +3,9 @@
 #include <iostream>
 #include <math.h>
 #include <stdio.h>
+#include <queue>
+
+#define ABS(a) (a > 0 ? a : (-1 * a))
 
 using namespace std;
 
@@ -199,70 +202,86 @@ void Grid::summary(ostream &stream) {
     stream << "Grid of " << grid.size() << "x" << grid[0].size() << "\n" << flush;
 }
 
-int Grid::distanceToMap(unsigned long x, unsigned long y, unsigned long origin_x, unsigned long origin_y, unsigned int maxRecurse) {
-    if(origin_x - x > 10 || x - origin_x > 10 || origin_y - y > 10 || y - origin_y > 10){
-        return INT8_MAX;
+class CompareForFlood {
+public:
+    /**
+    * Returns true if b has a higher priority than a
+    */
+    bool operator()(pair<cell,coord>& a, pair<cell,coord>& b){
+        if(b.first.distanceExplored < a.first.distanceExplored)
+            return true;
+        return false;
     }
+};
 
-    maxRecurse--;
+int Grid::distanceToMap(unsigned long x, unsigned long y, int maxDistance) {
 
     // Not even in grid, this is needed since very stupid recursive call
     if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size())
         return INT8_MAX;
 
-    cell* c = this->get(x, y);
-    if(c->mapped){
+    cell &c = this->get(x, y);
+
+    if(c.mapped)
         return 0;
-    }
 
-    return c->distanceToMap;
-
-    if(maxRecurse <= 0)
+    // Do not look here, my friend
+    if(c.distanceToMap == -1 && c.distanceExplored > maxDistance)
         return INT8_MAX;
 
-    if(x == origin_x && y == origin_y){
-        c->distanceToMap = 1 + min(
-                min(distanceToMap(x, y - 1, x, y, maxRecurse), distanceToMap(x, y + 1, x, y,maxRecurse)),
-                min(distanceToMap(x - 1, y, x, y, maxRecurse), distanceToMap(x + 1, y, x, y,maxRecurse))
-        );
-    } else
-    if(x == origin_x){
-        c->distanceToMap = 1 + min(min(distanceToMap(x, y - 1, x, y,maxRecurse),
-            distanceToMap(x, y + 1, x, y,maxRecurse)),
-            distanceToMap(x + (x > origin_x ? 1 : -1), y, x, y,maxRecurse)
-        );
-    } else
-    if(y == origin_y){
-        c->distanceToMap = 1 + min(min(distanceToMap(x - 1, y, x, y,maxRecurse),
-                        distanceToMap(x + 1, y, x, y,maxRecurse)),
-                distanceToMap(x, y + (y > origin_y ? 1 : -1), x, y,maxRecurse)
-        );
-    } else {
-        c->distanceToMap = 1 + min(
-                distanceToMap(x + (x > origin_x ? 1 : -1), y, x, y,maxRecurse),
-                distanceToMap(x, y + (y > origin_y ? 1 : -1), x, y,maxRecurse)
-        );
-    }
 
-    return c->distanceToMap;
+    return c.distanceToMap;
+
+//    if(maxRecurse <= 0)
+//        return INT8_MAX;
+//
+//    if(x == origin_x && y == origin_y){
+//        c.distanceToMap = 1 + min(
+//                min(distanceToMap(x, y - 1, x, y, maxRecurse), distanceToMap(x, y + 1, x, y,maxRecurse)),
+//                min(distanceToMap(x - 1, y, x, y, maxRecurse), distanceToMap(x + 1, y, x, y,maxRecurse))
+//        );
+//    } else
+//    if(x == origin_x){
+//        c.distanceToMap = 1 + min(min(distanceToMap(x, y - 1, x, y,maxRecurse),
+//            distanceToMap(x, y + 1, x, y,maxRecurse)),
+//            distanceToMap(x + (x > origin_x ? 1 : -1), y, x, y,maxRecurse)
+//        );
+//    } else
+//    if(y == origin_y){
+//        c.distanceToMap = 1 + min(min(distanceToMap(x - 1, y, x, y,maxRecurse),
+//                        distanceToMap(x + 1, y, x, y,maxRecurse)),
+//                distanceToMap(x, y + (y > origin_y ? 1 : -1), x, y,maxRecurse)
+//        );
+//    } else {
+//        c.distanceToMap = 1 + min(
+//                distanceToMap(x + (x > origin_x ? 1 : -1), y, x, y,maxRecurse),
+//                distanceToMap(x, y + (y > origin_y ? 1 : -1), x, y,maxRecurse)
+//        );
+//    }
+
+//    return c.distanceToMap;
 //        cout << "d(" << x << "," << y << ")=";
 //        cout << c->distanceToMap << ";" << endl;
 }
 
-vector<pair<unsigned long, unsigned long>> Grid::edgeNodes() {
-    vector<pair<unsigned long, unsigned long>> edges;
-    vector<vector<cell>>::const_iterator x;
-    vector<cell>::const_iterator c;
+vector<pair<cell,coord>> Grid::edgeNodes() {
+    vector<pair<cell,coord>> edges;
+    vector<vector<cell>>::iterator x;
+    vector<cell>::iterator c;
     for(x = grid.begin() + 1; x < grid.end() - 1; x++) {
         for (c = x->begin() + 1; c < x->end() - 1; c++) {
             unsigned long y = c - x->begin();
+
+            if(c->mapped)
+                c->distanceToMap = 0;
+
             if(
                     c->mapped != (x+1)->at(y).mapped ||
                     c->mapped != (x-1)->at(y).mapped ||
                     c->mapped != (c+1)->mapped ||
                     c->mapped != (c-1)->mapped
             ){
-                edges.push_back(make_pair(x - grid.begin(), y));
+                edges.push_back(make_pair(*c, make_pair(x - grid.begin(), y)));
             }
         }
     }
@@ -270,7 +289,22 @@ vector<pair<unsigned long, unsigned long>> Grid::edgeNodes() {
 };
 
 int Grid::distanceToMap(unsigned long x, unsigned long y) {
-    return distanceToMap(x, y, x, y, 2);
+    cell c;
+    if(!tryGet(x, y, c)){
+       return INT32_MAX;
+    } else {
+        c = get(x, y);
+        if(c.mapped)
+            return 0;
+        else if(c.distanceToMap != -1)
+            return c.distanceToMap;
+
+        floodFindDistancesToEdge();
+        if(get(x,y).distanceToMap == -1)
+            get(x,y).distanceToMap = INT32_MAX;
+
+        return distanceToMap(x, y);
+    }
 }
 
 void Grid::write(string filename) {
@@ -328,15 +362,69 @@ const cell& Grid::getCell(float x, float y, Projection &p) {
 
 cell& Grid::get(unsigned long x, unsigned long y) {
     if(x < 0 || y < 0 || x >= grid.size() || y >= grid.at(x).size()){
-        exit(2);
-//        throw invalid_argument("parameters must match the grid");
+        throw invalid_argument("parameters must match the grid");
     } else {
         return grid.at(x).at(y);
     }
 }
 
-void Grid::floodFindDistancesToEdge() {
+bool Grid::tryGet(unsigned long x, unsigned long y, cell& out_cell) {
+    if(x < 0 || y < 0 || x >= grid.size() || y >= grid.at(x).size()){
+        return false;
+    } else {
+        out_cell = grid.at(x).at(y);
+        return true;
+    }
+}
 
-    this->edgeNodes();
+void Grid::floodFindDistancesToEdge() {
+    clock_t start = clock();
+
+    priority_queue<pair<cell,coord>, vector<pair<cell,coord>>,CompareForFlood> pq(CompareForFlood(), this->edgeNodes());
+
+    while(!pq.empty()){
+        pair<cell,coord> current = pq.top();
+
+        unsigned long Ox = current.second.first;
+        unsigned long Oy = current.second.second;
+
+        float dist = ++get(Ox,Oy).distanceExplored;
+        unsigned long last_x = UINT32_MAX;
+        unsigned long last_y = UINT32_MAX;
+        int identified_count = 0;
+
+        // Go in circle
+        for(float r = 0; r < 2*M_PI; r += M_PI / dist / 4){
+            unsigned long x = (unsigned long) (round(cos(r)*dist) + Ox);
+            unsigned long y = (unsigned long) (round(sin(r)*dist) + Oy);
+
+            // Skip if coordinates are not new
+            if(ABS(x - last_x) < 1 && ABS(y - last_y) < 1)
+                continue;
+
+            cell a;
+            if(tryGet(x, y, a) && (a.distanceToMap == -1 || a.distanceToMap > (int)floor(dist))){
+                // debug:
+                // cout << "Explored " << x << "," << y << " current dist: " << a.distanceToMap << " new dist: " << floor(dist) << endl;
+                get(x,y).distanceToMap = (int) floor(dist);
+                identified_count++;
+            }
+
+            last_x = x;
+            last_y = y;
+        }
+
+        if(identified_count == 0){
+            pq.pop();
+        // debug:
+        // cout << "Popped cell " << current.second.first << "," << current.second.second << endl;
+        }
+        // debug:
+        // else
+        // cout << "Identified " << identified_count << " by mapped cell " << current.second.first << "," << current.second.second << endl;
+    }
+
+    clock_t stop = clock();
+    cout << double(stop - start) / CLOCKS_PER_SEC << " seconds for distance flood" << endl;
 
 }
