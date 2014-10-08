@@ -1,17 +1,23 @@
 #include <list>
 #include "../structures.h"
 
+#ifndef ___cablerouter_graph___
+#define ___cablerouter_graph___
+
+
+typedef pair<float, float> coordinate;
+
 class Graph {
 public:
     struct Node;
     struct Edge;
 
-    list<Node> nodes;
-    list<Edge> edges;
+    vector<Node> nodes;
+    vector<Edge> edges;
 
     struct Node {
-        cell p;
-        long long id;
+        coordinate p;
+        unsigned long id;
         list <Edge> adjEdges;
         double dist;
     };
@@ -27,3 +33,5 @@ public:
     Edge connect(Node &from, Node &to);
     double shortestPath(Node &from, Node &to);
 };
+
+#endif /* defined(___cablerouter_graph___) */

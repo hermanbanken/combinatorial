@@ -83,11 +83,7 @@ void Grid::plot(ostream &stream) {
             else if (j->mapped)
                 stream << " ";
             else {
-                int d = distanceToMap((unsigned long) (i-grid.begin()), (unsigned long) (j-i->begin()));
-                if(d > 9)
-                    stream << "*";
-                else
-                    stream << d;
+                stream << "*";
             }
         }
         stream << "\n" << flush;
@@ -134,8 +130,8 @@ float Grid::angle(float ax, float ay, float bx, float by, const Projection &p) {
     return (float) atan2(by - ay, bx - ax);
 }
 
-float Grid::cost(float ax, float ay, float bx, float by, const Projection &p) {
-    float val = 0;
+double Grid::cost(float ax, float ay, float bx, float by, const Projection &p) {
+    double val = 0;
 
     // Fix projection
     p.project(ax, ay, ax, ay);
@@ -145,36 +141,37 @@ float Grid::cost(float ax, float ay, float bx, float by, const Projection &p) {
     double distance = COST_CABLE * this->distance(ax, ay, bx, by, Projection::identity());
     val += distance;
 
-    double grid_distance = (float) sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
+    double grid_distance = sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
 
     /* Obstacles and off map */
     for(double p = 0; p < grid_distance; p++){
-        double cx = ax + bx * p / grid_distance * (ax < bx ? 1 : -1);
-        double cy = ay + by * p / grid_distance * (ay < by ? 1 : -1);
-
-        // Off map
-        if(cx < 0 || cx > grid.size())
-            val = FLT_MAX;
-        else if(cy < 0 || cy > grid.begin()->size())
-            val = FLT_MAX;
-        else {
-            cell c = grid.at((unsigned long)cx).at((unsigned long)cy);
-            if(!c.mapped)
-                val = FLT_MAX;
-            else {
-                // obstacles
-            }
-        }
+//        double cx = ax + bx * p / grid_distance * (ax < bx ? 1 : -1);
+//        double cy = ay + by * p / grid_distance * (ay < by ? 1 : -1);
+//
+//        // Off map
+//        if(cx < 0 || cx > grid.size())
+//            val = DBL_MAX;
+//        else if(cy < 0 || cy > grid.begin()->size())
+//            val = DBL_MAX;
+//        else {
+//            cell c = grid.at((unsigned long)cx).at((unsigned long)cy);
+//            if(!c.mapped)
+//                val = DBL_MAX;
+//            else {
+//                // obstacles
+//            }
+//        }
     }
 
     return val;
 }
 
-float Grid::cost(float angle) {
-    return (float) (COST_ANGLE * pow(fabs(angle/ALLOWED_ANGLE), COST_ANGLE_POW));
+double Grid::cost(float angle) {
+    return (COST_ANGLE * pow(fabs(angle/ALLOWED_ANGLE), COST_ANGLE_POW));
 }
 
-float Grid::distance(float ax, float ay, float bx, float by, const Projection &p) {
+
+double Grid::distance(float ax, float ay, float bx, float by, const Projection &p) {
     // Fix projection
     if(!p.isIdentity()) {
         p.project(ax, ay, ax, ay);
@@ -184,7 +181,7 @@ float Grid::distance(float ax, float ay, float bx, float by, const Projection &p
         this->backToInputProjection().project(ax, ay, ax, ay);
         this->backToInputProjection().project(bx, by, bx, by);
     }
-    return (float) sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
+    return sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
 }
 
 Projection Grid::backToInputProjection() {
@@ -199,55 +196,55 @@ void Grid::summary(ostream &stream) {
     stream << "Grid of " << grid.size() << "x" << grid[0].size() << "\n" << flush;
 }
 
-int Grid::distanceToMap(unsigned long x, unsigned long y, unsigned long origin_x, unsigned long origin_y, unsigned int maxRecurse) {
-    if(origin_x - x > 10 || x - origin_x > 10 || origin_y - y > 10 || y - origin_y > 10){
-        return INT8_MAX;
-    }
-
-    maxRecurse--;
-
-    // Not even in grid, this is needed since very stupid recursive call
-    if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size())
-        return INT8_MAX;
-
-    cell* c = this->get(x, y);
-    if(c->mapped){
-        return 0;
-    }
-
-    return c->distanceToMap;
-
-    if(maxRecurse <= 0)
-        return INT8_MAX;
-
-    if(x == origin_x && y == origin_y){
-        c->distanceToMap = 1 + min(
-                min(distanceToMap(x, y - 1, x, y, maxRecurse), distanceToMap(x, y + 1, x, y,maxRecurse)),
-                min(distanceToMap(x - 1, y, x, y, maxRecurse), distanceToMap(x + 1, y, x, y,maxRecurse))
-        );
-    } else
-    if(x == origin_x){
-        c->distanceToMap = 1 + min(min(distanceToMap(x, y - 1, x, y,maxRecurse),
-            distanceToMap(x, y + 1, x, y,maxRecurse)),
-            distanceToMap(x + (x > origin_x ? 1 : -1), y, x, y,maxRecurse)
-        );
-    } else
-    if(y == origin_y){
-        c->distanceToMap = 1 + min(min(distanceToMap(x - 1, y, x, y,maxRecurse),
-                        distanceToMap(x + 1, y, x, y,maxRecurse)),
-                distanceToMap(x, y + (y > origin_y ? 1 : -1), x, y,maxRecurse)
-        );
-    } else {
-        c->distanceToMap = 1 + min(
-                distanceToMap(x + (x > origin_x ? 1 : -1), y, x, y,maxRecurse),
-                distanceToMap(x, y + (y > origin_y ? 1 : -1), x, y,maxRecurse)
-        );
-    }
-
-    return c->distanceToMap;
-//        cout << "d(" << x << "," << y << ")=";
-//        cout << c->distanceToMap << ";" << endl;
-}
+//int Grid::distanceToMap(unsigned long x, unsigned long y, unsigned long origin_x, unsigned long origin_y, unsigned int maxRecurse) {
+//    if(origin_x - x > 10 || x - origin_x > 10 || origin_y - y > 10 || y - origin_y > 10){
+//        return INT8_MAX;
+//    }
+//
+//    maxRecurse--;
+//
+//    // Not even in grid, this is needed since very stupid recursive call
+//    if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size())
+//        return INT8_MAX;
+//
+//    cell* c = this->get(x, y);
+//    if(c->mapped){
+//        return 0;
+//    }
+//
+//    return c->distanceToMap;
+//
+//    if(maxRecurse <= 0)
+//        return INT8_MAX;
+//
+//    if(x == origin_x && y == origin_y){
+//        c->distanceToMap = 1 + min(
+//                min(distanceToMap(x, y - 1, x, y, maxRecurse), distanceToMap(x, y + 1, x, y,maxRecurse)),
+//                min(distanceToMap(x - 1, y, x, y, maxRecurse), distanceToMap(x + 1, y, x, y,maxRecurse))
+//        );
+//    } else
+//    if(x == origin_x){
+//        c->distanceToMap = 1 + min(min(distanceToMap(x, y - 1, x, y,maxRecurse),
+//            distanceToMap(x, y + 1, x, y,maxRecurse)),
+//            distanceToMap(x + (x > origin_x ? 1 : -1), y, x, y,maxRecurse)
+//        );
+//    } else
+//    if(y == origin_y){
+//        c->distanceToMap = 1 + min(min(distanceToMap(x - 1, y, x, y,maxRecurse),
+//                        distanceToMap(x + 1, y, x, y,maxRecurse)),
+//                distanceToMap(x, y + (y > origin_y ? 1 : -1), x, y,maxRecurse)
+//        );
+//    } else {
+//        c->distanceToMap = 1 + min(
+//                distanceToMap(x + (x > origin_x ? 1 : -1), y, x, y,maxRecurse),
+//                distanceToMap(x, y + (y > origin_y ? 1 : -1), x, y,maxRecurse)
+//        );
+//    }
+//
+//    return c->distanceToMap;
+////        cout << "d(" << x << "," << y << ")=";
+////        cout << c->distanceToMap << ";" << endl;
+//}
 
 vector<pair<unsigned long, unsigned long>> Grid::edgeNodes() {
     vector<pair<unsigned long, unsigned long>> edges;
@@ -270,7 +267,8 @@ vector<pair<unsigned long, unsigned long>> Grid::edgeNodes() {
 };
 
 int Grid::distanceToMap(unsigned long x, unsigned long y) {
-    return distanceToMap(x, y, x, y, 2);
+//    return distanceToMap(x, y, x, y, 2);
+    return 1;
 }
 
 void Grid::write(string filename) {
@@ -340,3 +338,4 @@ void Grid::floodFindDistancesToEdge() {
     this->edgeNodes();
 
 }
+

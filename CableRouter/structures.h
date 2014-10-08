@@ -168,9 +168,9 @@ public:
     /**
      * Gives the real distance in the input space
      */
-    float distance(float ax, float ay, float bx, float by, const Projection &p);
-    float cost(float ax, float ay, float bx, float by, const Projection &p);
-    float cost(float angle);
+    double distance(float ax, float ay, float bx, float by, const Projection &p);
+    double cost(float ax, float ay, float bx, float by, const Projection &p);
+    double cost(float angle);
 
     /**
     * Plot ASCII art to an output stream
