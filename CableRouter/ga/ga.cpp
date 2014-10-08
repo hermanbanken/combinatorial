@@ -30,6 +30,12 @@ vector<coord> GA::straightLine(coord start, coord end, unsigned long points) {
     return line;
 }
 
+string p2s(coord c){
+    std::ostringstream stringStream;
+    stringStream << c.first << "," << c.second;
+    return stringStream.str();
+}
+
 void GA::solve(Grid* grid, vector<coord> &line) {
     if(line.empty())
         throw invalid_argument("line was empty: it should contain at least 2 points");
@@ -46,11 +52,15 @@ void GA::solve(Grid* grid, vector<coord> &line) {
     line = straightLine(this->start, this->end, this->points);
 
     FitFunc fitness = [grid,this,id](const double *x, const int N)->double {
+        ostringstream out;
+        out << "Line from start " << p2s(this->start);
         double val = 0.0;
-        double angle = grid->angle(get<0>(this->start), get<1>(this->start), x[0], x[1], id);
+        double angle = grid->angle(this->start.first, this->start.second, x[0], x[1], id);
         // From windmill
         val += grid->cost(get<0>(this->start), get<1>(this->start), x[0], x[1], id, true);
+        out << " to " << x[0] << "," << x[1];
         for (int i = 0; i+3 < N; i+=4){
+            out << " to " << x[2] << "," << x[3];
             // Distance
             val += grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true);
             // Angle
@@ -58,23 +68,25 @@ void GA::solve(Grid* grid, vector<coord> &line) {
             val += grid->cost(grid->angle(angle, new_angle));
             angle = new_angle;
         }
+        out << " to " << p2s(this->end) << "; fitness: ";
         // To windmill
-        double new_angle = grid->angle(x[N-2], x[N-1], get<0>(this->end), get<1>(this->end), id);
-        val += grid->cost(x[N-2], x[N-1], get<0>(this->end), get<1>(this->end), id, true);
+        double new_angle = grid->angle(x[N-2], x[N-1], this->end.first, this->end.second, id);
+        val += grid->cost(x[N-2], x[N-1], this->end.first, this->end.second, id, true);
         val += grid->cost(grid->angle(angle, new_angle), true);
-        cout << "Fitness: " << val << endl;
+        cout << out.str() << val << endl;
         return val;
     };
 
     // problem dimensions: this->points
     vector<double> x0(0);
     for(vector<coord>::const_iterator it = line.begin(); it < line.end(); it++){
-        cout << "Line to " << it->first << "," << it->second << endl;
         x0.push_back(it->first);
         x0.push_back(it->second);
     }
 
-    double sigma = 10;
+    cout << "Initial fitness = " << fitness(x0.data(), x0.size());
+exit(0);
+    double sigma = 50;
     //int lambda = 100; // offsprings at each generation.
     CMAParameters<> cmaparams(this->points*2,&x0.front(),sigma);
     //cmaparams.set_algo(BIPOP_CMAES);

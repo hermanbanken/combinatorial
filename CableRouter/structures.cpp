@@ -190,7 +190,7 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 double Grid::cost(double angle, bool gradient) {
     if(!gradient)
         return angle - ALLOWED_ANGLE > 0 ? DBL_MAX : 0;
-    double c = (COST_ANGLE * pow(angle/ALLOWED_ANGLE, COST_ANGLE_POW));
+    double c = (COST_ANGLE * pow(angle - ALLOWED_ANGLE, COST_ANGLE_POW));
 
     if(c > INT8_MAX)
         cout << "Large cost for angle=" << angle << " > "<< ALLOWED_ANGLE << ") = " << c << endl;
