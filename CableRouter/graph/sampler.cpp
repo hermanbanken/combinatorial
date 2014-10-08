@@ -8,6 +8,8 @@
 
 #define NO_NODES 4000
 
+using namespace std;
+
 typedef pair<float, float> coordinate;
 
 Sampler::Sampler(Grid *grid) : grid(grid) {
@@ -17,13 +19,22 @@ Sampler::Sampler(Grid *grid) : grid(grid) {
 void Sampler::sample() {
     list<coordinate> points;
 
+    cout << "Sampling:" << endl;
+    clock_t start = clock();
     sampleGrid(NO_NODES, points);
+    clock_t grid_sampling = clock();
+    cout << "\t\tpoint sampling took: " << double(grid_sampling - start) / CLOCKS_PER_SEC << " sec" << endl;
     createNodes(points);
+    clock_t node_creating = clock();
+    cout << "\t\tnode creating took: " << double(node_creating - grid_sampling) / CLOCKS_PER_SEC << " sec" << endl;
     createAllEdges();
+    clock_t edge_creating = clock();
+    cout << "\t\tedge creating took: " << double(edge_creating - node_creating) / CLOCKS_PER_SEC << " sec" << endl;
+    cout << "\ttotal sampling: " << double(edge_creating - start) / CLOCKS_PER_SEC << " sec" << endl;
 }
 
 void Sampler::createNodes(list<coordinate> &points) {
-    Graph::Node* n;
+    Graph::Node *n;
     cell c;
 
     Projection p = this->grid->to_ZeroToOne_Projection().back();
@@ -61,10 +72,8 @@ void Sampler::createAllEdges() {
     Graph::Edge *e;
     Projection p = this->grid->to_ZeroToOne_Projection().back();
 
-    for (vector<Graph::Node>::iterator it_from = this->graph.nodes.begin(); it_from != this->graph.nodes.end(); ++it_from)
-    {
-        for (vector<Graph::Node>::iterator it_to = this->graph.nodes.begin(); it_to != this->graph.nodes.end(); ++it_to)
-        {
+    for (vector<Graph::Node>::iterator it_from = this->graph.nodes.begin(); it_from != this->graph.nodes.end(); ++it_from) {
+        for (vector<Graph::Node>::iterator it_to = this->graph.nodes.begin(); it_to != this->graph.nodes.end(); ++it_to) {
             if (it_from->id == it_to->id)
                 continue;
 
@@ -89,11 +98,9 @@ Graph::Node Sampler::findNearestNode(coord &point) {
     this->grid->to_ZeroToOne_Projection().project(point.first, point.second, x, y);
 
     max_distance = DBL_MAX;
-    for (vector<Graph::Node>::const_iterator it = this->graph.nodes.begin(); it != this->graph.nodes.end(); ++it)
-    {
-        distance = sqrt((x - it->p.first)*(x - it->p.first)+(y - it->p.second)*(y - it->p.second));
-        if (distance < max_distance)
-        {
+    for (vector<Graph::Node>::const_iterator it = this->graph.nodes.begin(); it != this->graph.nodes.end(); ++it) {
+        distance = sqrt((x - it->p.first) * (x - it->p.first) + (y - it->p.second) * (y - it->p.second));
+        if (distance < max_distance) {
             nearest = *it;
             max_distance = distance;
         }
