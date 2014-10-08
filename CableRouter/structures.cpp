@@ -148,6 +148,8 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 
     /* Obstacles and off map */
     for(double p = 0; p < grid_distance; p++){
+        double add = 0;
+
         double cx = ax + bx * p / grid_distance * (ax < bx ? 1 : -1);
         double cy = ay + by * p / grid_distance * (ay < by ? 1 : -1);
 
@@ -157,31 +159,43 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 
             // Penalties
             if(c.bomb)
-                val += 50;
+                add = 50;
             if(c.pipeline)
-                val += 100;
+                add = 100;
             if(c.builder)
-                val += 5;
+                add = 5;
 
         } else if(!gradient){
             // Either not in grid or off map
             return DBL_MAX;
         } else if(!c.mapped) {
             // In grid, of map
-            val += pow(COST_OFFMAP, this->distanceToMap(cx, cy));
+            add = COST_OFFMAP * pow(this->distanceToMap(cx, cy), 2);
         } else {
             // Of grid
-            val += pow(COST_OFFMAP, this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()));
+            add = COST_OFFMAP * pow(this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()), 2);
         }
+
+        if(add > FLT_MAX) {
+            cout << "Made inf in cost func (it=" << p << ",end=" << grid_distance << ") = " << add << endl;
+            cout << "Because " << (!exists ? "not exists" : (!c.mapped ? "not mapped" : "penalties")) << endl;
+        }
+        val += add;
     }
+
 
     return val;
 }
 
 double Grid::cost(double angle, bool gradient) {
     if(!gradient)
-        return fabs(angle) - ALLOWED_ANGLE > 0 ? DBL_MAX : 0;
-    return (COST_ANGLE * pow(fabs(angle/ALLOWED_ANGLE), COST_ANGLE_POW));
+        return angle - ALLOWED_ANGLE > 0 ? DBL_MAX : 0;
+    double c = (COST_ANGLE * pow(angle/ALLOWED_ANGLE, COST_ANGLE_POW));
+
+    if(c > INT8_MAX)
+        cout << "Large cost for angle=" << angle << " > "<< ALLOWED_ANGLE << ") = " << c << endl;
+
+    return c;
 }
 
 
@@ -387,3 +401,6 @@ void Grid::floodFindDistancesToEdge() {
 
 }
 
+double Grid::angle(double angle1, double angle2) {
+    return M_PI - ABS(ABS(angle1 - angle2) - M_PI);
+}

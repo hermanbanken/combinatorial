@@ -12,7 +12,7 @@
 
 #define coord pair<unsigned long,unsigned long>
 
-const double ALLOWED_ANGLE = 8 / 180 * M_PI;
+const double ALLOWED_ANGLE = 8.0 / 180.0 * M_PI;
 const double COST_ANGLE = 100;
 const double COST_ANGLE_POW = 2;
 const double COST_CABLE = 1;
@@ -169,6 +169,7 @@ public:
     * Gives the real angle in the input space
     */
     double angle(double ax, double ay, double bx, double by, const Projection &p);
+    double angle(double angle1, double angle2);
     /**
      * Gives the real distance (in meters) in the input space
      */

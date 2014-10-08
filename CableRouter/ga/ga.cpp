@@ -22,11 +22,11 @@ vector<coord> GA::straightLine(coord start, coord end, unsigned long points) {
     unsigned long y = 0;
 
     for(unsigned int i = 0; i + 1 < points; i++){
-        x = (unsigned  long) round(start.first  + i * (end.first  - start.first ) / points);
-        y = (unsigned  long) round(start.second + i * (end.second - start.second) / points);
-        line.push_back(make_pair(x, y));
+        x = (unsigned  long) round(start.first  + 1.0 * i * (1.0 * end.first  - start.first ) / points);
+        y = (unsigned  long) round(start.second + 1.0 * i * (1.0 * end.second - start.second) / points);
+        line[i] = make_pair(x, y);
     }
-    line.push_back(end);
+    line[points-1] = end;
     return line;
 }
 
@@ -55,25 +55,26 @@ void GA::solve(Grid* grid, vector<coord> &line) {
             val += grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true);
             // Angle
             double new_angle = grid->angle(x[i], x[i+1], x[i+2], x[i+3], id);
-            val += grid->cost(angle - new_angle);
+            val += grid->cost(grid->angle(angle, new_angle));
             angle = new_angle;
         }
         // To windmill
         double new_angle = grid->angle(x[N-2], x[N-1], get<0>(this->end), get<1>(this->end), id);
         val += grid->cost(x[N-2], x[N-1], get<0>(this->end), get<1>(this->end), id, true);
-        val += grid->cost(angle - new_angle, true);
+        val += grid->cost(grid->angle(angle, new_angle), true);
         cout << "Fitness: " << val << endl;
         return val;
     };
 
     // problem dimensions: this->points
-    vector<double> x0(this->points*2);
+    vector<double> x0(0);
     for(vector<coord>::const_iterator it = line.begin(); it < line.end(); it++){
+        cout << "Line to " << it->first << "," << it->second << endl;
         x0.push_back(it->first);
         x0.push_back(it->second);
     }
 
-    double sigma = 0.1;
+    double sigma = 10;
     //int lambda = 100; // offsprings at each generation.
     CMAParameters<> cmaparams(this->points*2,&x0.front(),sigma);
     //cmaparams.set_algo(BIPOP_CMAES);
