@@ -3,11 +3,12 @@
 #include "reader.h"
 #include "simplifier.h"
 #include "ga/ga.h"
+#include "graph/dijkstrasolver.h"
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define DEFAULT_GRID_SIZE 1;
+#define DEFAULT_GRID_SIZE 2;
 const int GA_COMPLEXITY = 5;
 
 using namespace std;
@@ -26,7 +27,7 @@ int main(int argc, char const *argv[]) {
     string bin = file+".bin";
 
     Grid* grid;
-    if(exists_test(bin)){
+    if(false){
         Grid g = Grid::read(bin);
         grid = &g;
     } else {
@@ -53,7 +54,7 @@ int main(int argc, char const *argv[]) {
         clock_t stop2 = clock();
         cout << double(stop2 - stop) / CLOCKS_PER_SEC << " seconds for grid\n";
 
-        grid->write(bin);
+//        grid->write(bin);
     }
 
 //    grid->summary(cout);
@@ -63,6 +64,9 @@ int main(int argc, char const *argv[]) {
 
     vector<tuple<unsigned long,unsigned long>> line(2, make_tuple(7, grid->maxY(id) - 3));
     line[1] = make_tuple(grid->maxX(id) - 2, 2);
+
+    Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver();
+    g->solve(grid, line);
 
     //Solvers::GA* g = new Solvers::GA(GA_COMPLEXITY);
     //g->solve(grid, line);
