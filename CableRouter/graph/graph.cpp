@@ -41,8 +41,8 @@ double Graph::shortestPath(Node &from, Node &to) {
     dist[from.id] = 0;
     from.dist = 0;
 
-    std::cout << "Planning: " << from.id << " -> " << to.id << endl;
-    std::cout << "coordinates: (" << from.p.first << "," << from.p.second << ") -> (" << to.p.first << "," << to.p.second << ")" << endl;
+//    std::cout << "Planning: " << from.id << " -> " << to.id << endl;
+//    std::cout << "coordinates: (" << from.p.first << "," << from.p.second << ") -> (" << to.p.first << "," << to.p.second << ")" << endl;
 
     pq.emplace(from);
     while (!pq.empty()) {
