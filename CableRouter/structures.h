@@ -10,6 +10,8 @@
 #ifndef ___cablerouter_structures___
 #define ___cablerouter_structures___
 
+#define coord pair<unsigned long,unsigned long>
+
 const double ALLOWED_ANGLE = 8 / 180 * M_PI;
 const double COST_ANGLE = 100;
 const double COST_ANGLE_POW = 2;
@@ -116,6 +118,7 @@ private:
     }
 
     cell& get(unsigned long x, unsigned long y);
+    bool tryGet(unsigned long x, unsigned long y, cell &out_cell);
 
     int distanceToMap(unsigned long x, unsigned long y, int maxDistance);
 
@@ -182,7 +185,7 @@ public:
     void write(string filename);
     static Grid read(string filename);
 
-    vector<pair<unsigned long, unsigned long>> edgeNodes();
+    vector<pair<cell,coord>> edgeNodes();
 };
 
 #endif /* defined(___cablerouter_structures___) */
