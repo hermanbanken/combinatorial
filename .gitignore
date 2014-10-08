@@ -52,3 +52,10 @@ docs/_build/
 
 # PyBuilder
 target/
+
+.iml
+*.iml
+*.ipr
+*.iws
+*.pdf
+*.docx
