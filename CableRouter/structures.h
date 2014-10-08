@@ -29,6 +29,7 @@ struct cell {
     bool pipeline;
     SeaBed seabed;
     int distanceToMap = -1;
+    int distanceExplored = 0;
 };
 
 struct point {
@@ -79,18 +80,18 @@ public:
     const float scale_x;
     const float scale_y;
     Projection(float offset_x, float offset_y, float scale_x, float scale_y);
-    void project(float x, float y, float &out_x, float &out_y);
-    void projectX(float x, float &out_x);
-    void projectY(float y, float &out_y);
-    Projection* back();
+    void project(float x, float y, float &out_x, float &out_y)const;
+    void projectX(float x, float &out_x)const;
+    void projectY(float y, float &out_y)const;
+    Projection back();
     bool isIdentity()const {
         return is_identity;
     }
-    bool hasEqualScales() {
+    bool hasEqualScales()const {
         return is_equalScale;
     }
-    static Projection* identity() {
-        return new Projection(0, 0, 1, 1);
+    static Projection identity() {
+        return Projection(0, 0, 1, 1);
     }
 
 
@@ -98,7 +99,7 @@ public:
 
 class Grid {
 private:
-    vector<vector<cell>>& grid;
+    vector<vector<cell>> grid;
     Projection gridProjection;
 
     float maxX() {
@@ -114,27 +115,28 @@ private:
         return 0;
     }
 
-    cell * get(unsigned long x, unsigned long y);
+    cell& get(unsigned long x, unsigned long y);
 
-    int distanceToMap(unsigned long x, unsigned long y, unsigned long origin_x, unsigned long origin_y, unsigned int maxRecurse);
+    int distanceToMap(unsigned long x, unsigned long y, int maxDistance);
 
+    void floodFindDistancesToEdge();
 
 public:
     /**
     * Returns pointer to internal data
     */
-    vector<vector<cell>>* data(){
-        return &this->grid;
+    vector<vector<cell>>& data(){
+        return this->grid;
     }
 
     /**
     * Creates grid, copying the data
     */
     Grid(vector<vector<cell>> grid, Projection fromInputToGrid);
-    Projection* backToInputProjection();
-    Projection* inputProjection();
-    Projection* to_ZeroToOne_Projection();
-    cell* getCell(float x, float y, Projection &p);
+    Projection backToInputProjection();
+    const Projection& inputProjection();
+    Projection to_ZeroToOne_Projection();
+    const cell& getCell(float x, float y, Projection &p);
 
     int distanceToMap(unsigned long x, unsigned long y);
 
@@ -162,12 +164,12 @@ public:
     /**
     * Gives the real angle in the input space
     */
-    float angle(float ax, float ay, float bx, float by, Projection &p);
+    float angle(float ax, float ay, float bx, float by, const Projection &p);
     /**
      * Gives the real distance in the input space
      */
-    float distance(float ax, float ay, float bx, float by, Projection &p);
-    float cost(float ax, float ay, float bx, float by, Projection &p);
+    float distance(float ax, float ay, float bx, float by, const Projection &p);
+    float cost(float ax, float ay, float bx, float by, const Projection &p);
     float cost(float angle);
 
     /**

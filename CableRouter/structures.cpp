@@ -94,10 +94,10 @@ void Grid::plot(ostream &stream) {
     }
 }
 
-Grid::Grid(vector<vector<cell>> grid, Projection fromInputToGrid) : gridProjection(fromInputToGrid), grid(grid) {
+Grid::Grid(vector<vector<cell>> grid, Projection fromInputToGrid) : grid(grid), gridProjection(fromInputToGrid) {
 }
 
-void Projection::project(float x, float y, float &out_x, float &out_y) {
+void Projection::project(float x, float y, float &out_x, float &out_y)const {
     projectX(x, out_x);
     projectY(y, out_y);
 }
@@ -107,22 +107,22 @@ Projection::Projection(float offset_x, float offset_y, float scale_x, float scal
     is_equalScale = scale_x == scale_y;
 }
 
-void Projection::projectX(float x, float &out_x) {
+void Projection::projectX(float x, float &out_x)const {
     out_x = (x + offset_x) * scale_x;
 }
-void Projection::projectY(float y, float &out_y) {
+void Projection::projectY(float y, float &out_y)const {
     out_y = (y + offset_y) * scale_y;
 }
 
-Projection* Grid::to_ZeroToOne_Projection() {
-    return new Projection(minX(), minY(),1/(maxX()-minX()), 1/(maxY()-minY()));
+Projection Grid::to_ZeroToOne_Projection() {
+    return Projection(minX(), minY(),1/(maxX()-minX()), 1/(maxY()-minY()));
 }
 
-Projection* Projection::back() {
-    return new Projection(-offset_x*scale_x, -offset_y*scale_y, 1/scale_x, 1/scale_y);
+Projection Projection::back() {
+    return Projection(-offset_x*scale_x, -offset_y*scale_y, 1/scale_x, 1/scale_y);
 }
 
-float Grid::angle(float ax, float ay, float bx, float by, Projection &p) {
+float Grid::angle(float ax, float ay, float bx, float by, const Projection &p) {
     if(!p.hasEqualScales()) {
         p.project(ax, ay, ax, ay);
         p.project(bx, by, bx, by);
@@ -134,7 +134,7 @@ float Grid::angle(float ax, float ay, float bx, float by, Projection &p) {
     return (float) atan2(by - ay, bx - ax);
 }
 
-float Grid::cost(float ax, float ay, float bx, float by, Projection &p) {
+float Grid::cost(float ax, float ay, float bx, float by, const Projection &p) {
     float val = 0;
 
     // Fix projection
@@ -142,7 +142,7 @@ float Grid::cost(float ax, float ay, float bx, float by, Projection &p) {
     p.project(bx, by, bx, by);
 
     /* Distance */
-    double distance = COST_CABLE * this->distance(ax, ay, bx, by, *(Projection::identity()));
+    double distance = COST_CABLE * this->distance(ax, ay, bx, by, Projection::identity());
     val += distance;
 
     double grid_distance = (float) sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
@@ -174,25 +174,25 @@ float Grid::cost(float angle) {
     return (float) (COST_ANGLE * pow(fabs(angle/ALLOWED_ANGLE), COST_ANGLE_POW));
 }
 
-float Grid::distance(float ax, float ay, float bx, float by, Projection &p) {
+float Grid::distance(float ax, float ay, float bx, float by, const Projection &p) {
     // Fix projection
     if(!p.isIdentity()) {
         p.project(ax, ay, ax, ay);
         p.project(bx, by, bx, by);
     }
     if(!gridProjection.isIdentity()){
-        this->backToInputProjection()->project(ax, ay, ax, ay);
-        this->backToInputProjection()->project(bx, by, bx, by);
+        this->backToInputProjection().project(ax, ay, ax, ay);
+        this->backToInputProjection().project(bx, by, bx, by);
     }
     return (float) sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
 }
 
-Projection* Grid::backToInputProjection() {
+Projection Grid::backToInputProjection() {
     return gridProjection.back();
 }
 
-Projection* Grid::inputProjection() {
-    return &gridProjection;
+const Projection& Grid::inputProjection() {
+    return gridProjection;
 }
 
 void Grid::summary(ostream &stream) {
@@ -315,10 +315,10 @@ Grid Grid::read(string filename) {
     }
 
     fclose(f);
-    return Grid(&r, *p);
+    return Grid(r, *p);
 }
 
-cell* Grid::getCell(float x, float y, Projection &p) {
+const cell& Grid::getCell(float x, float y, Projection &p) {
     // Fix projection
     if(!p.isIdentity()) {
         p.project(x, y, x, y);
@@ -326,11 +326,17 @@ cell* Grid::getCell(float x, float y, Projection &p) {
     return this->get((unsigned long) x, (unsigned long) y);
 }
 
-cell* Grid::get(unsigned long x, unsigned long y) {
+cell& Grid::get(unsigned long x, unsigned long y) {
     if(x < 0 || y < 0 || x >= grid.size() || y >= grid.at(x).size()){
         exit(2);
 //        throw invalid_argument("parameters must match the grid");
     } else {
-        return &grid.at(x).at(y);
+        return grid.at(x).at(y);
     }
+}
+
+void Grid::floodFindDistancesToEdge() {
+
+    this->edgeNodes();
+
 }

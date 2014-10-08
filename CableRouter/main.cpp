@@ -59,10 +59,10 @@ int main(int argc, char const *argv[]) {
 //    grid->summary(cout);
     grid->plot(cout);
 
-    Projection *id = Projection::identity();
+    Projection id = Projection::identity();
 
-    vector<tuple<unsigned long,unsigned long>> line(2, make_tuple(7, grid->maxY(*id) - 3));
-    line[1] = make_tuple(grid->maxX(*id) - 2, 2);
+    vector<tuple<unsigned long,unsigned long>> line(2, make_tuple(7, grid->maxY(id) - 3));
+    line[1] = make_tuple(grid->maxX(id) - 2, 2);
 
     //Solvers::GA* g = new Solvers::GA(GA_COMPLEXITY);
     //g->solve(grid, line);
