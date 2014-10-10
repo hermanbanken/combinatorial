@@ -21,12 +21,12 @@ vector<coord> GA::straightLine(coord start, coord end, unsigned long points) {
     unsigned long x = 0;
     unsigned long y = 0;
 
-    for(unsigned int i = 0; i + 1 < points; i++){
-        x = (unsigned  long) round(start.first  + 1.0 * i * (1.0 * end.first  - start.first ) / points);
-        y = (unsigned  long) round(start.second + 1.0 * i * (1.0 * end.second - start.second) / points);
+    // TODO: fix line to be evenly spaced
+    for(unsigned int i = 0; i < points; i++){
+        x = (unsigned  long) round(start.first  + 1.0 * (i+1) * (1.0 * end.first  - start.first ) / points);
+        y = (unsigned  long) round(start.second + 1.0 * (i+1) * (1.0 * end.second - start.second) / points);
         line[i] = make_pair(x, y);
     }
-    line[points-1] = end;
     return line;
 }
 
@@ -52,28 +52,28 @@ void GA::solve(Grid* grid, vector<coord> &line) {
     line = straightLine(this->start, this->end, this->points);
 
     FitFunc fitness = [grid,this,id](const double *x, const int N)->double {
-        ostringstream out;
-        out << "Line from start " << p2s(this->start);
+//        ostringstream out;
+//        out << "Line from start " << p2s(this->start);
         double val = 0.0;
         double angle = grid->angle(this->start.first, this->start.second, x[0], x[1], id);
         // From windmill
         val += grid->cost(get<0>(this->start), get<1>(this->start), x[0], x[1], id, true);
-        out << " to " << x[0] << "," << x[1];
+//        out << " to " << x[0] << "," << x[1];
         for (int i = 0; i+3 < N; i+=4){
-            out << " to " << x[2] << "," << x[3];
+//            out << " to " << x[i+2] << "," << x[i+3];
             // Distance
             val += grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true);
             // Angle
             double new_angle = grid->angle(x[i], x[i+1], x[i+2], x[i+3], id);
-            val += grid->cost(grid->angle(angle, new_angle));
+            val += grid->cost(grid->angle(angle, new_angle), true);
             angle = new_angle;
         }
-        out << " to " << p2s(this->end) << "; fitness: ";
+//        out << " to " << p2s(this->end) << "; fitness: ";
         // To windmill
         double new_angle = grid->angle(x[N-2], x[N-1], this->end.first, this->end.second, id);
         val += grid->cost(x[N-2], x[N-1], this->end.first, this->end.second, id, true);
         val += grid->cost(grid->angle(angle, new_angle), true);
-        cout << out.str() << val << endl;
+//        cout << out.str() << val << endl;
         return val;
     };
 
@@ -85,7 +85,7 @@ void GA::solve(Grid* grid, vector<coord> &line) {
     }
 
     cout << "Initial fitness = " << fitness(x0.data(), x0.size());
-exit(0);
+//exit(0);
     double sigma = 50;
     //int lambda = 100; // offsprings at each generation.
     CMAParameters<> cmaparams(this->points*2,&x0.front(),sigma);
