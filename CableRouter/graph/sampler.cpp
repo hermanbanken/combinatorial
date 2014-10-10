@@ -12,7 +12,7 @@ using namespace std;
 
 typedef pair<float, float> coordinate;
 
-Sampler::Sampler(Grid *grid) : grid(grid) {
+Sampler::Sampler(Grid *grid) : grid(grid), projection(Projection::identity()) {
     this->graph = Graph();
 }
 
@@ -37,7 +37,7 @@ void Sampler::createNodes(list<coordinate> &points) {
     Graph::Node *n;
     cell c;
 
-    Projection p = this->grid->to_ZeroToOne_Projection().back();
+    Projection p = projection.back();
 
     for (list<coordinate>::const_iterator it = points.begin(); it != points.end(); ++it) {
         c = this->grid->getCell(it->first, it->second, p);
@@ -52,17 +52,18 @@ void Sampler::createNodes(list<coordinate> &points) {
 
 void Sampler::sampleGrid(int noPoints, list<coordinate> &points) {
     int noPointsX, noPointsY, x, y;
-    float distX, distY;
+    double distX, distY;
 
     noPointsX = (int) sqrt(noPoints);
     noPointsY = (int) sqrt(noPoints);
 
-    distX = 1.0f / noPointsX;
-    distY = 1.0f / noPointsY;
+    // Use normal projection/back-projection here, if changing projection again
+    distX = (grid->maxX(projection) - grid->minX(projection)) / noPointsX;
+    distY = (grid->maxY(projection) - grid->minY(projection)) / noPointsY;
 
-    for (x = 0; x <= noPointsX; x++) {
+    for (x = 0; x < noPointsX; x++) {
         for (y = 0; y < noPointsY; y++) {
-            points.push_back(coordinate(distX * x, distY * y));
+            points.push_back(coordinate(grid->minX(projection) + distX * x, grid->minY(projection) + distY * y));
         }
     }
 }
@@ -70,7 +71,7 @@ void Sampler::sampleGrid(int noPoints, list<coordinate> &points) {
 
 void Sampler::createAllEdges() {
     Graph::Edge *e;
-    Projection p = this->grid->to_ZeroToOne_Projection().back();
+    Projection p = projection.back();
 
     for (vector<Graph::Node>::iterator it_from = this->graph.nodes.begin(); it_from != this->graph.nodes.end(); ++it_from) {
         for (vector<Graph::Node>::iterator it_to = this->graph.nodes.begin(); it_to != this->graph.nodes.end(); ++it_to) {
@@ -95,7 +96,7 @@ Graph::Node Sampler::findNearestNode(coord &point) {
     double distance, max_distance;
     Graph::Node nearest;
 
-    this->grid->to_ZeroToOne_Projection().project(point.first, point.second, x, y);
+    projection.project(point.first, point.second, x, y);
 
     max_distance = DBL_MAX;
     for (vector<Graph::Node>::const_iterator it = this->graph.nodes.begin(); it != this->graph.nodes.end(); ++it) {

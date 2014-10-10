@@ -18,6 +18,7 @@ Possibilities for sampling:
 class Sampler
 {
     Grid *grid;
+    Projection projection;
 public:
     Graph graph;
     Sampler(Grid *grid);
