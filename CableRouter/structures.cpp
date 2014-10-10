@@ -7,6 +7,8 @@
 #include <sstream>
 
 #define ABS(a) (a > 0 ? a : (-1 * a))
+#define EUCL(ax,ay,bx,by) (sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by)))
+#define ANGL(ax,ay,bx,by) atan2(by - ay, bx - ax)
 
 using namespace std;
 
@@ -72,7 +74,21 @@ point::point(float x, float y, float z) {
     this->z = z;
 }
 
-void Grid::plot(ostream &stream) {
+void Grid::plot(ostream &stream, vector<coordinate> line) {
+
+    vector<vector<bool>> hasLine(grid.size(), vector<bool>(grid.begin()->size(), false));
+    for(unsigned long i = 0; i + 1 < line.size(); i++){
+        cout << "Line from (" << line[i].first << "," << line[i].second << ") to (" << line[i+1].first << "," << line[i+1].second << ")" << endl;
+        double dx = line[i+1].first -  line[i].first;
+        double dy = line[i+1].second - line[i].second;
+        for(unsigned long j = 0; j < fabs(dx); j++){
+            unsigned long x = round((dx > 0 ? 1 : -1) * j + line[i].first);
+            unsigned long y = (unsigned long) round(dy / fabs(dx) * j + line[i].second);
+            if(x > minX() && y > minY() && x < maxX() && y < maxY())
+                hasLine[x][y] = true;
+        }
+    }
+
     vector<vector<cell>>::const_iterator i;
     vector<cell>::const_iterator j;
     stream << "Outputting grid(" << grid.size() << "x" << grid.begin()->size() << "):" << endl;
@@ -84,10 +100,14 @@ void Grid::plot(ostream &stream) {
                 stream << "b";
             else if (j->builder)
                 stream << ".";
-            else if (j->mapped)
-                stream << " ";
             else {
-                stream << "*";
+                if(hasLine[i - grid.begin()][j - grid.begin()->begin()])
+                    stream << "-";
+                else  if (j->mapped)
+                    stream << " ";
+                else {
+                    stream << "*";
+                }
             }
         }
         stream << "\n" << flush;
@@ -131,7 +151,7 @@ double Grid::angle(double ax, double ay, double bx, double by, const Projection 
         gridProjection.project(ax,ay,ax,ay);
         gridProjection.project(bx,by,bx,by);
     }
-    return atan2(by - ay, bx - ax);
+    return ANGL(ax,ay,bx,by);
 }
 
 double Grid::cost(double ax, double ay, double bx, double by, const Projection &p, bool gradient) {
@@ -147,7 +167,7 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 
     // If > 50 meters: penalty
 
-    double grid_distance = sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
+    double grid_distance = EUCL(ax,ay,bx,by);
 
     /* Obstacles and off map */
     for(double p = 0; p < grid_distance; p++){
@@ -219,7 +239,7 @@ double Grid::distance(double ax, double ay, double bx, double by, const Projecti
         this->backToInputProjection().project(ax, ay, ax, ay);
         this->backToInputProjection().project(bx, by, bx, by);
     }
-    return sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
+    return EUCL(ax,ay,bx,by);
 }
 
 Projection Grid::backToInputProjection() {

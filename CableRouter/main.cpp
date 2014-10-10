@@ -68,8 +68,7 @@ int main(int argc, char const *argv[]) {
     Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver();
     g->solve(grid, line);
 
-    //Solvers::GA* g = new Solvers::GA(GA_COMPLEXITY);
-    //g->solve(grid, line);
+    grid->plot(cout, line);
 
     return 0;
 }

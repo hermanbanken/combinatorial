@@ -183,7 +183,7 @@ public:
     /**
     * Plot ASCII art to an output stream
     */
-    void plot(ostream& stream);
+    void plot(ostream& stream, vector<coordinate> line = vector<coordinate>(0));
 
     void summary(ostream& stream);
 
