@@ -101,8 +101,13 @@ void GA::solve(Grid* grid, vector<coordinate> &line) {
     vector<double> x0 = lineCandidate(line);
     //int lambda = 100; // offsprings at each generation.
     CMAParameters<> cmaparams(this->points*2,&x0.front(),sigma);
+    cout << "Initial fitness = " << fitness(x0.data(), x0.size());
     //cmaparams.set_algo(BIPOP_CMAES);
+
+    // Run
     CMASolutions cmasols = cmaes<>(fitness,cmaparams);
+
+    // Print
     cout << "best solution: " << cmasols << endl;
     cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds" << endl;
     int o = cmasols.run_status();
