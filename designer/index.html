@@ -1,0 +1,33 @@
+<html>
+<head>
+    <script src="jquery.min.js"></script>
+    <script src="FileSaver.min.js"></script>
+</head>
+<style>
+    html,body { padding: 0; margin: 0; overflow: hidden; background: black; }
+    .dim { position: absolute; top: 0; left: 0; padding: 5px; z-index: 1000; }
+    .save { position: absolute; top: 0; right: 0; padding: 5px; z-index: 1000; }
+    #bar { position: absolute; top: 0; right: 50%; padding: 5px; z-index: 1000; width: 100px; margin-left: -50px; }
+    canvas {
+        position: absolute;
+        top: 0; bottom: 0;
+        left: 0; right: 0;
+        z-index: 100;
+        cursor: crosshair;
+    }
+    #cursor { position: absolute; z-index: 150; }
+</style>
+
+<div id="bar">
+    <button id="white">Map</button>
+    <button id="red">Bom</button>
+    <button id="blue">Pipe</button>
+    <button id="green">Builder</button>
+</div>
+<div class="dim"></div>
+<button class="save">Export</button>
+<div id="cursor"></div>
+<canvas></canvas>
+
+<script src="draw.js"></script>
+</html>
