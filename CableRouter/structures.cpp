@@ -144,6 +144,8 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
     double distance = COST_CABLE * this->distance(ax, ay, bx, by, Projection::identity());
     val += distance;
 
+    // If > 50 meters: penalty
+
     double grid_distance = sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
 
     /* Obstacles and off map */
@@ -167,8 +169,8 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 
         } else if(!gradient){
             // Either not in grid or off map
-            return DBL_MAX;
-        } else if(!c.mapped) {
+            return FLT_MAX;
+        } else if(exists && !c.mapped) {
             // In grid, of map
             add = COST_OFFMAP * pow(this->distanceToMap(cx, cy), 2);
         } else {
@@ -190,7 +192,7 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 
 double Grid::cost(double angle, bool gradient) {
     if(!gradient)
-        return angle - ALLOWED_ANGLE > 0 ? DBL_MAX : 0;
+        return angle - ALLOWED_ANGLE > 0 ? FLT_MAX : 0;
     double c = (COST_ANGLE * pow(angle - ALLOWED_ANGLE, COST_ANGLE_POW));
 
     if(c > INT8_MAX)
