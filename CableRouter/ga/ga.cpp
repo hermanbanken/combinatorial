@@ -59,7 +59,7 @@ void GA::solve(Grid* grid, vector<coord> &line) {
         // From windmill
         val += grid->cost(get<0>(this->start), get<1>(this->start), x[0], x[1], id, true);
 //        out << " to " << x[0] << "," << x[1];
-        for (int i = 0; i+3 < N; i+=4){
+        for (int i = 0; i+3 < N; i+=2){
 //            out << " to " << x[i+2] << "," << x[i+3];
             // Distance
             val += grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true);
