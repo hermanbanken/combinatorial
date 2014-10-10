@@ -21,12 +21,12 @@ vector<coord> GA::straightLine(coord start, coord end, unsigned long points) {
     unsigned long x = 0;
     unsigned long y = 0;
 
-    for(unsigned int i = 0; i + 1 < points; i++){
-        x = (unsigned  long) round(start.first  + 1.0 * i * (1.0 * end.first  - start.first ) / points);
-        y = (unsigned  long) round(start.second + 1.0 * i * (1.0 * end.second - start.second) / points);
+    // TODO: fix line to be evenly spaced
+    for(unsigned int i = 0; i < points; i++){
+        x = (unsigned  long) round(start.first  + 1.0 * (i+1) * (1.0 * end.first  - start.first ) / points);
+        y = (unsigned  long) round(start.second + 1.0 * (i+1) * (1.0 * end.second - start.second) / points);
         line[i] = make_pair(x, y);
     }
-    line[points-1] = end;
     return line;
 }
 
@@ -65,7 +65,7 @@ void GA::solve(Grid* grid, vector<coord> &line) {
             val += grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true);
             // Angle
             double new_angle = grid->angle(x[i], x[i+1], x[i+2], x[i+3], id);
-            val += grid->cost(grid->angle(angle, new_angle));
+            val += grid->cost(grid->angle(angle, new_angle), true);
             angle = new_angle;
         }
         out << " to " << p2s(this->end) << "; fitness: ";
