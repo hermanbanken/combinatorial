@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <queue>
+#include <sstream>
 
 #define ABS(a) (a > 0 ? a : (-1 * a))
 
@@ -338,12 +339,14 @@ const cell& Grid::getCell(double x, double y, Projection &p) {
     if(!p.isIdentity()) {
         p.project(x, y, x, y);
     }
-    return this->get((unsigned long) x, (unsigned long) y);
+    return this->get((unsigned long) floor(x), (unsigned long) floor(y));
 }
 
 cell& Grid::get(unsigned long x, unsigned long y) {
     if(x < 0 || y < 0 || x >= grid.size() || y >= grid.at(x).size()){
-        throw invalid_argument("parameters must match the grid");
+        ostringstream e;
+        e << "parameters(x=" << x << ",y=" << y << ") must match the grid";
+        throw invalid_argument(e.str());
     } else {
         return grid.at(x).at(y);
     }
