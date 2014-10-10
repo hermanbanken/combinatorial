@@ -414,5 +414,11 @@ void Grid::floodFindDistancesToEdge() {
 }
 
 double Grid::angle(double angle1, double angle2) {
-    return M_PI - ABS(ABS(angle1 - angle2) - M_PI);
+//    cout << angle1 << ", " << angle2 << endl;
+    // if sign(angle1) != sign(angle2)
+    if ((angle1 <= 0 and angle2 >= 0) or (angle1 > 0 and angle2 < 0)) {
+        return fabs(angle1) + fabs(angle2);
+    }
+    // else
+    return fabs(fabs(angle1) - fabs(angle2));
 }
