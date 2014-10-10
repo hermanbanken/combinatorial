@@ -166,6 +166,10 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
     val += distance;
 
     // If > 50 meters: penalty
+    double scale = 2.0f;
+    double limit = 50.0f;
+    double const COST_50M = 50;
+    val += COST_50M * (M_PI / 2 - atan(distance / scale + limit / scale));
 
     double grid_distance = EUCL(ax,ay,bx,by);
 
