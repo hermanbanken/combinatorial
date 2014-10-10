@@ -185,15 +185,21 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
         val += add;
     }
 
+//    cout << "From a (" << ax <<  "," << ay << ") to b (" << bx <<  "," << by << ") = " << val << endl;
+
     if(val > FLT_MAX)
         return FLT_MAX;
+
     return val;
 }
 
 double Grid::cost(double angle, bool gradient) {
+//    cout << "Angle: " << angle;
     if(!gradient)
         return angle - ALLOWED_ANGLE > 0 ? FLT_MAX : 0;
     double c = (COST_ANGLE * pow(angle - ALLOWED_ANGLE, COST_ANGLE_POW));
+
+//    cout << " costing: " << c << endl;
 
     if(c > INT8_MAX)
         cout << "Large cost for angle=" << angle << " > "<< ALLOWED_ANGLE << ") = " << c << endl;
