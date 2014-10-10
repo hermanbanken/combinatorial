@@ -60,10 +60,6 @@ double Graph::shortestPath(Node &from, Node &to) {
             {
                 alt = dist[u.id] + it->weight;
 //                std::cout << "alt: " << alt << ", old_dist: " << dist[to_node->id] <<  endl;
-                if (to_node->id == to.id)
-                {
-                    return alt;
-                }
 
                 if (alt < dist[to_node->id])
                 {
@@ -75,5 +71,8 @@ double Graph::shortestPath(Node &from, Node &to) {
         }
     }
 
-    return -1;
+    if (dist[to.id] == DBL_MAX)
+        return -1;
+
+    return dist[to.id];
 }

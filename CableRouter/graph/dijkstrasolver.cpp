@@ -6,6 +6,8 @@ using namespace std;
 
 void Solvers::DijkstraSolver::solve(Grid *grid, vector<coord> &line) {
     clock_t start = clock();
+
+    grid->floodFindDistancesToEdge();
     Sampler sampler = Sampler(grid);
 
     sampler.sample();

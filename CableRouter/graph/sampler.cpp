@@ -6,7 +6,7 @@
 #include "../structures.h"
 #include "graph.h"
 
-#define NO_NODES 4000
+#define NO_NODES 8000
 
 using namespace std;
 
@@ -81,9 +81,9 @@ void Sampler::createAllEdges() {
             e = new Graph::Edge();
             e->from = &*it_from;
             e->to = &*it_to;
-            e->weight = grid->cost(e->from->p.first, e->from->p.second, e->to->p.first, e->to->p.second, p);
+            e->weight = grid->cost(e->from->p.first, e->from->p.second, e->to->p.first, e->to->p.second, p, true);
 
-            if (e->weight != DBL_MAX) {
+            if (e->weight != FLT_MAX) {
                 graph.addEdge(*e);
             }
         }

@@ -183,7 +183,8 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
         val += add;
     }
 
-
+    if(val > FLT_MAX)
+        return FLT_MAX;
     return val;
 }
 

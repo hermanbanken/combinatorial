@@ -123,9 +123,10 @@ private:
 
     int distanceToMap(unsigned long x, unsigned long y, int maxDistance);
 
-    void floodFindDistancesToEdge();
+
 
 public:
+    void floodFindDistancesToEdge();
     /**
     * Returns pointer to internal data
     */
