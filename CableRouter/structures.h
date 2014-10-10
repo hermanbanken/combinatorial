@@ -2,6 +2,7 @@
 #include <float.h>
 #include <stdio.h>
 #include <string>
+#include <tuple>
 #include <vector>
 #include <math.h>
 #include <stdexcept>
@@ -11,6 +12,7 @@
 #define ___cablerouter_structures___
 
 #define coord pair<unsigned long,unsigned long>
+#define coordinate pair<double,double>
 
 const double ALLOWED_ANGLE = 8.0 / 180.0 * M_PI;
 const double COST_ANGLE = 100;

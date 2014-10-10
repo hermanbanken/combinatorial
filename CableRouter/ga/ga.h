@@ -18,13 +18,14 @@ namespace Solvers {
     private:
         unsigned int points;
         Grid *grid;
-        coord start;
-        coord end;
-        vector<coord> straightLine(coord start, coord end, unsigned long points);
+        coordinate start;
+        coordinate end;
+        vector<coordinate> straightLine(coordinate start, coordinate end, unsigned long points);
     public:
         GA(unsigned int points);
 
-        void solve(Grid* grid, vector<coord> &line);
+        void solve(Grid* grid, vector<coordinate> &line);
+
     };
 
 }

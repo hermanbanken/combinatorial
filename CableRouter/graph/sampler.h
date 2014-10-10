@@ -23,11 +23,11 @@ public:
     Graph graph;
     Sampler(Grid *grid);
     void sample();
-    void sampleGrid(int noPoints, list<pair<float, float>>& points);
+    void sampleGrid(int noPoints, list<coordinate>& points);
 
-    void createNodes(list<pair<float, float>> &points);
+    void createNodes(list<coordinate> &points);
 
     void createAllEdges();
 
-    Graph::Node findNearestNode(coord &param);
+    Graph::Node findNearestNode(coordinate &param);
 };

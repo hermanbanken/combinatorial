@@ -10,8 +10,6 @@
 
 using namespace std;
 
-typedef pair<float, float> coordinate;
-
 Sampler::Sampler(Grid *grid) : grid(grid), projection(Projection::identity()) {
     this->graph = Graph();
 }
@@ -91,7 +89,7 @@ void Sampler::createAllEdges() {
     }
 }
 
-Graph::Node Sampler::findNearestNode(coord &point) {
+Graph::Node Sampler::findNearestNode(coordinate &point) {
     double x, y;
     double distance, max_distance;
     Graph::Node nearest;

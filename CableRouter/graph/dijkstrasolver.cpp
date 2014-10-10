@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void Solvers::DijkstraSolver::solve(Grid *grid, vector<coord> &line) {
+void Solvers::DijkstraSolver::solve(Grid *grid, vector<coordinate> &line) {
     clock_t start = clock();
 
     grid->floodFindDistancesToEdge();

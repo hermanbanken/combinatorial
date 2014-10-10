@@ -5,6 +5,6 @@ namespace Solvers {
     class DijkstraSolver : public Solver {
 
     public:
-        void solve(Grid *grid, vector<coord> &line);
+        void solve(Grid *grid, vector<coordinate> &line);
     };
 }

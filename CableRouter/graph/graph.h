@@ -4,9 +4,6 @@
 #ifndef ___cablerouter_graph___
 #define ___cablerouter_graph___
 
-
-typedef pair<float, float> coordinate;
-
 class Graph {
 public:
     struct Node;

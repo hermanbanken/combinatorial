@@ -16,15 +16,15 @@ Solvers::GA::GA(unsigned int points) {
     this->points = points;
 }
 
-vector<coord> GA::straightLine(coord start, coord end, unsigned long points) {
-    vector<coord> line(points);
-    unsigned long x = 0;
-    unsigned long y = 0;
+vector<coordinate> GA::straightLine(coordinate start, coordinate end, unsigned long points) {
+    vector<coordinate> line(points);
+    double x = 0;
+    double y = 0;
 
     // TODO: fix line to be evenly spaced
     for(unsigned int i = 0; i < points; i++){
-        x = (unsigned  long) round(start.first  + 1.0 * (i+1) * (1.0 * end.first  - start.first ) / points);
-        y = (unsigned  long) round(start.second + 1.0 * (i+1) * (1.0 * end.second - start.second) / points);
+        x = start.first  + 1.0 * (i+1) * (1.0 * end.first  - start.first ) / points;
+        y = start.second + 1.0 * (i+1) * (1.0 * end.second - start.second) / points;
         line[i] = make_pair(x, y);
     }
     return line;
@@ -36,7 +36,26 @@ string p2s(coord c){
     return stringStream.str();
 }
 
-void GA::solve(Grid* grid, vector<coord> &line) {
+vector<double> lineCandidate(vector<coordinate> line){
+    vector<double> x0(0);
+    for(vector<coordinate>::const_iterator it = line.begin(); it < line.end(); it++){
+        x0.push_back(it->first);
+        x0.push_back(it->second);
+    }
+    return x0;
+}
+
+vector<coordinate> candidateLine(coordinate start, Candidate c, coordinate end) {
+    vector<coordinate> line(0);
+    line.push_back(make_pair(start.first, start.second));
+    for(unsigned int i = 0; i < c.get_x_size(); i+=2){
+        line.push_back(make_pair(c.get_x()[i], c.get_x()[i+1]));
+    }
+    line.push_back(make_pair(end.first, end.second));
+    return line;
+}
+
+void GA::solve(Grid* grid, vector<coordinate> &line) {
     if(line.empty())
         throw invalid_argument("line was empty: it should contain at least 2 points");
 
@@ -77,16 +96,9 @@ void GA::solve(Grid* grid, vector<coord> &line) {
         return val;
     };
 
-    // problem dimensions: this->points
-    vector<double> x0(0);
-    for(vector<coord>::const_iterator it = line.begin(); it < line.end(); it++){
-        x0.push_back(it->first);
-        x0.push_back(it->second);
-    }
-
-    cout << "Initial fitness = " << fitness(x0.data(), x0.size());
-//exit(0);
+    // Config
     double sigma = 50;
+    vector<double> x0 = lineCandidate(line);
     //int lambda = 100; // offsprings at each generation.
     CMAParameters<> cmaparams(this->points*2,&x0.front(),sigma);
     //cmaparams.set_algo(BIPOP_CMAES);
@@ -95,4 +107,7 @@ void GA::solve(Grid* grid, vector<coord> &line) {
     cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds" << endl;
     int o = cmasols.run_status();
     cout << "Result: " << o << endl;
+
+    // Return
+    line = candidateLine(this->start, cmasols.best_candidate(), this->end);
 }
