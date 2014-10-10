@@ -34,10 +34,12 @@ double Graph::shortestPath(Node &from, Node &to) {
     double alt;
     double dist[this->nodes.size()];
     bool scanned[this->nodes.size()];
+    unsigned long previous[this->nodes.size()];
     priority_queue<Node, vector<Node>, CompareGreater> pq;
 
     std::fill_n(dist, this->nodes.size(), DBL_MAX);
     std::fill_n(scanned, this->nodes.size(), false);
+    std::fill_n(previous, this->nodes.size(), ((unsigned long) 0)-1);
     dist[from.id] = 0;
     from.dist = 0;
 
@@ -64,6 +66,7 @@ double Graph::shortestPath(Node &from, Node &to) {
                 if (alt < dist[to_node->id])
                 {
                     dist[to_node->id] = alt;
+                    previous[to_node->id] = u.id;
                     pq.emplace(*to_node);
 //                    std::cout << "Emplaced node " << to_node->id << endl;
                 }
@@ -73,6 +76,17 @@ double Graph::shortestPath(Node &from, Node &to) {
 
     if (dist[to.id] == DBL_MAX)
         return -1;
+
+    to_node = &to;
+    while(true)
+    {
+        cout << to_node->p.first << "," << to_node->p.second << endl;
+
+        if (to_node->id == from.id)
+            break;
+
+        to_node = &this->nodes[previous[to_node->id]];
+    }
 
     return dist[to.id];
 }
