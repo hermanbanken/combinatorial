@@ -6,10 +6,6 @@
 #include <queue>
 #include <sstream>
 
-#define ABS(a) (a > 0 ? a : (-1 * a))
-#define EUCL(ax,ay,bx,by) (sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by)))
-#define ANGL(ax,ay,bx,by) atan2(by - ay, bx - ax)
-
 using namespace std;
 
 string point::toString() {

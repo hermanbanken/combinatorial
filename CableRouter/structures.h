@@ -14,6 +14,10 @@
 #define coord pair<unsigned long,unsigned long>
 #define coordinate pair<double,double>
 
+#define ABS(a) (a > 0 ? a : (-1 * a))
+#define EUCL(ax,ay,bx,by) (sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by)))
+#define ANGL(ax,ay,bx,by) atan2(by - ay, bx - ax)
+
 const double ALLOWED_ANGLE = 8.0 / 180.0 * M_PI;
 const double COST_ANGLE = 100;
 const double COST_ANGLE_POW = 2;
