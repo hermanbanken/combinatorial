@@ -20,12 +20,13 @@ vector<coordinate> GA::straightLine(coordinate start, coordinate end, unsigned l
     vector<coordinate> line(0);
     double x = 0;
     double y = 0;
-
+    line.push_back(start);
     for(unsigned int i = 0; i < points; i++){
         x = start.first  + (i+1) * (end.first  - start.first ) / (points+1);
         y = start.second + (i+1) * (end.second - start.second) / (points+1);
         line.push_back(make_pair(x,y));
     }
+    line.push_back(end);
     return line;
 }
 
@@ -33,6 +34,11 @@ string p2s(coord c){
     std::ostringstream stringStream;
     stringStream << c.first << "," << c.second;
     return stringStream.str();
+}
+
+double log(string n, double x){
+//    cout << n << ": " << x << endl;
+    return x;
 }
 
 vector<double> lineCandidate(vector<coordinate> line){
@@ -70,37 +76,36 @@ void GA::solve(Grid* grid, vector<coordinate> &line) {
     line = straightLine(this->start, this->end, this->points);
 
     FitFunc fitness = [grid,this,id](const double *x, const int N)->double {
-//        ostringstream out;
-//        out << "Line from start " << p2s(this->start);
         double val = 0.0;
         double angle = grid->angle(this->start.first, this->start.second, x[0], x[1], id);
         // From windmill
-        val += grid->cost(get<0>(this->start), get<1>(this->start), x[0], x[1], id, true);
-//        out << " to " << x[0] << "," << x[1];
+        val += log("start line cost", grid->cost(get<0>(this->start), get<1>(this->start), x[0], x[1], id, true));
+
         for (int i = 0; i+3 < N; i+=2){
-//            out << " to " << x[i+2] << "," << x[i+3];
+
             // Distance
-            val += grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true);
+            val += log("line cost", grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true));
             // Angle
             double new_angle = grid->angle(x[i], x[i+1], x[i+2], x[i+3], id);
-            val += grid->cost(grid->angle(angle, new_angle), true);
+            val += log("angle cost", grid->cost(grid->angle(angle, new_angle), true));
             angle = new_angle;
         }
-//        out << " to " << p2s(this->end) << "; fitness: ";
+
         // To windmill
         double new_angle = grid->angle(x[N-2], x[N-1], this->end.first, this->end.second, id);
-        val += grid->cost(x[N-2], x[N-1], this->end.first, this->end.second, id, true);
-        val += grid->cost(grid->angle(angle, new_angle), true);
-//        cout << out.str() << val << endl;
+        val += log("end line cost", grid->cost(x[N-2], x[N-1], this->end.first, this->end.second, id, true));
+        val += log("end angle cost", grid->cost(grid->angle(angle, new_angle), true));
+
         return val;
     };
 
     // Config
     double sigma = 50;
     vector<double> x0 = lineCandidate(line);
-    //int lambda = 100; // offsprings at each generation.
-    CMAParameters<> cmaparams(this->points*2,&x0.front(),sigma);
-    cout << "Initial fitness = " << fitness(x0.data(), x0.size());
+//    //int lambda = 100; // offsprings at each generation.
+    CMAParameters<> cmaparams(this->points*2,&x0.at(2),sigma);
+    cmaparams.set_mt_feval(true); // multi threading
+    cout << "Initial fitness = " << fitness(&x0.at(2), this->points*2) << endl;
     //cmaparams.set_algo(BIPOP_CMAES);
 
     // Run
