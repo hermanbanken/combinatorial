@@ -185,13 +185,14 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
     val += COST_50M * (M_PI / 2 - atan(distance / scale + limit / scale));
 
     double grid_distance = EUCL(ax,ay,bx,by);
+    double angle = ANGL(ax, ay, bx, by);
 
     /* Obstacles and off map */
     for(double p = 0; p < grid_distance; p++){
         double add = 0;
 
-        double cx = ax + bx * p / grid_distance * (ax < bx ? 1 : -1);
-        double cy = ay + by * p / grid_distance * (ay < by ? 1 : -1);
+        double cx = ax - sin(angle) * p;
+        double cy = ay - cos(angle) * p;
 
         cell c;
         bool exists = tryGet(cx, cy, c);
