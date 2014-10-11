@@ -17,15 +17,14 @@ Solvers::GA::GA(unsigned int points) {
 }
 
 vector<coordinate> GA::straightLine(coordinate start, coordinate end, unsigned long points) {
-    vector<coordinate> line(points);
+    vector<coordinate> line(0);
     double x = 0;
     double y = 0;
 
-    // TODO: fix line to be evenly spaced
     for(unsigned int i = 0; i < points; i++){
-        x = start.first  + 1.0 * (i+1) * (1.0 * end.first  - start.first ) / points;
-        y = start.second + 1.0 * (i+1) * (1.0 * end.second - start.second) / points;
-        line[i] = make_pair(x, y);
+        x = start.first  + (i+1) * (end.first  - start.first ) / (points+1);
+        y = start.second + (i+1) * (end.second - start.second) / (points+1);
+        line.push_back(make_pair(x,y));
     }
     return line;
 }
@@ -47,11 +46,11 @@ vector<double> lineCandidate(vector<coordinate> line){
 
 vector<coordinate> candidateLine(coordinate start, Candidate c, coordinate end) {
     vector<coordinate> line(0);
-    line.push_back(make_pair(start.first, start.second));
+    line.push_back(start);
     for(unsigned int i = 0; i < c.get_x_size(); i+=2){
         line.push_back(make_pair(c.get_x()[i], c.get_x()[i+1]));
     }
-    line.push_back(make_pair(end.first, end.second));
+    line.push_back(end);
     return line;
 }
 
