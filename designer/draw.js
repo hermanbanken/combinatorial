@@ -51,7 +51,7 @@ $(window).on("resize",function(){
     $(".dim").text(window.innerWidth + "x" + window.innerHeight);
 }).trigger("resize");
 
-$(".save").on("click", function(){
+$(".save").on("click", function(e){
     var w = canvas.width,
         h = canvas.height,
         data = c.getImageData(0, 0, w, h).data,
@@ -59,7 +59,7 @@ $(".save").on("click", function(){
         blob;
 
     var ct = 0;
-    for(var i = 0, n = data.length; i < n; i += 4, ct++) {
+    for(var x = 0, i = 0, n = data.length; i < n; i += 4, x++, ct++) {
         var soil = "1",
             obs = "0";
 
@@ -76,13 +76,17 @@ $(".save").on("click", function(){
         if(data[i] === 0 && data[i+1] === 0 && data[i+2] === 255)
             obs = "3";
 
-        var line = (i % w) + " " + ~~(i / h) + " -5.000 -1.000 " + soil + ".000 " + obs + ".000\n";
+        var line = (x % w) + " " + ~~(x / h) + " -5.000 -1.000 " + soil + ".000 " + obs + ".000\n";
         lines.push(line);
     }
     console.log(ct, "data points", "of", data.length);
 
     blob = new Blob(lines, {type: 'text/plain'});
     saveAs(blob, "matrix.txt");
+
+    canvas.toBlob(function(blob) {
+        saveAs(blob, "matrix.png");
+    }, "image/png");
 });
 
 var styles = {
