@@ -33,7 +33,7 @@ int Simplifier::add(point *row) {
 }
 
 Grid* Simplifier::grid(int cell_w, int cell_h) {
-    if(cell_w < 0 || cell_h < 0)
+    if(cell_w < 0 || cell_h < 0 || count == 0)
         throw invalid_argument("the grid dimensions must be at least 1");
 
     float grid_x = this->min->x;
