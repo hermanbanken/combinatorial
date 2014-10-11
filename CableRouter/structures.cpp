@@ -75,35 +75,48 @@ point::point(float x, float y, float z) {
 }
 
 void Grid::plot(ostream &stream, vector<coordinate> line) {
+    double dx, dy;
+    unsigned long i, j, x, y;
+    coordinate from, to;
 
     vector<vector<bool>> hasLine(grid.size(), vector<bool>(grid.begin()->size(), false));
-    for(unsigned long i = 0; i + 1 < line.size(); i++){
+    for(i = 0; i + 1 < line.size(); i++){
         cout << "Line from (" << line[i].first << "," << line[i].second << ") to (" << line[i+1].first << "," << line[i+1].second << ")" << endl;
-        double dx = line[i+1].first -  line[i].first;
-        double dy = line[i+1].second - line[i].second;
-        for(unsigned long j = 0; j < fabs(dx); j++){
-            unsigned long x = round((dx > 0 ? 1 : -1) * j + line[i].first);
-            unsigned long y = (unsigned long) round(dy / fabs(dx) * j + line[i].second);
+
+        if (line[i+1].second > line[i].second) {
+            from  = line[i];
+            to = line[i+1];
+        } else {
+            from  = line[i+1];
+            to = line[i];
+        }
+        dx = to.first - from.first;
+        dy = to.second - from.second;
+        for(j = 0; j < dy; j++){
+            y = j + (unsigned long) floor(from.second);
+            x = (unsigned long) round(dx / dy * j + from.first);
+
             if(x > minX() && y > minY() && x < maxX() && y < maxY())
                 hasLine[x][y] = true;
         }
     }
 
-    vector<vector<cell>>::const_iterator i;
-    vector<cell>::const_iterator j;
+    vector<vector<cell>>::const_iterator k;
+    vector<cell>::const_iterator l;
     stream << "Outputting grid(" << grid.size() << "x" << grid.begin()->size() << "):" << endl;
-    for(i=grid.begin(); i<grid.end(); i++){
-        for(j=i->begin(); j<i->end(); j++) {
-            if (j->pipeline)
+    for(k =grid.begin(); k <grid.end(); k++){
+        for(l = k->begin(); l < k->end(); l++) {
+            if (l->pipeline)
                 stream << "|";
-            else if (j->bomb)
+            else if (l->bomb)
                 stream << "b";
-            else if (j->builder)
+            else if (l->builder)
                 stream << ".";
             else {
-                if(hasLine[i - grid.begin()][j - grid.begin()->begin()])
+                if(hasLine[k - grid.begin()][l - k->begin()])
                     stream << "-";
-                else  if (j->mapped)
+                else
+                if (l->mapped)
                     stream << " ";
                 else {
                     stream << "*";
@@ -226,8 +239,8 @@ double Grid::cost(double angle, bool gradient) {
 
 //    cout << " costing: " << c << endl;
 
-    if(c > INT8_MAX)
-        cout << "Large cost for angle=" << angle << " > "<< ALLOWED_ANGLE << ") = " << c << endl;
+//    if(c > INT8_MAX)
+//        cout << "Large cost for angle=" << angle << " > "<< ALLOWED_ANGLE << ") = " << c << endl;
 
     return c;
 }
