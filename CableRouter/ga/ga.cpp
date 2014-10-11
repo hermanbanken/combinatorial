@@ -21,9 +21,11 @@ vector<coordinate> GA::straightLine(coordinate start, coordinate end, unsigned l
     double x = 0;
     double y = 0;
     line.push_back(start);
+    double a = ANGL(start.first, start.second, end.first, end.second);
+    double d = EUCL(start.first, start.second, end.first, end.second);
     for(unsigned int i = 0; i < points; i++){
-        x = start.first  + (i+1) * (end.first  - start.first ) / (points+1);
-        y = start.second + (i+1) * (end.second - start.second) / (points+1);
+        x = start.first  + cos(a) * (d / (points+1) * i+1);
+        y = start.second + sin(a) * (d / (points+1) * i+1);
         line.push_back(make_pair(x,y));
     }
     line.push_back(end);
