@@ -19,6 +19,7 @@ const double COST_ANGLE = 100;
 const double COST_ANGLE_POW = 2;
 const double COST_CABLE = 1;
 const double COST_OFFMAP = 100;
+const double COST_OFFMAP_POW = 3;
 
 using namespace std;
 
