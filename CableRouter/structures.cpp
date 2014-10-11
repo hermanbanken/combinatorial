@@ -13,13 +13,9 @@
 using namespace std;
 
 string point::toString() {
-    char *r = (char *) malloc(100);
-    sprintf(r,
-            "(%f,%f)(dept=%f,seabed=%i,builder=%i,bomb=%i,pipeline=%i)\n",
-            x, y, z, seabed, builder, bomb, pipeline
-    );
-    std::string str(r);
-    return str;
+    ostringstream s;
+    s << "(" << x << "," << y << ")(depth=" << z << ")";
+    return s.str();
 }
 
 void aggregationCell::addPoint(point *p) {
@@ -119,7 +115,10 @@ void Grid::plot(ostream &stream, vector<coordinate> line) {
                 if (l->mapped)
                     stream << " ";
                 else {
-                    stream << "*";
+                    if(l->distanceToMap != -1 && l->distanceToMap < 10)
+                        stream << l->distanceToMap;
+                    else
+                        stream << "*";
                 }
             }
         }
@@ -187,12 +186,16 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
     double grid_distance = EUCL(ax,ay,bx,by);
     double angle = ANGL(ax, ay, bx, by);
 
-    /* Obstacles and off map */
-    for(double p = 0; p < grid_distance; p++){
-        double add = 0;
+//    cout << "from a=(" << ax << ",\t" << ay << "\t) = " << val << endl;
+//    cout << "to   b=(" << bx << ",\t" << by << "\t)" << endl;
 
-        double cx = ax - sin(angle) * p;
-        double cy = ay - cos(angle) * p;
+    /* Obstacles and off map */
+    double add = 0;
+    for(double p = 0; p < grid_distance; p++){
+        add = 0;
+
+        double cx = ax + cos(angle) * p;
+        double cy = ay + sin(angle) * p;
 
         cell c;
         bool exists = tryGet(cx, cy, c);
@@ -211,16 +214,20 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
             return FLT_MAX;
         } else if(exists && !c.mapped) {
             // In grid, of map
-            add = COST_OFFMAP * pow(this->distanceToMap(cx, cy), 2);
+//            cout << "\tdist: " << this->distanceToMap(cx, cy) << endl;
+            add = COST_OFFMAP * pow(this->distanceToMap(cx, cy), COST_OFFMAP_POW);
         } else {
-            // Of grid
-            add = COST_OFFMAP * pow(this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()), 2);
+            // Off grid
+//            cout << "\tDistance outside grid: " << this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()) << endl;
+            add = COST_OFFMAP * pow(this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()), COST_OFFMAP_POW * 2);
         }
 
         if(add > FLT_MAX) {
             cout << "Made inf in cost func (it=" << p << ",end=" << grid_distance << ") = " << add << endl;
             cout << "Because " << (!exists ? "not exists" : (!c.mapped ? "not mapped" : "penalties")) << endl;
         }
+
+//        cout << "\tc=(" << cx << "," << cy << ") = " << add << endl;
         val += add;
     }
 
@@ -406,6 +413,11 @@ void Grid::floodFindDistancesToEdge() {
 
     while(!pq.empty()){
         pair<cell,coord> current = pq.top();
+
+        if(!current.first.mapped){
+            pq.pop();
+            continue;
+        }
 
         unsigned long Ox = current.second.first;
         unsigned long Oy = current.second.second;
