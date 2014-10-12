@@ -41,35 +41,42 @@ int main(int argc, char const *argv[]) {
         }
 
         // Summary
-        cout << "Read " << simplifier->count << " points\n";
-        cout << "Min:\n\t" << simplifier->min->toString() << "\n";
-        cout << "Max:\n\t" << simplifier->max->toString() << "\n";
-        cout << "Avg:\n\t" << simplifier->avg->toString() << "\n";
+//        cout << "Read " << simplifier->count << " points\n";
+//        cout << "Min:\n\t" << simplifier->min->toString() << "\n";
+//        cout << "Max:\n\t" << simplifier->max->toString() << "\n";
+//        cout << "Avg:\n\t" << simplifier->avg->toString() << "\n";
 
         // End timer
-        clock_t stop = clock();
-        cout << double(stop - start) / CLOCKS_PER_SEC << " seconds for input\n";
+//        clock_t stop = clock();
+//        cout << double(stop - start) / CLOCKS_PER_SEC << " seconds for input\n";
 
         grid = simplifier->grid(grid_s, grid_s);
-        clock_t stop2 = clock();
-        cout << double(stop2 - stop) / CLOCKS_PER_SEC << " seconds for grid\n";
-
+//        clock_t stop2 = clock();
+//        cout << double(stop2 - stop) / CLOCKS_PER_SEC << " seconds for grid\n";
 //        grid->write(bin);
     }
 
 //    grid->summary(cout);
-    grid->plot(cout);
+//    grid->plot(cout);
 
     Projection id = Projection::identity();
 
-    vector<coordinate> line(2, make_pair(7.0, grid->maxY(id) - 3.0));
+    vector<coordinate> line(2, make_pair(3.0, grid->maxY(id) - 3.0));
     line[1] = make_pair(grid->maxX(id) - 2.0, 2.0);
+
+    double dist = grid->distance(line[0].first, line[0].second, line[1].first, line[1].second, id);
+    cout << "Solving the placement of a cable between two points " << dist << "m apart" << endl;
+
+    if(dist / 50 < GA_COMPLEXITY+1)
+        cout << "Warning: the input space might be too small to make " << (GA_COMPLEXITY + 1) << " turns." << endl;
 
     Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver();
     g->solve(grid, line);
+
+//    Solvers::GA* g = new Solvers::GA(GA_COMPLEXITY);
+//    g->solve(grid, line);
 
     grid->plot(cout, line);
 
     return 0;
 }
-

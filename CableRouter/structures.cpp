@@ -73,7 +73,8 @@ void Grid::plot(ostream &stream, vector<coordinate> line) {
 
     vector<vector<bool>> hasLine(grid.size(), vector<bool>(grid.begin()->size(), false));
     for(i = 0; i + 1 < line.size(); i++){
-        cout << "Line from (" << line[i].first << "," << line[i].second << ") to (" << line[i+1].first << "," << line[i+1].second << ")" << endl;
+        double dist = this->distance(line[i].first, line[i].second, line[i+1].first, line[i+1].second, Projection::identity());
+        cout << "Line from (" << line[i].first << "," << line[i].second << ") to (" << line[i+1].first << "," << line[i+1].second << "), distance is " << dist << "m." << endl;
 
         if (line[i+1].second > line[i].second) {
             from  = line[i];
@@ -176,22 +177,17 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
     // If > 50 meters: penalty
     double scale = 2.0f;
     double limit = 50.0f;
-    double const COST_50M = 50;
-    val += COST_50M * (M_PI / 2 - atan(distance / scale + limit / scale));
+    val += COST_50M * (1 - exactLimitToGradient(limit, scale, distance));
 
-    double grid_distance = EUCL(ax,ay,bx,by);
-    double angle = ANGL(ax, ay, bx, by);
-
-//    cout << "from a=(" << ax << ",\t" << ay << "\t) = " << val << endl;
-//    cout << "to   b=(" << bx << ",\t" << by << "\t)" << endl;
+    double  grid_distance = EUCL(ax,ay,bx,by),
+            angle = ANGL(ax, ay, bx, by),
+            a_cos = cos(angle),
+            a_sin = sin(angle);
 
     /* Obstacles and off map */
-    double add = 0;
     for(double p = 0; p < grid_distance; p++){
-        add = 0;
-
-        double cx = ax + cos(angle) * p;
-        double cy = ay + sin(angle) * p;
+        double cx = ax + a_cos * p;
+        double cy = ay + a_sin * p;
 
         cell c;
         bool exists = tryGet(cx, cy, c);
@@ -199,35 +195,23 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 
             // Penalties
             if(c.bomb)
-                add = 50;
+                val += 50;
             if(c.pipeline)
-                add = 100;
+                val += 100;
             if(c.builder)
-                add = 5;
+                val += 5;
 
         } else if(!gradient){
             // Either not in grid or off map
             return FLT_MAX;
         } else if(exists && !c.mapped) {
             // In grid, of map
-//            cout << "\tdist: " << this->distanceToMap(cx, cy) << endl;
-            add = COST_OFFMAP * pow(this->distanceToMap(cx, cy), COST_OFFMAP_POW);
+            val += COST_OFFMAP * pow(this->distanceToMap(cx, cy), COST_OFFMAP_POW);
         } else {
             // Off grid
-//            cout << "\tDistance outside grid: " << this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()) << endl;
-            add = COST_OFFMAP * pow(this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()), COST_OFFMAP_POW * 2);
+            val += COST_OFFMAP * pow(this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()), COST_OFFMAP_POW * 2);
         }
-
-        if(add > FLT_MAX) {
-            cout << "Made inf in cost func (it=" << p << ",end=" << grid_distance << ") = " << add << endl;
-            cout << "Because " << (!exists ? "not exists" : (!c.mapped ? "not mapped" : "penalties")) << endl;
-        }
-
-//        cout << "\tc=(" << cx << "," << cy << ") = " << add << endl;
-        val += add;
     }
-
-//    cout << "From a (" << ax <<  "," << ay << ") to b (" << bx <<  "," << by << ") = " << val << endl;
 
     if(val > FLT_MAX)
         return FLT_MAX;
@@ -236,17 +220,10 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 }
 
 double Grid::cost(double angle, bool gradient) {
-//    cout << "Angle: " << angle;
     if(!gradient)
         return angle - ALLOWED_ANGLE > 0 ? FLT_MAX : 0;
-    double c = (COST_ANGLE * pow(angle - ALLOWED_ANGLE, COST_ANGLE_POW));
 
-//    cout << " costing: " << c << endl;
-
-//    if(c > INT8_MAX)
-//        cout << "Large cost for angle=" << angle << " > "<< ALLOWED_ANGLE << ") = " << c << endl;
-
-    return c;
+    return COST_ANGLE * exactLimitToGradient(ALLOWED_ANGLE, 8*M_PI, angle);
 }
 
 
@@ -467,4 +444,8 @@ double Grid::angle(double angle1, double angle2) {
     }
     // else
     return fabs(fabs(angle1) - fabs(angle2));
+}
+
+inline double Grid::exactLimitToGradient(double limit, double width_of_gradient_factor, double input) {
+    return (atan(input / width_of_gradient_factor + limit / width_of_gradient_factor) / M_PI * 2);
 }

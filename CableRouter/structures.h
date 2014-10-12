@@ -19,11 +19,12 @@
 #define ANGL(ax,ay,bx,by) atan2(by - ay, bx - ax)
 
 const double ALLOWED_ANGLE = 8.0 / 180.0 * M_PI;
-const double COST_ANGLE = 100;
+const double COST_ANGLE = 50000;
 const double COST_ANGLE_POW = 2;
 const double COST_CABLE = 1;
 const double COST_OFFMAP = 100;
 const double COST_OFFMAP_POW = 3;
+const double COST_50M = 50000;
 
 using namespace std;
 
@@ -124,6 +125,8 @@ private:
     float minY() {
         return 0;
     }
+
+    inline double exactLimitToGradient(double limit, double width_of_gradient_factor, double input);
 
     cell& get(unsigned long x, unsigned long y);
     bool tryGet(unsigned long x, unsigned long y, cell &out_cell);
