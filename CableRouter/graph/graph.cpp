@@ -1,6 +1,7 @@
 #include "graph.h"
 #include <list>
 #include <queue>
+#include <vector>
 #include <iostream>
 
 void Graph::addNode(Node &node) {
@@ -21,7 +22,7 @@ Graph::Edge Graph::connect(Node &from, Node &to) {
     return edge;
 }
 
-class CompareGreater {
+class CompareDijkstra {
 public:
     bool const operator()(pair<unsigned long, double> &nodeX, pair<unsigned long, double> &nodeY) {
         return (nodeX.second > nodeY.second) ;
@@ -36,7 +37,7 @@ double Graph::dijkstra(Node &from, Node &to, vector<coordinate> &line) {
     double dist[this->nodes.size()];
     bool scanned[this->nodes.size()];
     unsigned long previous[this->nodes.size()];
-    priority_queue<Node, vector<pair<unsigned long, double>>, CompareGreater> pq;
+    priority_queue<vector<pair<unsigned long, double>>, vector<pair<unsigned long, double>>, CompareDijkstra> pq;
 
     std::fill_n(dist, this->nodes.size(), DBL_MAX);
     std::fill_n(scanned, this->nodes.size(), false);
@@ -93,4 +94,73 @@ double Graph::dijkstra(Node &from, Node &to, vector<coordinate> &line) {
     }
 
     return dist[to.id];
+}
+
+double Graph::aStar(Graph::Node &start, Graph::Node &goal, vector<coordinate > &line) {
+    bool closed[this->nodes.size()], found = false;
+    priority_queue<vector<pair<unsigned long, double>>, vector<pair<unsigned long, double>>, CompareDijkstra> open;
+    unsigned long came_from[this->nodes.size()];
+    double g_score[this->nodes.size()], f_score[this->nodes.size()], tentative_g_score;
+    Node *current, *neighbour;
+    list<Edge>::iterator edge;
+
+    std::fill_n(closed, this->nodes.size(), false);
+
+    g_score[start.id] = 0;
+    f_score[start.id] = aStarCostEstimate(start, goal);
+
+    open.emplace(make_pair(start.id, f_score[start.id]));
+
+    while(!open.empty()) {
+        current = &this->nodes.at(open.top().first); open.pop();
+        if (closed[current->id])
+            continue;
+
+        if (current->id == goal.id) {
+            found = true;
+            break;
+        }
+
+        closed[current->id] = true;
+        for (edge = current->adjEdges.begin(); edge != current->adjEdges.end(); ++edge) {
+            if (edge->from->id == current->id)
+                neighbour = edge->to;
+            else
+                neighbour = edge->from;
+
+            if (closed[neighbour->id])
+                continue;
+            tentative_g_score = g_score[current->id] + edge->weight;
+
+            if (tentative_g_score < g_score[neighbour->id])
+            {
+                came_from[neighbour->id] = current->id;
+                g_score[neighbour->id] = tentative_g_score;
+                f_score[neighbour->id] = tentative_g_score + aStarCostEstimate(*neighbour, goal);
+                open.emplace(make_pair(neighbour->id, f_score[neighbour->id]));
+            }
+        }
+    }
+
+    if(!found)
+        return -1;
+
+    current = &goal;
+    line.clear();
+    while(true)
+    {
+        cout << current->p.first << "," << current->p.second << endl;
+        line.push_back(current->p);
+
+        if (current->id == start.id)
+            break;
+
+        current = &this->nodes[came_from[current->id]];
+    }
+
+    return g_score[goal.id];
+}
+
+double Graph::aStarCostEstimate(Graph::Node &from, Graph::Node &to) {
+    return EUCL(from.p.first, from.p.second, to.p.first, to.p.second);
 }
