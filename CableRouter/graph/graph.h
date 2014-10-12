@@ -32,7 +32,7 @@ public:
 
     // A*
     double aStar(Node &start, Node &goal, vector<coordinate> &line);
-    double aStarCostEstimate(Graph::Node &from, Graph::Node &to)
+    double aStarCostEstimate(Graph::Node &from, Graph::Node &to);
 };
 
 #endif /* defined(___cablerouter_graph___) */

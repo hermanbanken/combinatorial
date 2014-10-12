@@ -1,9 +1,8 @@
 #include "graph.h"
 #include <list>
 #include <queue>
+#include <vector>
 #include <iostream>
-#include <PubSub.framework/Headers/PSEntry.h>
-#include <Automator.framework/Headers/AMAction.h>
 
 void Graph::addNode(Node &node) {
     node.id = this->nodes.size();
@@ -99,7 +98,7 @@ double Graph::dijkstra(Node &from, Node &to, vector<coordinate> &line) {
 
 double Graph::aStar(Graph::Node &start, Graph::Node &goal, vector<coordinate > &line) {
     bool closed[this->nodes.size()], found = false;
-    priority_queue<vector<pair<unsigned long, double>>, pair<unsigned long, double>, CompareDijkstra> open;
+    priority_queue<vector<pair<unsigned long, double>>, vector<pair<unsigned long, double>>, CompareDijkstra> open;
     unsigned long came_from[this->nodes.size()];
     double g_score[this->nodes.size()], f_score[this->nodes.size()], tentative_g_score;
     Node *current, *neighbour;
@@ -113,7 +112,7 @@ double Graph::aStar(Graph::Node &start, Graph::Node &goal, vector<coordinate > &
     open.emplace(make_pair(start.id, f_score[start.id]));
 
     while(!open.empty()) {
-        current = *this->nodes.at(open.top().first); open.pop();
+        current = &this->nodes.at(open.top().first); open.pop();
         if (closed[current->id])
             continue;
 
