@@ -177,7 +177,10 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
     // If > 50 meters: penalty
     double scale = 2.0f;
     double limit = 50.0f;
-    val += COST_50M * (1 - exactLimitToGradient(limit, scale, distance));
+    double fiftyGrad = exactLimitToGradient(limit, scale, distance);
+    double fifty = COST_50M * (1.0 - fiftyGrad * fiftyGrad);
+//    cout << "Fifty-or-less penalty ("<<distance<<"m) = " << fifty << endl;
+    val += fifty;
 
     double  grid_distance = EUCL(ax,ay,bx,by),
             angle = ANGL(ax, ay, bx, by),
@@ -223,7 +226,10 @@ double Grid::cost(double angle, bool gradient) {
     if(!gradient)
         return angle - ALLOWED_ANGLE > 0 ? FLT_MAX : 0;
 
-    return COST_ANGLE * exactLimitToGradient(ALLOWED_ANGLE, 8*M_PI, angle);
+    double i = exactLimitToGradient(ALLOWED_ANGLE, 0.01, angle);
+    double c = COST_ANGLE * i * i;
+//    cout << "Angle a=" << angle << " costs " << c << endl;
+    return c;
 }
 
 
@@ -447,5 +453,5 @@ double Grid::angle(double angle1, double angle2) {
 }
 
 inline double Grid::exactLimitToGradient(double limit, double width_of_gradient_factor, double input) {
-    return (atan(input / width_of_gradient_factor + limit / width_of_gradient_factor) / M_PI * 2);
+    return atan(input / width_of_gradient_factor - limit / width_of_gradient_factor) / M_PI + 0.5;
 }
