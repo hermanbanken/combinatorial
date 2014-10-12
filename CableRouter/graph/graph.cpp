@@ -28,7 +28,7 @@ public:
     }
 };
 
-double Graph::shortestPath(Node &from, Node &to) {
+double Graph::shortestPath(Node &from, Node &to, vector<coordinate> &line) {
     Node u;
     Node *to_node;
     double alt;
@@ -78,9 +78,11 @@ double Graph::shortestPath(Node &from, Node &to) {
         return -1;
 
     to_node = &to;
+    line.clear();
     while(true)
     {
         cout << to_node->p.first << "," << to_node->p.second << endl;
+        line.push_back(to_node->p);
 
         if (to_node->id == from.id)
             break;

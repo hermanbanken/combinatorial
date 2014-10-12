@@ -20,7 +20,8 @@ void Solvers::DijkstraSolver::solve(Grid *grid, vector<coordinate> &line) {
     cout << "\ttook: " << double(found - start_find) / CLOCKS_PER_SEC << " sec" << endl;
 
     cout << "Find shortest path: " << endl;
-    double distance = sampler.graph.shortestPath(from, to);
+    double distance = sampler.graph.shortestPath(from, to, line);
+
     clock_t path_found = clock();
     cout << "\ttook: " << double(path_found - found) / CLOCKS_PER_SEC << " sec" << endl;
 

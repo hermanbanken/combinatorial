@@ -28,7 +28,7 @@ public:
     void addNode(Node &node);
     void addEdge(Edge &edge);
     Edge connect(Node &from, Node &to);
-    double shortestPath(Node &from, Node &to);
+    double shortestPath(Node &from, Node &to, vector<coordinate>& line);
 };
 
 #endif /* defined(___cablerouter_graph___) */
