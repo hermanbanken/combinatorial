@@ -29,6 +29,10 @@ public:
     void addEdge(Edge &edge);
     Edge connect(Node &from, Node &to);
     double dijkstra(Node &from, Node &to, vector<coordinate> &line);
+
+    // A*
+    double aStar(Node &start, Node &goal, vector<coordinate> &line);
+    double aStarCostEstimate(Graph::Node &from, Graph::Node &to)
 };
 
 #endif /* defined(___cablerouter_graph___) */
