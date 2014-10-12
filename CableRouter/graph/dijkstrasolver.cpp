@@ -31,5 +31,5 @@ void Solvers::DijkstraSolver::solve(Grid *grid, vector<coordinate> &line) {
 
 
 Solvers::DijkstraSolver::DijkstraSolver(int noPoints) {
-    this->noPoints = noPoints
+    this->noPoints = noPoints;
 }
