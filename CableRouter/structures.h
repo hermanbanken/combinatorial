@@ -22,7 +22,7 @@ const double ALLOWED_ANGLE = 8.0 / 180.0 * M_PI;
 const double COST_ANGLE = 50000;
 const double COST_ANGLE_POW = 2;
 const double COST_CABLE = 1;
-const double COST_OFFMAP = 100;
+const double COST_OFFMAP = 10000;
 const double COST_OFFMAP_POW = 3;
 const double COST_50M = 50000;
 
