@@ -22,7 +22,7 @@ class Sampler
 public:
     Graph graph;
     Sampler(Grid *grid);
-    void sample();
+    void sample(int noPoints);
     void sampleGrid(int noPoints, list<coordinate>& points);
 
     void createNodes(list<coordinate> &points);
@@ -30,4 +30,8 @@ public:
     void createAllEdges();
 
     Graph::Node findNearestNode(coordinate &param);
+
+    void sample8ConnectedGridNodesAndEdges(int noPoints);
+
+    void createEdge(Graph::Node *from, Graph::Node *to);
 };

@@ -4,11 +4,13 @@
 #include "simplifier.h"
 #include "ga/ga.h"
 #include "graph/dijkstrasolver.h"
+#include "graph/astarsolver.h"
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
 #define DEFAULT_GRID_SIZE 2;
+#define NO_GRAPH_NODES 8000
 const int GA_COMPLEXITY = 5;
 
 using namespace std;
@@ -70,8 +72,11 @@ int main(int argc, char const *argv[]) {
     if(dist / 50 < GA_COMPLEXITY+1)
         cout << "Warning: the input space might be too small to make " << (GA_COMPLEXITY + 1) << " turns." << endl;
 
-    Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver();
+    Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver(NO_GRAPH_NODES);
     g->solve(grid, line);
+
+//    Solvers::AStarSolver* g = new Solvers::AStarSolver(NO_GRAPH_NODES);
+//    g->solve(grid, line);
 
 //    Solvers::GA* g = new Solvers::GA(GA_COMPLEXITY);
 //    g->solve(grid, line);

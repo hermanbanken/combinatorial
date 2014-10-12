@@ -10,7 +10,7 @@ void Solvers::DijkstraSolver::solve(Grid *grid, vector<coordinate> &line) {
     grid->floodFindDistancesToEdge();
     Sampler sampler = Sampler(grid);
 
-    sampler.sample();
+    sampler.sample(this->noPoints);
 
     cout << "Find nodes in graph: " << endl;
     clock_t start_find = clock();
@@ -30,3 +30,6 @@ void Solvers::DijkstraSolver::solve(Grid *grid, vector<coordinate> &line) {
 }
 
 
+Solvers::DijkstraSolver::DijkstraSolver(int noPoints) {
+    this->noPoints = noPoints
+}

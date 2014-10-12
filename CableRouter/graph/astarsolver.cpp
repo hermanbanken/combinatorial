@@ -10,7 +10,7 @@ void Solvers::AStarSolver::solve(Grid *grid, vector<coordinate> &line) {
     grid->floodFindDistancesToEdge();
     Sampler sampler = Sampler(grid);
 
-    sampler.sample();
+    sampler.sample8ConnectedGridNodesAndEdges(this->noPoints);
 
     cout << "Find nodes in graph: " << endl;
     clock_t start_find = clock();
@@ -33,3 +33,6 @@ void Solvers::AStarSolver::solve(Grid *grid, vector<coordinate> &line) {
 }
 
 
+Solvers::AStarSolver::AStarSolver(int noPoints) {
+    this->noPoints = noPoints;
+}

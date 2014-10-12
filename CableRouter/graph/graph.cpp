@@ -105,6 +105,7 @@ double Graph::aStar(Graph::Node &start, Graph::Node &goal, vector<coordinate > &
     list<Edge>::iterator edge;
 
     std::fill_n(closed, this->nodes.size(), false);
+    std::fill_n(g_score, this->nodes.size(), DBL_MAX);
 
     g_score[start.id] = 0;
     f_score[start.id] = aStarCostEstimate(start, goal);
@@ -113,6 +114,7 @@ double Graph::aStar(Graph::Node &start, Graph::Node &goal, vector<coordinate > &
 
     while(!open.empty()) {
         current = &this->nodes.at(open.top().first); open.pop();
+//        cout << "Current node is " << current->id << endl;
         if (closed[current->id])
             continue;
 
@@ -149,7 +151,7 @@ double Graph::aStar(Graph::Node &start, Graph::Node &goal, vector<coordinate > &
     line.clear();
     while(true)
     {
-        cout << current->p.first << "," << current->p.second << endl;
+//        cout << current->p.first << "," << current->p.second << endl;
         line.push_back(current->p);
 
         if (current->id == start.id)
