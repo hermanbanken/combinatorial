@@ -78,6 +78,7 @@ void Sampler::sample8ConnectedGridNodesAndEdges(int noPoints) {
     cout << "Creating Node Grid" << endl;
     unsigned long nodeGrid[noPointsX][noPointsY];
     bool boolGrid[noPointsX][noPointsY];
+    std::fill( &boolGrid[0][0], &boolGrid[0][0] + sizeof(boolGrid) /* / sizeof(flags[0][0]) */, false );
 
     // Use normal projection/back-projection here, if changing projection again
     distX = (grid->maxX(projection) - grid->minX(projection)) / noPointsX;
@@ -97,7 +98,6 @@ void Sampler::sample8ConnectedGridNodesAndEdges(int noPoints) {
                 boolGrid[x][y] = true;
             } else {
                 nodeGrid[x][y] = 0;
-                boolGrid[x][y] = false;
             }
         }
     }
@@ -109,18 +109,18 @@ void Sampler::sample8ConnectedGridNodesAndEdges(int noPoints) {
                 continue;
             }
             if(x != 0) {
-                if (boolGrid[boolGrid[x-1][y]]) {
-                    createEdge(&graph.nodes.at(nodeGrid[x][y]), &graph.nodes.at(nodeGrid[x - 1][y]));
+                if (boolGrid[x-1][y]) {
+                    createEdge(&graph.nodes[nodeGrid[x][y]], &graph.nodes[nodeGrid[x - 1][y]]);
                 }
 
                 if (y != 0) {
-                    if (boolGrid[boolGrid[x - 1][y - 1]])
-                        createEdge(&graph.nodes.at(nodeGrid[x][y]), &graph.nodes.at(nodeGrid[x - 1][y - 1]));
+                    if (boolGrid[x - 1][y - 1])
+                        createEdge(&graph.nodes[nodeGrid[x][y]], &graph.nodes[nodeGrid[x - 1][y - 1]]);
                 }
             }
             if(y != 0) {
-                if (boolGrid[boolGrid[x][y - 1]])
-                    createEdge(&graph.nodes.at(nodeGrid[x][y]), &graph.nodes.at(nodeGrid[x][y - 1]));
+                if (boolGrid[x][y - 1])
+                    createEdge(&graph.nodes[nodeGrid[x][y]], &graph.nodes[nodeGrid[x][y - 1]]);
             }
         }
     }

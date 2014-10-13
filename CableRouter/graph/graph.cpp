@@ -22,12 +22,10 @@ Graph::Edge Graph::connect(Node &from, Node &to) {
     return edge;
 }
 
-class CompareDijkstra {
-public:
-    bool const operator()(pair<unsigned long, double> &nodeX, pair<unsigned long, double> &nodeY) {
-        return (nodeX.second > nodeY.second) ;
-    }
-};
+
+bool const CompareDijkstra::operator()(pair<unsigned long, double> &nodeX, pair<unsigned long, double> &nodeY) {
+    return (nodeX.second > nodeY.second) ;
+}
 
 double Graph::dijkstra(Node &from, Node &to, vector<coordinate> &line) {
     Node *u;
@@ -132,6 +130,8 @@ double Graph::aStar(Graph::Node &start, Graph::Node &goal, vector<coordinate > &
 
             if (closed[neighbour->id])
                 continue;
+
+            // updateNode
             tentative_g_score = g_score[current->id] + edge->weight;
 
             if (tentative_g_score < g_score[neighbour->id])
@@ -165,4 +165,95 @@ double Graph::aStar(Graph::Node &start, Graph::Node &goal, vector<coordinate > &
 
 double Graph::aStarCostEstimate(Graph::Node &from, Graph::Node &to) {
     return EUCL(from.p.first, from.p.second, to.p.first, to.p.second);
+}
+
+double Graph::thetaStar(Graph::Node &start, Graph::Node &goal, Grid &grid, Projection &projection, vector<coordinate > &line) {
+    bool closed[this->nodes.size()], found = false;
+    priority_queue<vector<pair<unsigned long, double>>, vector<pair<unsigned long, double>>, CompareDijkstra> open;
+    unsigned long came_from[this->nodes.size()];
+    double g_score[this->nodes.size()], f_score[this->nodes.size()], tentative_g_score;
+    Node *current, *neighbour;
+    list<Edge>::iterator edge;
+    Projection p = projection.back();
+
+    std::fill_n(closed, this->nodes.size(), false);
+    std::fill_n(g_score, this->nodes.size(), DBL_MAX);
+
+    g_score[start.id] = 0;
+    f_score[start.id] = aStarCostEstimate(start, goal);
+    came_from[start.id] = start.id;
+
+    open.emplace(make_pair(start.id, f_score[start.id]));
+
+    while(!open.empty()) {
+        current = &this->nodes.at(open.top().first); open.pop();
+//        cout << "Current node is " << current->id << endl;
+        if (closed[current->id])
+            continue;
+
+        if (current->id == goal.id) {
+            found = true;
+            break;
+        }
+
+        closed[current->id] = true;
+        for (edge = current->adjEdges.begin(); edge != current->adjEdges.end(); ++edge) {
+            if (edge->from->id == current->id)
+                neighbour = edge->to;
+            else
+                neighbour = edge->from;
+
+            if (closed[neighbour->id])
+                continue;
+
+            if (grid.lineOfSight(
+                    nodes[came_from[current->id]].p.first, nodes[came_from[current->id]].p.second,
+                    nodes[neighbour->id].p.first, nodes[neighbour->id].p.second,
+                    p)) {
+                // Path 2
+                tentative_g_score = g_score[came_from[current->id]] \
+                        + grid.cost(nodes[came_from[current->id]].p.first, nodes[came_from[current->id]].p.second,
+                        nodes[neighbour->id].p.first, nodes[neighbour->id].p.second,
+                        p, true);
+
+                if (tentative_g_score < g_score[neighbour->id]) {
+                    came_from[neighbour->id] = came_from[current->id];
+                    g_score[neighbour->id] = tentative_g_score;
+                    f_score[neighbour->id] = tentative_g_score + aStarCostEstimate(*neighbour, goal);
+                    open.emplace(make_pair(neighbour->id, f_score[neighbour->id]));
+                }
+
+                continue;
+            }
+
+            // Path 1
+            tentative_g_score = g_score[current->id] + edge->weight;
+
+            if (tentative_g_score < g_score[neighbour->id])
+            {
+                came_from[neighbour->id] = current->id;
+                g_score[neighbour->id] = tentative_g_score;
+                f_score[neighbour->id] = tentative_g_score + aStarCostEstimate(*neighbour, goal);
+                open.emplace(make_pair(neighbour->id, f_score[neighbour->id]));
+            }
+        }
+    }
+
+    if(!found)
+        return -1;
+
+    current = &goal;
+    line.clear();
+    while(true)
+    {
+//        cout << current->p.first << "," << current->p.second << endl;
+        line.push_back(current->p);
+
+        if (current->id == start.id)
+            break;
+
+        current = &this->nodes[came_from[current->id]];
+    }
+
+    return g_score[goal.id];
 }

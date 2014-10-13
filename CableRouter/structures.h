@@ -151,7 +151,7 @@ public:
     Projection backToInputProjection();
     const Projection& inputProjection();
     Projection to_ZeroToOne_Projection();
-    const cell& getCell(double x, double y, Projection &p);
+    const cell& getCell(double x, double y, const Projection &p);
 
     int distanceToMap(unsigned long x, unsigned long y);
 
@@ -199,6 +199,8 @@ public:
     static Grid read(string filename);
 
     vector<pair<cell,coord>> edgeNodes();
+
+    bool lineOfSight(double x0, double y0, double x1, double y1, Projection const &p);
 };
 
 #endif /* defined(___cablerouter_structures___) */

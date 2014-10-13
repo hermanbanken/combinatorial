@@ -248,6 +248,29 @@ double Grid::cost(double angle, bool gradient) {
     return c;
 }
 
+bool Grid::lineOfSight(double x0, double y0, double x1, double y1, const Projection &p) {
+    // Fix projection
+    p.project(x0, y0, x0, y0);
+    p.project(x1, y1, x1, y1);
+
+    double  grid_distance = EUCL(x0, y0, x1, y1),
+            angle = ANGL(x0, y0, x1, y1),
+            a_cos = cos(angle),
+            a_sin = sin(angle);
+
+    /* Obstacles and off map */
+    for(double a = 0; a < grid_distance; a++) {
+        double cx = x0 + a_cos * a;
+        double cy = y0 + a_sin * a;
+
+        if (!getCell(cx, cy, p).mapped) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 
 double Grid::distance(double ax, double ay, double bx, double by, const Projection &p) {
     // Fix projection
@@ -374,7 +397,7 @@ Grid Grid::read(string filename) {
     return Grid(r, *p);
 }
 
-const cell& Grid::getCell(double x, double y, Projection &p) {
+const cell& Grid::getCell(double x, double y, const Projection &p) {
     // Fix projection
     if(!p.isIdentity()) {
         p.project(x, y, x, y);

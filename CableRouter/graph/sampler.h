@@ -18,8 +18,8 @@ Possibilities for sampling:
 class Sampler
 {
     Grid *grid;
-    Projection projection;
 public:
+    Projection projection;
     Graph graph;
     Sampler(Grid *grid);
     void sample(int noPoints);
