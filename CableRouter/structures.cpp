@@ -92,6 +92,22 @@ void Grid::plot(ostream &stream, vector<coordinate> line) {
             if(x > minX() && y > minY() && x < maxX() && y < maxY())
                 hasLine[x][y] = true;
         }
+        if (line[i+1].first > line[i].first) {
+            from  = line[i];
+            to = line[i+1];
+        } else {
+            from  = line[i+1];
+            to = line[i];
+        }
+        dx = to.second - from.second;
+        dy = to.first - from.first;
+        for(j = 0; j < dy; j++){
+            y = j + (unsigned long) floor(from.first);
+            x = (unsigned long) round(dx / dy * j + from.second);
+
+            if(y > minX() && x > minY() && y < maxX() && x < maxY())
+                hasLine[y][x] = true;
+        }
     }
 
     vector<vector<cell>>::const_iterator k;
