@@ -4,6 +4,11 @@
 #ifndef ___cablerouter_graph___
 #define ___cablerouter_graph___
 
+class CompareDijkstra {
+public:
+    bool const operator()(pair<unsigned long, double> &nodeX, pair<unsigned long, double> &nodeY);
+};
+
 class Graph {
 public:
     struct Node;
@@ -33,6 +38,9 @@ public:
     // A*
     double aStar(Node &start, Node &goal, vector<coordinate> &line);
     double aStarCostEstimate(Graph::Node &from, Graph::Node &to);
+
+    // Theta*
+    double thetaStar(Node &start, Node &goal, Grid &grid, Projection &p, vector<coordinate> &line);
 };
 
 #endif /* defined(___cablerouter_graph___) */

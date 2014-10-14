@@ -2,11 +2,12 @@
 #include "../structures.h"
 
 namespace Solvers {
-    class DijkstraSolver : public Solver {
-    int noPoints;
+    class ThetaStarSolver : public Solver {
+
+        int noPoints;
 
     public:
-        DijkstraSolver(int noPoints);
+        ThetaStarSolver(int noPoints);
         void solve(Grid *grid, vector<coordinate> &line);
     };
 }
