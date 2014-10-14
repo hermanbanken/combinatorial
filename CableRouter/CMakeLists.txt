@@ -10,6 +10,9 @@ set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} ${CMAES_CXX_FLAGS}")
 set(SOURCE_FILES main.cpp reader.cpp simplifier.cpp structures.cpp ga/ga.cpp graph/graph.cpp graph/sampler.cpp graph/dijkstrasolver.cpp graph/astarsolver.cpp)
 add_executable(CableRouter ${SOURCE_FILES})
 
+set(TO_BIN_SOURCES tobinary.cpp)
+add_executable(tobinary ${TO_BIN_SOURCES})
+
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/vendor/libcmaes/src /usr/local/Cellar/eigen/3.2.2/include/eigen3")
 target_include_directories (CableRouter PUBLIC /usr/local/Cellar/eigen/3.2.2/include/eigen3)
 target_include_directories (CableRouter PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/vendor/libcmaes)
