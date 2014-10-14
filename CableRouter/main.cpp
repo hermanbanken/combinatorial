@@ -6,6 +6,7 @@
 #include "graph/dijkstrasolver.h"
 #include "graph/astarsolver.h"
 #include "graph/thetastarsolver.h"
+#include "graph/anglethetastarsolver.h"
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -73,14 +74,17 @@ int main(int argc, char const *argv[]) {
     if(dist / 50 < GA_COMPLEXITY+1)
         cout << "Warning: the input space might be too small to make " << (GA_COMPLEXITY + 1) << " turns." << endl;
 
-    Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver(NO_GRAPH_NODES);
-    g->solve(grid, line);
+//    Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver(NO_GRAPH_NODES);
+//    g->solve(grid, line);
 
 //    Solvers::AStarSolver* g = new Solvers::AStarSolver(NO_GRAPH_NODES);
 //    g->solve(grid, line);
 
 //    Solvers::ThetaStarSolver* g = new Solvers::ThetaStarSolver(NO_GRAPH_NODES);
 //    g->solve(grid, line);
+
+    Solvers::AngleAwareThetaStarSolver* g = new Solvers::AngleAwareThetaStarSolver(NO_GRAPH_NODES);
+    g->solve(grid, line);
 
 //    Solvers::GA* g = new Solvers::GA(GA_COMPLEXITY);
 //    g->solve(grid, line);

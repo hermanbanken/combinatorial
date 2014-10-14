@@ -41,6 +41,7 @@ public:
 
     // Theta*
     double thetaStar(Node &start, Node &goal, Grid &grid, Projection &p, vector<coordinate> &line);
+    double angleAwareThetaStar(Node &start, Node &goal, Grid &grid, Projection &p, vector<coordinate> &line);
 };
 
 #endif /* defined(___cablerouter_graph___) */
