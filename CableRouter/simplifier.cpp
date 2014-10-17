@@ -32,9 +32,11 @@ int Simplifier::add(point *row) {
     return true;
 }
 
-Grid* Simplifier::grid(int cell_w, int cell_h) {
-    if(cell_w < 0 || cell_h < 0 || count == 0)
+Grid* Simplifier::grid(float cell_w, float cell_h) {
+    if(cell_w < 0 || cell_h < 0)
         throw invalid_argument("the grid dimensions must be at least 1");
+    if(count == 0)
+        throw invalid_argument("please first add cells to the simplifier before simplyfing to a grid");
 
     float grid_x = this->min->x;
     float grid_y = this->min->y;

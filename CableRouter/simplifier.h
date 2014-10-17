@@ -28,5 +28,5 @@ public:
     /**
     * Generate a simplified grid with the given cell widths and heights
     */
-    Grid* grid(int cell_w, int cell_h);
+    Grid* grid(float cell_w, float cell_h);
 };

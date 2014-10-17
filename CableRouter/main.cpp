@@ -26,8 +26,9 @@ int actual(int argc, char const *argv[]) {
     // Start timer
     clock_t start = clock();
 
-    int grid_s = argc >= 3 ? atoi(argv[2]) : DEFAULT_GRID_SIZE;
+    double grid_s = argc >= 3 ? atof(argv[2]) : DEFAULT_GRID_SIZE;
     string file = argc >= 2 ? argv[1] : "/Projects/Combinatorial/data/matrix 2.txt";
+    int complexity = argc >= 4 ? atoi(argv[3]) : GA_COMPLEXITY;
     string bin = file+".bin";
 
     Grid* grid;
