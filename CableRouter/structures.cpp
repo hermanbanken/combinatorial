@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <queue>
 #include <sstream>
+#include <unistd.h>
 
 using namespace std;
 
@@ -67,47 +68,35 @@ point::point(float x, float y, float z) {
 }
 
 void Grid::plot(ostream &stream, vector<coordinate> line) {
-    double dx, dy;
-    unsigned long i, j, x, y;
-    coordinate from, to;
+    unsigned long i;
 
-    vector<vector<bool>> hasLine(grid.size(), vector<bool>(grid.begin()->size(), false));
-    for(i = 0; i + 1 < line.size(); i++){
-        double dist = this->distance(line[i].first, line[i].second, line[i+1].first, line[i+1].second, Projection::identity());
-        cout << "Line from (" << line[i].first << "," << line[i].second << ") to (" << line[i+1].first << "," << line[i+1].second << "), distance is " << dist << "m." << endl;
+    vector<vector<long>> hasLine(grid.size(), vector<long>(grid.begin()->size(), -1));
+    // Add lines and print summary of lines and angles
+    for(i = 0; i + 1 < line.size(); i++) {
+        double dist = this->distance(line[i].first, line[i].second, line[i + 1].first, line[i + 1].second, Projection::identity());
+        if (i > 0) {
+            double a1 = angle(line[i - 1].first, line[i - 1].second, line[i].first, line[i].second, Projection::identity());
+            double a2 = angle(line[i].first, line[i].second, line[i + 1].first, line[i + 1].second, Projection::identity());
+            cout << "angle = " << angle(a1, a2) * 180.0 / M_PI << ", cost: " << cost(angle(a1, a2)) << endl;
+        }
+        cout << "Line from (" << line[i].first << "," << line[i].second << ") to (" << line[i + 1].first << "," << line[i + 1].second << "), distance is " << dist << "m." << endl;
 
-        if (line[i+1].second > line[i].second) {
-            from  = line[i];
-            to = line[i+1];
-        } else {
-            from  = line[i+1];
-            to = line[i];
-        }
-        dx = to.first - from.first;
-        dy = to.second - from.second;
-        for(j = 0; j < dy; j++){
-            y = j + (unsigned long) floor(from.second);
-            x = (unsigned long) round(dx / dy * j + from.first);
+        double grid_distance = EUCL(line[i].first, line[i].second, line[i + 1].first, line[i + 1].second),
+                angle = ANGL(line[i].first, line[i].second, line[i + 1].first, line[i + 1].second),
+                a_cos = cos(angle),
+                a_sin = sin(angle);
 
-            if(x > minX() && y > minY() && x < maxX() && y < maxY())
-                hasLine[x][y] = true;
+        /* Obstacles and off map */
+        for (double p = 0; p < grid_distance; p += 0.2) {
+            double cx = line[i].first + a_cos * p;
+            double cy = line[i].second + a_sin * p;
+            if (cx > minX() && cy > minY() && cx < maxX() && cy < maxY())
+                hasLine[(unsigned long) cx][(unsigned long) cy] = true;
         }
-        if (line[i+1].first > line[i].first) {
-            from  = line[i];
-            to = line[i+1];
-        } else {
-            from  = line[i+1];
-            to = line[i];
-        }
-        dx = to.second - from.second;
-        dy = to.first - from.first;
-        for(j = 0; j < dy; j++){
-            y = j + (unsigned long) floor(from.first);
-            x = (unsigned long) round(dx / dy * j + from.second);
-
-            if(y > minX() && x > minY() && y < maxX() && x < maxY())
-                hasLine[y][x] = true;
-        }
+    }
+    // Put x's
+    for(i = 0; i < line.size(); i++){
+        hasLine[(unsigned long) line[i].first][(unsigned long) line[i].second] = 9;
     }
 
     vector<vector<cell>>::const_iterator k;
@@ -122,8 +111,13 @@ void Grid::plot(ostream &stream, vector<coordinate> line) {
             else if (l->builder)
                 stream << ".";
             else {
-                if(hasLine[k - grid.begin()][l - k->begin()])
-                    stream << "-";
+                int line = hasLine[k - grid.begin()][l - k->begin()];
+                if(line > -1){
+                    if(isatty(1))
+                        stream << "\033[0;3" << line << "m" << "-" << "\033[0m";
+                    else
+                        stream << (line == 9 ? "x" : "-");
+                }
                 else
                 if (l->mapped)
                     stream << " ";
@@ -484,11 +478,16 @@ void Grid::floodFindDistancesToEdge() {
 double Grid::angle(double angle1, double angle2) {
 //    cout << angle1 << ", " << angle2 << endl;
     // if sign(angle1) != sign(angle2)
-    if ((angle1 <= 0 and angle2 >= 0) or (angle1 > 0 and angle2 < 0)) {
-        return fabs(angle1) + fabs(angle2);
-    }
-    // else
-    return fabs(fabs(angle1) - fabs(angle2));
+    double d = angle1 - angle2;
+    d=fabs(d);
+
+    // Shorter angle if going other way round
+    if(d > M_PI)
+        d = -1.0 * (d-2*M_PI);
+    if(d < -M_PI)
+        d = d+(2*M_PI);
+
+    return d;
 }
 
 inline double Grid::exactLimitToGradient(double limit, double width_of_gradient_factor, double input) {

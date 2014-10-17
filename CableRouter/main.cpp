@@ -12,6 +12,7 @@
 
 #define DEFAULT_GRID_SIZE 2;
 #define NO_GRAPH_NODES 8000
+#define DEFAULT_GRID_SIZE 10;
 const int GA_COMPLEXITY = 5;
 
 using namespace std;
@@ -21,7 +22,7 @@ inline bool exists_test (const std::string& name) {
     return (-1 != access( name.c_str(), F_OK ));
 }
 
-int main(int argc, char const *argv[]) {
+int actual(int argc, char const *argv[]) {
     // Start timer
     clock_t start = clock();
 
@@ -88,4 +89,50 @@ int main(int argc, char const *argv[]) {
     grid->plot(cout, line);
 
     return 0;
+}
+
+void test() {
+    Grid* g = new Grid(vector<vector<cell>>(0), Projection::identity());
+
+    cout << "Testing all angles in circle: ";
+    for(float a = 0.0; a <= 2*M_PI; a += M_PI / 8){
+        double x = cos(a) * 1;
+        double y = sin(a) * 1;
+        double r = g->angle(0.0, 0.0, x, y, Projection::identity());
+        cout << (fabs(r - a) > 0.001f ? "F" : ".");
+        if(fabs(r - a) > 0.001f)
+            cout << "\n\t(x:"<<x<<",y:"<<y<<") - Expected: "<< a << "; Got: " << r << endl;
+    }
+    cout << endl;
+
+    cout << "Testing all angles in 2 circles: ";
+    for(float a1 = 0.0; a1 <= 2*M_PI; a1 += M_PI / 8){
+        double x = cos(a1) * 1;
+        double y = sin(a1) * 1;
+        double r1 = g->angle(0.0, 0.0, x, y, Projection::identity());
+
+        for(float a2 = 0.0; a2 <= 2*M_PI; a2 += M_PI / 8){
+            double x2 = x + cos(a2) * 1;
+            double y2 = y + sin(a2) * 1;
+            double r2 = g->angle(x, y, x2, y2, Projection::identity());
+
+            double r = g->angle(r1, r2);
+
+            double diff = r2 - r1;
+            diff = fabs(diff);
+
+            if(fabs(r - diff) > 0.001f)
+                cout << "F\n\tExpected: "<< diff << "; Got: " << r << endl;
+            else
+                cout << ".";
+        }
+    }
+
+    cout << endl;
+}
+
+int main(int argc, char const *argv[]) {
+    //test();
+    //return 0;
+    return actual(argc, argv);
 }
