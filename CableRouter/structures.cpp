@@ -208,11 +208,11 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
 
             // Penalties
             if(c.bomb)
-                val += 50;
+                val += COST_PIXEL_BOMB;
             if(c.pipeline)
-                val += 100;
+                val += COST_PIXEL_PIPE;
             if(c.builder)
-                val += 5;
+                val += COST_PIXEL_ROCK;
 
         } else if(!gradient){
             // Either not in grid or off map
