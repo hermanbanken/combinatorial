@@ -77,7 +77,7 @@ void Grid::plot(ostream &stream, vector<coordinate> line) {
         if (i > 0) {
             double a1 = angle(line[i - 1].first, line[i - 1].second, line[i].first, line[i].second, Projection::identity());
             double a2 = angle(line[i].first, line[i].second, line[i + 1].first, line[i + 1].second, Projection::identity());
-            cout << "angle = " << angle(a1, a2) * 180.0 / M_PI << ", cost: " << cost(angle(a1, a2)) << endl;
+            cout << "angle = " << angle(a1, a2) * 180.0 / M_PI << ", cost: " << cost(angle(a1, a2), true) << endl;
         }
         cout << "Line from (" << line[i].first << "," << line[i].second << ") to (" << line[i + 1].first << "," << line[i + 1].second << "), distance is " << dist << "m." << endl;
 

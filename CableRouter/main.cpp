@@ -14,7 +14,9 @@
 #define DEFAULT_GRID_SIZE 2;
 #define NO_GRAPH_NODES 8000
 #define DEFAULT_GRID_SIZE 10;
-const int GA_COMPLEXITY = 5;
+#define TTY if (isatty(fileno(stdin)))
+
+const int GA_COMPLEXITY = 8;
 
 using namespace std;
 
@@ -24,19 +26,16 @@ inline bool exists_test (const std::string& name) {
 }
 
 int actual(int argc, char const *argv[]) {
-    // Start timer
-    clock_t start = clock();
+    std::cout << "> CableRouter" << endl;
 
-    double grid_s = argc >= 3 ? atof(argv[2]) : DEFAULT_GRID_SIZE;
-    string file = argc >= 2 ? argv[1] : "/Projects/Combinatorial/data/matrix 2.txt";
-    int complexity = argc >= 4 ? atoi(argv[3]) : GA_COMPLEXITY;
-    string bin = file+".bin";
+    ASKFILE:while(true){
 
-    Grid* grid;
-    if(false){
-        Grid g = Grid::read(bin);
-        grid = &g;
-    } else {
+        // Load Matrix
+        TTY std::cout << "> Enter matrix file name: ";
+        string file;
+        std::getline(std::cin, file);
+        std::cout << "> Reading " << file << endl << flush;
+
         Reader *r = new Reader(file);
         point *row = new point();
         Simplifier *simplifier = new Simplifier();
@@ -46,52 +45,124 @@ int actual(int argc, char const *argv[]) {
             row = new point();
         }
 
-        // Summary
-//        cout << "Read " << simplifier->count << " points\n";
-//        cout << "Min:\n\t" << simplifier->min->toString() << "\n";
-//        cout << "Max:\n\t" << simplifier->max->toString() << "\n";
-//        cout << "Avg:\n\t" << simplifier->avg->toString() << "\n";
+        char action = '_';
+        char algorithm = 'g';
+        Grid* grid;
+        float grid_s = 1;
+        bool simplified = false;
+        Solvers::Solver* solver;
+        unsigned int num_nodes = NO_GRAPH_NODES;
+        unsigned int complexity = GA_COMPLEXITY;
 
-        // End timer
-//        clock_t stop = clock();
-//        cout << double(stop - start) / CLOCKS_PER_SEC << " seconds for input\n";
+        RUNLOOP:do {
 
-        grid = simplifier->grid(grid_s, grid_s);
-//        clock_t stop2 = clock();
-//        cout << double(stop2 - stop) / CLOCKS_PER_SEC << " seconds for grid\n";
-//        grid->write(bin);
+            switch(action) {
+                case 'c': goto ASKFILE;
+                case 'r':
+                    if(grid == NULL)
+                        grid = simplifier->grid(grid_s, grid_s);
+
+                    // Run algorithms
+                    TTY std::cout << "> Which algorithm to run: " << endl <<
+                            "> - [g] CMA-ES"             << endl <<
+                            "> - [d] Dijkstra"           << endl <<
+                            "> - [s] A*"                 << endl <<
+                            "> - [t] Theta*"             << endl <<
+                            "> - [a] Theta* with angles" << endl <<
+                            "> Do [g]: ";
+                    std::cin >> algorithm;
+                    std::cout << endl;
+
+                    if(algorithm != 'g'){
+                        TTY std::cout << "> Parameter: [number of nodes]";
+                        std::cin >> num_nodes;
+                    } else {
+                        TTY std::cout << "> Parameter <max corners>: [ex: " << complexity << "]";
+                        std::cin >> complexity;
+                    }
+                    std::cout << endl;
+
+                    std::cout << "Using solver ";
+                    switch(algorithm){
+                        case 'd':   cout << "Dijkstra" << endl;
+                                    solver = new Solvers::DijkstraSolver(num_nodes); break;
+                        case 's':   cout << "A*" << endl;
+                                    solver = new Solvers::AStarSolver(num_nodes); break;
+                        case 't':   cout << "Theta*" << endl;
+                                    solver = new Solvers::ThetaStarSolver(num_nodes); break;
+                        case 'a':   cout << "Theta* with angles" << endl;
+                                    solver = new Solvers::AngleAwareThetaStarSolver(num_nodes); break;
+                        default:    cout << "CMA-ES" << endl;
+                                    solver = new Solvers::GA(complexity);
+                    }
+
+                    std::cout << "> Flooding grid" << endl << flush;
+                    grid->floodFindDistancesToEdge();
+                    std::cout << "> Done flooding" << endl;
+
+                    do {
+                        double ax, ay, bx, by;
+                        TTY std::cout << "> Cable start and end coordinates, format <a_x> <a_y> <b_x> <b_y>:";
+
+                        if((std::cin >> ax >> ay >> bx >> by) && std::cin.good()){
+                            std::cout << endl << "> Finding line from (" << ax << "," << ay << ") to (" << bx << "," << by << ")" << endl << flush;
+                            vector<coordinate> line(2, make_pair(ax, ay));
+                            line[1] = make_pair(bx, by);
+                            std::cout << "> Running... " << endl << flush;
+                            solver->solve(grid, line);
+                            std::cout << "> Done" << endl;
+
+                            cout << "(" << line[0].first << "," << line[0].second << ")";
+                            for(unsigned int i = 1; i + 1 < line.size(); i++) {
+                                cout << "->(" << line[i].first << "," << line[i].second << ")";
+                            }
+                            cout << endl;
+
+                            TTY std::cout << "> Continue? (else hit ctrl-D)" << endl;
+                        } else {
+                            cout << "Not good!!" << endl << flush;
+                            std::cin.clear();
+                            break;
+                        }
+                    } while(true);
+
+                    break;
+
+                case 's':
+                    if(grid == NULL)
+                        grid = simplifier->grid(grid_s, grid_s);
+
+                    // Write statistics
+                    cout << "{ \"points\": " << simplifier->count << ", " <<
+                              "\"min\": \"" << simplifier->min->toString() << "\", "
+                              "\"max\": \"" << simplifier->max->toString() << "\", "
+                              "\"avg\": \"" << simplifier->avg->toString() << "\" "
+                         << "}" << endl;
+                    break;
+
+                case 'd':
+
+                    // Change simplifycation
+                    TTY std::cout << "> Simplify grid to points [x] meters apart: ";
+                    std::cin >> grid_s;
+                    std::cout << endl;
+                    grid = NULL;
+                    break;
+            }
+
+            // Manual
+            TTY std::cout << "> What do you want to do?" << endl <<
+                    "> - [d] change grid density by simplifying (currently " << grid_s << "m)" << endl <<
+                    "> - [c] change file" << endl <<
+                    "> - [s] write statistics" << endl <<
+                    "> - [r] run cable router" << endl <<
+                    "> Do: ";
+
+            std::cin >> action;
+            std::cout << endl;
+        } while(true);
+
     }
-
-//    grid->summary(cout);
-//    grid->plot(cout);
-
-    Projection id = Projection::identity();
-
-    vector<coordinate> line(2, make_pair(3.0, grid->maxY(id) - 3.0));
-    line[1] = make_pair(grid->maxX(id) - 2.0, 2.0);
-
-    double dist = grid->distance(line[0].first, line[0].second, line[1].first, line[1].second, id);
-    cout << "Solving the placement of a cable between two points " << dist << "m apart" << endl;
-
-    if(dist / 50 < GA_COMPLEXITY+1)
-        cout << "Warning: the input space might be too small to make " << (GA_COMPLEXITY + 1) << " turns." << endl;
-
-//    Solvers::DijkstraSolver* g = new Solvers::DijkstraSolver(NO_GRAPH_NODES);
-//    g->solve(grid, line);
-
-//    Solvers::AStarSolver* g = new Solvers::AStarSolver(NO_GRAPH_NODES);
-//    g->solve(grid, line);
-
-//    Solvers::ThetaStarSolver* g = new Solvers::ThetaStarSolver(NO_GRAPH_NODES);
-//    g->solve(grid, line);
-
-    Solvers::AngleAwareThetaStarSolver* g = new Solvers::AngleAwareThetaStarSolver(NO_GRAPH_NODES);
-    g->solve(grid, line);
-
-//    Solvers::GA* g = new Solvers::GA(GA_COMPLEXITY);
-//    g->solve(grid, line);
-
-    grid->plot(cout, line);
 
     return 0;
 }
