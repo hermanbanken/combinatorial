@@ -77,8 +77,8 @@ void GA::solve(Grid* grid, vector<coordinate> &line) {
     this->start = line.front();
     this->end = line.back();
 
-    // Make straight line
-    line = straightLine(this->start, this->end, this->points);
+    // Results
+    std::map <unsigned int, Candidate> results;
 
     FitFunc fitness = [grid,this,id](const double *x, const int N)->double {
         double val = 0.0;
@@ -104,24 +104,40 @@ void GA::solve(Grid* grid, vector<coordinate> &line) {
         return val;
     };
 
-    // Config
-    double sigma = 50;
-    vector<double> x0 = lineCandidate(line);
-//    //int lambda = 100; // offsprings at each generation.
-    CMAParameters<> cmaparams(this->points*2,&x0.at(2),sigma);
-    cmaparams.set_mt_feval(true); // multi threading
-    cout << "Initial fitness = " << fitness(&x0.at(2), this->points*2) << endl;
-    //cmaparams.set_algo(BIPOP_CMAES);
+    for(int tries = 2; tries > 0; tries--)
+    for(unsigned int complexity = 1; complexity <= this->points; complexity++){
+        // Make straight line
+        line = straightLine(this->start, this->end, complexity);
 
-    // Run
-    CMASolutions cmasols = cmaes<>(fitness,cmaparams);
+        // Config
+        vector<double> x0 = lineCandidate(line);
+        CMAParameters<> cmaparams(complexity*2,&x0.at(2), 50);
+        cmaparams.set_mt_feval(true); // multi threading
+
+        // Run
+        CMASolutions cmasols = cmaes<>(fitness,cmaparams);
+
+        if(results.count(complexity) == 0 || results[complexity].get_fvalue() > cmasols.best_candidate().get_fvalue())
+            results[complexity] = cmasols.best_candidate();
+    }
+
+    Candidate best = results.begin()->second;
+    for(map<unsigned int, ::libcmaes::Candidate>::iterator i = results.begin(); i != results.end(); i++){
+        best = best.get_fvalue() < i->second.get_fvalue() ? best : i->second;
+    }
+
+    // Store, don't neglect straight line costs
+    if(best.get_fvalue() > grid->cost(get<0>(this->start), get<1>(this->start), get<0>(this->end), get<1>(this->end), id, true))
+        line = straightLine(this->start, this->end, 0);
+    else
+        line = candidateLine(this->start, best, this->end);
 
     // Print
-    cout << "best solution: " << cmasols << endl;
-    cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds" << endl;
-    int o = cmasols.run_status();
-    cout << "Result: " << o << endl;
-
-    // Return
-    line = candidateLine(this->start, cmasols.best_candidate(), this->end);
+//    cout << "best solution: " << cmasols << endl;
+//    cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds" << endl;
+//    int o = cmasols.run_status();
+//    cout << "Result: " << o << endl;
+//
+//    // Return
+//    line = candidateLine(this->start, cmasols.best_candidate(), this->end);
 }
