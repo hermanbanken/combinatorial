@@ -113,7 +113,7 @@ int actual(int argc, char const *argv[]) {
                             std::cout << "> Done" << endl;
 
                             cout << "(" << line[0].first << "," << line[0].second << ")";
-                            for(unsigned int i = 1; i + 1 < line.size(); i++) {
+                            for(unsigned int i = 1; i < line.size(); i++) {
                                 cout << "->(" << line[i].first << "," << line[i].second << ")";
                             }
                             cout << endl;
