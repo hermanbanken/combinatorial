@@ -28,7 +28,7 @@ inline bool exists_test (const std::string& name) {
 int actual(int argc, char const *argv[]) {
     std::cout << "> CableRouter" << endl;
 
-    ASKFILE:while(true){
+    ASKFILE:do {
 
         // Load Matrix
         TTY std::cout << "> Enter matrix file name: ";
@@ -120,7 +120,6 @@ int actual(int argc, char const *argv[]) {
 
                             TTY std::cout << "> Continue? (else hit ctrl-D)" << endl;
                         } else {
-                            cout << "Not good!!" << endl << flush;
                             std::cin.clear();
                             break;
                         }
@@ -158,11 +157,9 @@ int actual(int argc, char const *argv[]) {
                     "> - [r] run cable router" << endl <<
                     "> Do: ";
 
-            std::cin >> action;
-            std::cout << endl;
-        } while(true);
+        } while(std::cin >> action);
 
-    }
+    } while(!std::cin.eof());
 
     return 0;
 }
