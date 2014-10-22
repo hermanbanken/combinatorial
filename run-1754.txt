@@ -1,0 +1,22 @@
+/Projects/Combinatorial/data/matrix-1754.txt
+d
+5
+r
+g
+5
+2 2 721 2
+
+r
+t
+8000
+2 2 721 2
+
+r
+s
+8000
+2 2 721 2
+
+r
+a
+8000
+2 2 721 2

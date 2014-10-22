@@ -139,13 +139,13 @@ public:
     /**
     * Costs
     */
-    double ALLOWED_ANGLE = 8.0 / 180.0 * M_PI;
-    double TOO_SHORT = 50;
-    double COST_ANGLE = 5000000;
-    double COST_CABLE = 1;
-    double COST_OFFMAP = 50000;
-    double COST_TOO_SHORT = 50000;
-    double COST_PIXEL_BOMB = 5000.0;
+    double ALLOWED_ANGLE =   8.0 / 180.0 * M_PI;
+    double TOO_SHORT =       50;
+    double COST_ANGLE =      5000000;
+    double COST_CABLE =      1;
+    double COST_OFFMAP =     50000;
+    double COST_TOO_SHORT =  50000;
+    double COST_PIXEL_BOMB = 50000.0;
     double COST_PIXEL_PIPE = 5000000.0;
     double COST_PIXEL_ROCK = 50.0;
 

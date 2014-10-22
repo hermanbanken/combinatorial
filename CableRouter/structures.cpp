@@ -234,8 +234,8 @@ double Grid::cost(double angle, bool gradient) {
     if(!gradient)
         return angle - ALLOWED_ANGLE > 0 ? FLT_MAX : 0;
 
-    double i = exactLimitToGradient(ALLOWED_ANGLE, 0.01, angle);
-    double c = COST_ANGLE * i * i;
+    //double i = exactLimitToGradient(ALLOWED_ANGLE, 0.01, angle);
+    double c = max(0.0, (angle - ALLOWED_ANGLE))/M_PI * COST_ANGLE;
 //    cout << "Angle a=" << angle << " costs " << c << endl;
     return c;
 }
