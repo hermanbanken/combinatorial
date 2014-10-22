@@ -101,12 +101,15 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
         return grid->cost(this->start, x, N, this->end, id);
     };
 
-    for(int tries = 1; tries > 0; tries--)
-    for(unsigned int complexity = 0; complexity <= this->points; complexity++){
+    int notImprovedCount = 0;
+    double currentFitness = 0;
+
+    for(unsigned int complexity = 0; complexity <= this->points && notImprovedCount < 3; complexity++){
         // Make straight line
         if(complexity == 0){
             line = straightLine(this->start, this->end, complexity);
-            results[complexity].set_fvalue(grid->cost(line, id));
+            currentFitness = grid->cost(line, id);
+            results[complexity].set_fvalue(currentFitness);
         } else {
             // Introduce one point extra, increasing complexity
             line = splitMaxSegment(line, grid, id);
@@ -119,6 +122,13 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
             // Run
             CMASolutions cmasols = cmaes<>(fitness,cmaparams);
 
+            // Keep track if we still improve by increasing complexity
+            if(cmasols.best_candidate().get_fvalue() < currentFitness){
+                currentFitness = cmasols.best_candidate().get_fvalue();
+                notImprovedCount = 0;
+            }
+
+            // Update best value for complexity
             if(results.count(complexity) == 0 || results[complexity].get_fvalue() > cmasols.best_candidate().get_fvalue())
                 results[complexity] = cmasols.best_candidate();
         }
