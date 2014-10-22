@@ -65,6 +65,21 @@ vector<coordinate> candidateLine(coordinate start, Candidate c, coordinate end) 
     return line;
 }
 
+vector<coordinate> splitMaxSegment(vector<coordinate> line, Grid* grid, Projection &p){
+    unsigned int mI = 0;
+    double max = grid->cost(line[0].first, line[0].second, line[1].first, line[1].second, p, true);
+    for(unsigned int i = 1; i + 1 < line.size(); i++){
+        double c = grid->cost(line[i].first, line[i].second, line[i+1].first, line[i+1].second, p, true);
+        if(c > max){
+            mI = i;
+            max = c;
+        }
+    }
+    // Add point halfway the most expensive line part
+    line.insert(line.begin() + mI + 1, make_pair((line[mI].first + line[mI+1].first)/2, (line[mI].second + line[mI+1].second)/2));
+    return line;
+}
+
 void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
     if(line.empty())
         throw invalid_argument("line was empty: it should contain at least 2 points");
@@ -86,21 +101,27 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
         return grid->cost(this->start, x, N, this->end, id);
     };
 
-    for(int tries = 2; tries > 0; tries--)
-    for(unsigned int complexity = 1; complexity <= this->points; complexity++){
+    for(int tries = 1; tries > 0; tries--)
+    for(unsigned int complexity = 0; complexity <= this->points; complexity++){
         // Make straight line
-        line = straightLine(this->start, this->end, complexity);
+        if(complexity == 0){
+            line = straightLine(this->start, this->end, complexity);
+            results[complexity].set_fvalue(grid->cost(line, id));
+        } else {
+            // Introduce one point extra, increasing complexity
+            line = splitMaxSegment(line, grid, id);
 
-        // Config
-        vector<double> x0 = lineCandidate(line);
-        CMAParameters<> cmaparams(complexity*2,&x0.at(2), 50);
-        cmaparams.set_mt_feval(true); // multi threading
+            // Config
+            vector<double> x0 = lineCandidate(line);
+            CMAParameters<> cmaparams(complexity*2,&x0.at(2), 50);
+            cmaparams.set_mt_feval(true); // multi threading
 
-        // Run
-        CMASolutions cmasols = cmaes<>(fitness,cmaparams);
+            // Run
+            CMASolutions cmasols = cmaes<>(fitness,cmaparams);
 
-        if(results.count(complexity) == 0 || results[complexity].get_fvalue() > cmasols.best_candidate().get_fvalue())
-            results[complexity] = cmasols.best_candidate();
+            if(results.count(complexity) == 0 || results[complexity].get_fvalue() > cmasols.best_candidate().get_fvalue())
+                results[complexity] = cmasols.best_candidate();
+        }
     }
 
     Candidate best = results.begin()->second;
@@ -108,11 +129,7 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
         best = best.get_fvalue() < i->second.get_fvalue() ? best : i->second;
     }
 
-    // Store, don't neglect straight line costs
-    if(best.get_fvalue() > grid->cost(get<0>(this->start), get<1>(this->start), get<0>(this->end), get<1>(this->end), id, true))
-        line = straightLine(this->start, this->end, 0);
-    else
-        line = candidateLine(this->start, best, this->end);
+    line = candidateLine(this->start, best, this->end);
 
     time = double(clock() - start);
 }
