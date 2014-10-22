@@ -116,7 +116,7 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
 
             // Config
             vector<double> x0 = lineCandidate(line);
-            CMAParameters<> cmaparams(complexity*2,&x0.at(2), max(grid->maxX(id), grid->maxY(id)));
+            CMAParameters<> cmaparams(complexity*2,&x0.at(2), max(grid->maxX(id)/2, grid->maxY(id)/2));
             cmaparams.set_mt_feval(true); // multi threading
 
             // Run
