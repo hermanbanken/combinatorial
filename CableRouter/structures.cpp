@@ -495,3 +495,25 @@ double Grid::cost(const vector<coordinate> line, const Projection &p) {
 
     return val;
 }
+
+double Grid::cost(const coordinate start, const double *x, const int N, const coordinate end, const Projection &p) {
+    double val = this->cost(start.first, start.second, x[0], x[1], p);
+    double angle = this->angle(start.first, start.second, x[0], x[1], p);
+
+    for (unsigned int i = 0; i + 3 < N; i+=2){
+        // Distance
+        val += this->cost(x[i], x[i+1], x[i+2], x[i+3], p, true);
+
+        // Angle
+        double new_angle = this->angle(x[i], x[i+1], x[i+2], x[i+3], p);
+        val += this->cost(this->angle(angle, new_angle), true);
+        angle = new_angle;
+    }
+
+    // Last
+    val += this->cost(x[N-2], x[N-1], end.first, end.second, p, true);
+    double new_angle = this->angle(x[N-2], x[N-1], end.first, end.second, p);
+    val += this->cost(this->angle(angle, new_angle), true);
+
+    return val;
+}

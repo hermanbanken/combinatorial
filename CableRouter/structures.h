@@ -192,6 +192,7 @@ public:
     double cost(double angle, bool gradient = false);
 
     double cost(const vector<coordinate> line, const Projection &p);
+    double cost(const coordinate start, const double *x, const int N, const coordinate end, const Projection &p);
 
     /**
     * Plot ASCII art to an output stream

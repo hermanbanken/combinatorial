@@ -83,27 +83,7 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
     std::map <unsigned int, Candidate> results;
 
     FitFunc fitness = [grid,this,id](const double *x, const int N)->double {
-        double val = 0.0;
-        double angle = grid->angle(this->start.first, this->start.second, x[0], x[1], id);
-        // From windmill
-        val += log("start line cost", grid->cost(get<0>(this->start), get<1>(this->start), x[0], x[1], id, true));
-
-        for (int i = 0; i+3 < N; i+=2){
-
-            // Distance
-            val += log("line cost", grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true));
-            // Angle
-            double new_angle = grid->angle(x[i], x[i+1], x[i+2], x[i+3], id);
-            val += log("angle cost", grid->cost(grid->angle(angle, new_angle), true));
-            angle = new_angle;
-        }
-
-        // To windmill
-        double new_angle = grid->angle(x[N-2], x[N-1], this->end.first, this->end.second, id);
-        val += log("end line cost", grid->cost(x[N-2], x[N-1], this->end.first, this->end.second, id, true));
-        val += log("end angle cost", grid->cost(grid->angle(angle, new_angle), true));
-
-        return val;
+        return grid->cost(this->start, x, N, this->end, id);
     };
 
     for(int tries = 2; tries > 0; tries--)
