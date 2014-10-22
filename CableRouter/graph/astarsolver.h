@@ -8,6 +8,6 @@ namespace Solvers {
 
     public:
         AStarSolver(int noPoints);
-        void solve(Grid *grid, vector<coordinate> &line);
+        void solve(Grid *grid, vector<coordinate> &line, double &time);
     };
 }

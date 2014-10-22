@@ -419,8 +419,6 @@ bool Grid::tryGet(unsigned long x, unsigned long y, cell& out_cell) {
 }
 
 void Grid::floodFindDistancesToEdge() {
-    clock_t start = clock();
-
     priority_queue<pair<cell,coord>, vector<pair<cell,coord>>,CompareForFlood> pq(CompareForFlood(), this->edgeNodes());
 
     while(!pq.empty()){
@@ -450,8 +448,6 @@ void Grid::floodFindDistancesToEdge() {
 
             cell a;
             if(tryGet(x, y, a) && (a.distanceToMap == -1 || a.distanceToMap > (int)floor(dist))){
-                // debug:
-                // cout << "Explored " << x << "," << y << " current dist: " << a.distanceToMap << " new dist: " << floor(dist) << endl;
                 get(x,y).distanceToMap = (int) floor(dist);
                 identified_count++;
             }
@@ -460,24 +456,12 @@ void Grid::floodFindDistancesToEdge() {
             last_y = y;
         }
 
-        if(identified_count == 0){
+        if(identified_count == 0)
             pq.pop();
-        // debug:
-        // cout << "Popped cell " << current.second.first << "," << current.second.second << endl;
-        }
-        // debug:
-        // else
-        // cout << "Identified " << identified_count << " by mapped cell " << current.second.first << "," << current.second.second << endl;
     }
-
-    clock_t stop = clock();
-    cout << double(stop - start) / CLOCKS_PER_SEC << " seconds for distance flood" << endl;
-
 }
 
 double Grid::angle(double angle1, double angle2) {
-//    cout << angle1 << ", " << angle2 << endl;
-    // if sign(angle1) != sign(angle2)
     double d = angle1 - angle2;
     d=fabs(d);
 
@@ -492,4 +476,22 @@ double Grid::angle(double angle1, double angle2) {
 
 inline double Grid::exactLimitToGradient(double limit, double width_of_gradient_factor, double input) {
     return atan(input / width_of_gradient_factor - limit / width_of_gradient_factor) / M_PI + 0.5;
+}
+
+double Grid::cost(const vector<coordinate> line, const Projection &p) {
+    double val = 0;
+    double angle = this->angle(line[0].first, line[0].second, line[1].first, line[1].second, p);
+
+    for (int i = 0; i + 1 < line.size(); i++){
+        // Distance
+        val += this->cost(line[i].first, line[i].second, line[i+1].first, line[i+1].second, p, true);
+        // Angle
+        if(i != 0){
+            double new_angle = this->angle(line[i].first, line[i].second, line[i+1].first, line[i+1].second, p);
+            val += this->cost(this->angle(angle, new_angle), true);
+            angle = new_angle;
+        }
+    }
+
+    return val;
 }

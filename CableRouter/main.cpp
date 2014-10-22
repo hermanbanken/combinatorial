@@ -11,7 +11,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define DEFAULT_GRID_SIZE 2;
 #define NO_GRAPH_NODES 8000
 #define DEFAULT_GRID_SIZE 10;
 #define TTY if (isatty(fileno(stdin)))
@@ -53,6 +52,7 @@ int actual(int argc, char const *argv[]) {
         Solvers::Solver* solver;
         unsigned int num_nodes = NO_GRAPH_NODES;
         unsigned int complexity = GA_COMPLEXITY;
+        double time_preprocess = 0;
 
         RUNLOOP:do {
 
@@ -82,7 +82,7 @@ int actual(int argc, char const *argv[]) {
                     }
                     std::cout << endl;
 
-                    std::cout << "Using solver ";
+                    std::cout << "> Using solver ";
                     switch(algorithm){
                         case 'd':   cout << "Dijkstra" << endl;
                                     solver = new Solvers::DijkstraSolver(num_nodes); break;
@@ -100,8 +100,10 @@ int actual(int argc, char const *argv[]) {
                     grid->floodFindDistancesToEdge();
                     std::cout << "> Done flooding" << endl;
 
+                    solver->preprocess(grid, time_preprocess);
+
                     do {
-                        double ax, ay, bx, by;
+                        double ax, ay, bx, by, time_solve = 0, fitness;
                         TTY std::cout << "> Cable start and end coordinates, format <a_x> <a_y> <b_x> <b_y>:";
 
                         if((std::cin >> ax >> ay >> bx >> by) && std::cin.good()){
@@ -109,11 +111,13 @@ int actual(int argc, char const *argv[]) {
                             vector<coordinate> line(2, make_pair(ax, ay));
                             line[1] = make_pair(bx, by);
                             std::cout << "> Running... " << endl << flush;
-                            solver->solve(grid, line);
+                            solver->solve(grid, line, time_solve);
+                            fitness = grid->cost(line, Projection::identity());
                             std::cout << "> Done" << endl;
 
-                            cout << "(" << line[0].first << "," << line[0].second << ")";
-                            for(unsigned int i = 1; i < line.size(); i++) {
+                            cout << "=" << algorithm << ' ' << fitness << ' ' << time_preprocess <<  '' << time_solve << endl;
+                            cout << "?(" << line[0].first << "," << line[0].second << ")";
+                            for(unsigned int i = 1; i + 1 < line.size(); i++) {
                                 cout << "->(" << line[i].first << "," << line[i].second << ")";
                             }
                             cout << endl;

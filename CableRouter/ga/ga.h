@@ -24,7 +24,13 @@ namespace Solvers {
     public:
         GA(unsigned int points);
 
-        void solve(Grid* grid, vector<coordinate> &line);
+        void preprocess(Grid *grid, double &time) {
+            clock_t start = clock();
+            grid->floodFindDistancesToEdge();
+            time = double(clock() - start);
+        }
+
+        void solve(Grid* grid, vector<coordinate> &line, double &time);
 
     };
 

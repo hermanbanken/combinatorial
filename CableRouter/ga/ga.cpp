@@ -65,9 +65,11 @@ vector<coordinate> candidateLine(coordinate start, Candidate c, coordinate end) 
     return line;
 }
 
-void GA::solve(Grid* grid, vector<coordinate> &line) {
+void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
     if(line.empty())
         throw invalid_argument("line was empty: it should contain at least 2 points");
+
+    clock_t start = clock();
 
     // Grid
     this->grid = grid;
@@ -81,27 +83,13 @@ void GA::solve(Grid* grid, vector<coordinate> &line) {
     std::map <unsigned int, Candidate> results;
 
     FitFunc fitness = [grid,this,id](const double *x, const int N)->double {
-        double val = 0.0;
-        double angle = grid->angle(this->start.first, this->start.second, x[0], x[1], id);
-        // From windmill
-        val += log("start line cost", grid->cost(get<0>(this->start), get<1>(this->start), x[0], x[1], id, true));
-
-        for (int i = 0; i+3 < N; i+=2){
-
-            // Distance
-            val += log("line cost", grid->cost(x[i], x[i+1], x[i+2], x[i+3], id, true));
-            // Angle
-            double new_angle = grid->angle(x[i], x[i+1], x[i+2], x[i+3], id);
-            val += log("angle cost", grid->cost(grid->angle(angle, new_angle), true));
-            angle = new_angle;
+        vector<coordinate> line(0);
+        line.push_back(this->start);
+        for(unsigned int i = 0; i < N; i+=2){
+            line.push_back(make_pair(x[i], x[i+1]));
         }
-
-        // To windmill
-        double new_angle = grid->angle(x[N-2], x[N-1], this->end.first, this->end.second, id);
-        val += log("end line cost", grid->cost(x[N-2], x[N-1], this->end.first, this->end.second, id, true));
-        val += log("end angle cost", grid->cost(grid->angle(angle, new_angle), true));
-
-        return val;
+        line.push_back(this->end);
+        return grid->cost(line, id);
     };
 
     for(int tries = 2; tries > 0; tries--)
@@ -132,12 +120,5 @@ void GA::solve(Grid* grid, vector<coordinate> &line) {
     else
         line = candidateLine(this->start, best, this->end);
 
-    // Print
-//    cout << "best solution: " << cmasols << endl;
-//    cout << "optimization took " << cmasols.elapsed_time() / 1000.0 << " seconds" << endl;
-//    int o = cmasols.run_status();
-//    cout << "Result: " << o << endl;
-//
-//    // Return
-//    line = candidateLine(this->start, cmasols.best_candidate(), this->end);
+    time = double(clock() - start);
 }

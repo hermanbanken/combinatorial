@@ -16,7 +16,10 @@ namespace Solvers {
 
     class Solver {
     public:
-        virtual void solve(Grid *grid, vector<coordinate> &line) = 0;
+        virtual void preprocess(Grid *grid, double &time) {
+            time = 0;
+        }
+        virtual void solve(Grid *grid, vector<coordinate> &line, double &time) = 0;
     };
 
 }

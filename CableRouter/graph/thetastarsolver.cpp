@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void Solvers::ThetaStarSolver::solve(Grid *grid, vector<coordinate> &line) {
+void Solvers::ThetaStarSolver::solve(Grid *grid, vector<coordinate> &line, double &time) {
     clock_t start = clock();
 
     grid->floodFindDistancesToEdge();

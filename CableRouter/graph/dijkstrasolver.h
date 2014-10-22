@@ -7,6 +7,6 @@ namespace Solvers {
 
     public:
         DijkstraSolver(int noPoints);
-        void solve(Grid *grid, vector<coordinate> &line);
+        void solve(Grid *grid, vector<coordinate> &line, double &time);
     };
 }
