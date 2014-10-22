@@ -7,11 +7,14 @@ SET(CMAKE_CPP_COMPILER "/usr/local/Cellar/gcc/4.9.1/bin/gcc-4.9" )
 set(CMAES_CXX_FLAGS "-g -Wall -fopenmp -lgflags -lstdc++ -lcmaes")
 set(CMAKE_CXX_FLAGS "-std=c++0x ${CMAKE_CXX_FLAGS} ${CMAES_CXX_FLAGS}")
 
-set(SOURCE_FILES main.cpp reader.cpp simplifier.cpp structures.cpp ga/ga.cpp graph/graph.cpp graph/sampler.cpp graph/dijkstrasolver.cpp graph/astarsolver.cpp graph/thetastarsolver.cpp graph/anglethetastarsolver.cpp)
+set(SOURCE_FILES main.cpp reader.cpp simplifier.cpp structures.cpp ga/ga.cpp graph/graph.cpp graph/sampler.cpp graph/dijkstrasolver.cpp graph/astarsolver.cpp graph/thetastarsolver.cpp graph/anglethetastarsolver.cpp )
 add_executable(CableRouter ${SOURCE_FILES})
 
 set(TO_BIN_SOURCES tobinary.cpp)
 add_executable(tobinary ${TO_BIN_SOURCES})
+
+set(TO_LINE_SOURCES linereader.cpp)
+add_executable(readline ${TO_LINE_SOURCES})
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/vendor/libcmaes/src /usr/local/Cellar/eigen/3.2.2/include/eigen3")
 target_include_directories (CableRouter PUBLIC /usr/local/Cellar/eigen/3.2.2/include/eigen3)

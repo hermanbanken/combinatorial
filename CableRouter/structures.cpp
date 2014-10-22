@@ -263,7 +263,8 @@ bool Grid::lineOfSight(double x0, double y0, double x1, double y1, const Project
         double cx = x0 + a_cos * a;
         double cy = y0 + a_sin * a;
 
-        if (!getCell(cx, cy, p).mapped) {
+        cell c = getCell(cx, cy, p);
+        if (!c.mapped and !c.bomb and !c.pipeline) {
             return false;
         }
     }
