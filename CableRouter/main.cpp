@@ -19,6 +19,17 @@ const int GA_COMPLEXITY = 8;
 
 using namespace std;
 
+void printLine(ostream &stream, vector<coordinate> line, Projection p){
+    double x, y;
+    p.project(line[0].first, line[0].second, x, y);
+    stream << "(" << x << "," << y << ")";
+    for(unsigned int i = 1; i < line.size(); i++) {
+        p.project(line[i].first, line[i].second, x, y);
+        stream << "->(" << x << "," << y << ")";
+    }
+    stream << endl;
+}
+
 // http://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exist-using-standard-c-c11-c
 inline bool exists_test (const std::string& name) {
     return (-1 != access( name.c_str(), F_OK ));
@@ -101,8 +112,11 @@ int actual(int argc, char const *argv[]) {
                         double ax, ay, bx, by, time_solve = 0, fitness;
                         TTY std::cout << "> Cable start and end coordinates, format <a_x> <a_y> <b_x> <b_y>:";
 
-                        if((std::cin >> ax >> ay >> bx >> by) && std::cin.good()){
+                        if(std::cin >> ax >> ay >> bx >> by){
                             std::cout << endl << "> Finding line from (" << ax << "," << ay << ") to (" << bx << "," << by << ")" << endl << flush;
+                            grid->inputProjection().project(ax, ay, ax, ay);
+                            grid->inputProjection().project(bx, by, bx, by);
+
                             vector<coordinate> line(2, make_pair(ax, ay));
                             line[1] = make_pair(bx, by);
                             std::cout << "> Running... " << endl << flush;
@@ -110,12 +124,11 @@ int actual(int argc, char const *argv[]) {
                             fitness = grid->cost(line, Projection::identity());
                             std::cout << "> Done" << endl;
 
-                            cout << "=" << algorithm << ' ' << fitness << ' ' << time_preprocess <<  ' ' << time_solve << endl;
-                            cout << "?(" << line[0].first << "," << line[0].second << ")";
-                            for(unsigned int i = 1; i < line.size(); i++) {
-                                cout << "->(" << line[i].first << "," << line[i].second << ")";
-                            }
-                            cout << endl;
+                            cout << "=" << algorithm << ' ' << fitness << ' ' << time_preprocess / CLOCKS_PER_SEC <<  ' ' << time_solve / CLOCKS_PER_SEC << endl;
+                            cout << "?";
+                            printLine(cout, line, grid->backToInputProjection());
+
+                            //grid->plot(std::cout, line);
 
                             TTY std::cout << "> Continue? (else hit ctrl-D)" << endl;
                         } else {
