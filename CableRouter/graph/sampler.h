@@ -4,6 +4,9 @@
 #include <vector>
 #include <tuple>
 
+#ifndef ___cablerouter_sampler___
+#define ___cablerouter_sampler___
+
 /*
 Possibilities for sampling:
     - Random
@@ -35,3 +38,5 @@ public:
 
     void createEdge(Graph::Node *from, Graph::Node *to);
 };
+
+#endif /* defined(___cablerouter_sampler___) */

@@ -482,7 +482,7 @@ double Grid::cost(const vector<coordinate> line, const Projection &p) {
     double val = 0;
     double angle = this->angle(line[0].first, line[0].second, line[1].first, line[1].second, p);
 
-    for (int i = 0; i + 1 < line.size(); i++){
+    for (unsigned int i = 0; i + 1 < line.size(); i++){
         // Distance
         val += this->cost(line[i].first, line[i].second, line[i+1].first, line[i+1].second, p, true);
         // Angle

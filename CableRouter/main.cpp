@@ -48,13 +48,12 @@ int actual(int argc, char const *argv[]) {
         char algorithm = 'g';
         Grid* grid;
         float grid_s = 1;
-        bool simplified = false;
         Solvers::Solver* solver;
         unsigned int num_nodes = NO_GRAPH_NODES;
         unsigned int complexity = GA_COMPLEXITY;
         double time_preprocess = 0;
 
-        RUNLOOP:do {
+        do {
 
             switch(action) {
                 case 'c': goto ASKFILE;
@@ -96,10 +95,6 @@ int actual(int argc, char const *argv[]) {
                                     solver = new Solvers::GA(complexity);
                     }
 
-                    std::cout << "> Flooding grid" << endl << flush;
-                    grid->floodFindDistancesToEdge();
-                    std::cout << "> Done flooding" << endl;
-
                     solver->preprocess(grid, time_preprocess);
 
                     do {
@@ -115,9 +110,9 @@ int actual(int argc, char const *argv[]) {
                             fitness = grid->cost(line, Projection::identity());
                             std::cout << "> Done" << endl;
 
-                            cout << "=" << algorithm << ' ' << fitness << ' ' << time_preprocess <<  '' << time_solve << endl;
+                            cout << "=" << algorithm << ' ' << fitness << ' ' << time_preprocess <<  ' ' << time_solve << endl;
                             cout << "?(" << line[0].first << "," << line[0].second << ")";
-                            for(unsigned int i = 1; i + 1 < line.size(); i++) {
+                            for(unsigned int i = 1; i < line.size(); i++) {
                                 cout << "->(" << line[i].first << "," << line[i].second << ")";
                             }
                             cout << endl;

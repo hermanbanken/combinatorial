@@ -75,7 +75,7 @@ void Sampler::sample8ConnectedGridNodesAndEdges(int noPoints) {
     noPointsX = (int) sqrt(noPoints);
     noPointsY = (int) sqrt(noPoints);
 
-    cout << "Creating Node Grid" << endl;
+    //cout << "Creating Node Grid" << endl;
     unsigned long nodeGrid[noPointsX][noPointsY];
     bool boolGrid[noPointsX][noPointsY];
     std::fill( &boolGrid[0][0], &boolGrid[0][0] + sizeof(boolGrid) /* / sizeof(flags[0][0]) */, false );
@@ -85,7 +85,7 @@ void Sampler::sample8ConnectedGridNodesAndEdges(int noPoints) {
     distY = (grid->maxY(projection) - grid->minY(projection)) / noPointsY;
 
     // Creating nodes
-    cout << "Creating Nodes" << endl;
+    //cout << "Creating Nodes" << endl;
     for (x = 0; x < noPointsX; x++) {
         for (y = 0; y < noPointsY; y++) {
             point = coordinate(grid->minX(projection) + distX * x, grid->minY(projection) + distY * y);
@@ -102,7 +102,7 @@ void Sampler::sample8ConnectedGridNodesAndEdges(int noPoints) {
         }
     }
 
-    cout << "Creating Edges" << endl;
+    //cout << "Creating Edges" << endl;
     for (x = 0; x < noPointsX; x++) {
         for (y = 0; y < noPointsX; y++) {
             if (!boolGrid[x][y]) {

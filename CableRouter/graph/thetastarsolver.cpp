@@ -4,32 +4,28 @@
 
 using namespace std;
 
-void Solvers::ThetaStarSolver::solve(Grid *grid, vector<coordinate> &line, double &time) {
+void Solvers::ThetaStarSolver::preprocess(Grid *grid, double &time) {
     clock_t start = clock();
 
     grid->floodFindDistancesToEdge();
-    Sampler sampler = Sampler(grid);
 
-    sampler.sample8ConnectedGridNodesAndEdges(this->noPoints);
+    sampler = new Sampler(grid);
+    sampler->sample8ConnectedGridNodesAndEdges(this->noPoints);
 
-    cout << "Find nodes in graph: " << endl;
-    clock_t start_find = clock();
+    time = double(clock() - start);
+}
 
-    Graph::Node from = sampler.findNearestNode(line.front());
-    Graph::Node to = sampler.findNearestNode(line.back());
+void Solvers::ThetaStarSolver::solve(Grid *grid, vector<coordinate> &line, double &time) {
+    clock_t start = clock();
 
-    clock_t found = clock();
-    cout << "\ttook: " << double(found - start_find) / CLOCKS_PER_SEC << " sec" << endl;
+    // Lookup start & end nodes
+    Graph::Node from = sampler->findNearestNode(line.front());
+    Graph::Node to = sampler->findNearestNode(line.back());
 
-    cout << "Find shortest path: " << endl;
+    // Shortest path
+    double distance = sampler->graph.thetaStar(from, to, *grid, sampler->projection, line);
 
-    double distance = sampler.graph.thetaStar(from, to, *grid, sampler.projection, line);
-
-    clock_t path_found = clock();
-    cout << "\ttook: " << double(path_found - found) / CLOCKS_PER_SEC << " sec" << endl;
-
-    cout << "best solution: " << distance << endl;
-    cout << "Found solution in: " << double(path_found - start) / CLOCKS_PER_SEC << " sec" << endl;
+    time = double(clock() - start);
 }
 
 
