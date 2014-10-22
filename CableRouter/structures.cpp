@@ -185,10 +185,8 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
     val += distance;
 
     // If > 50 meters: penalty
-    double scale = 2.0f;
-    double limit = 50.0f;
-    double fiftyGrad = exactLimitToGradient(limit, scale, distance);
-    double fifty = COST_50M * (1.0 - fiftyGrad * fiftyGrad);
+    double fiftyGrad = exactLimitToGradient(TOO_SHORT, 1, distance);
+    double fifty = COST_TOO_SHORT * (1.0 - fiftyGrad * fiftyGrad);
 //    cout << "Fifty-or-less penalty ("<<distance<<"m) = " << fifty << endl;
     val += fifty;
 
@@ -219,10 +217,10 @@ double Grid::cost(double ax, double ay, double bx, double by, const Projection &
             return FLT_MAX;
         } else if(exists && !c.mapped) {
             // In grid, of map
-            val += COST_OFFMAP * pow(this->distanceToMap(cx, cy), COST_OFFMAP_POW);
+            val += COST_OFFMAP * pow(this->distanceToMap(cx, cy), 2);
         } else {
             // Off grid
-            val += COST_OFFMAP * pow(this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()), COST_OFFMAP_POW * 2);
+            val += COST_OFFMAP * pow(this->distance(cx, cy, (maxX() - minX())/2, (maxY() - minY())/2, Projection::identity()), 4);
         }
     }
 

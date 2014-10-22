@@ -18,17 +18,6 @@
 #define EUCL(ax,ay,bx,by) (sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by)))
 #define ANGL(ax,ay,bx,by) atan2(by - ay, bx - ax)
 
-const double ALLOWED_ANGLE = 8.0 / 180.0 * M_PI;
-const double COST_ANGLE = 50000;
-const double COST_ANGLE_POW = 2;
-const double COST_CABLE = 1;
-const double COST_OFFMAP = 50000;
-const double COST_OFFMAP_POW = 3;
-const double COST_50M = 50000;
-const double COST_PIXEL_BOMB = 5000.0;
-const double COST_PIXEL_PIPE = 50000.0;
-const double COST_PIXEL_ROCK = 50.0;
-
 using namespace std;
 
 enum SeaBed : char {
@@ -146,6 +135,19 @@ public:
     vector<vector<cell>>& data(){
         return this->grid;
     }
+
+    /**
+    * Costs
+    */
+    double ALLOWED_ANGLE = 8.0 / 180.0 * M_PI;
+    double TOO_SHORT = 50;
+    double COST_ANGLE = 5000000;
+    double COST_CABLE = 1;
+    double COST_OFFMAP = 50000;
+    double COST_TOO_SHORT = 50000;
+    double COST_PIXEL_BOMB = 5000.0;
+    double COST_PIXEL_PIPE = 5000000.0;
+    double COST_PIXEL_ROCK = 50.0;
 
     /**
     * Creates grid, copying the data
