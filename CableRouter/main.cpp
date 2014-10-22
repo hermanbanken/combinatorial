@@ -72,6 +72,8 @@ int actual(int argc, char const *argv[]) {
                     if(grid == NULL)
                         grid = simplifier->grid(grid_s, grid_s);
 
+                    grid->floodFindDistancesToEdge();
+
                     // Run algorithms
                     TTY std::cout << "> Which algorithm to run: " << endl <<
                             "> - [g] CMA-ES"             << endl <<
