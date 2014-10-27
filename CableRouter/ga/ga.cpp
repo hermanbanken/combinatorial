@@ -130,7 +130,6 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
             cmaparams.set_algo(this->algo);
             cmaparams.set_mt_feval(true); // multi threading
 
-            cout << "Running GA(" << this->algo << ") with complexity " << complexity << endl;
             // Run
             CMASolutions cmasols = this->print_progress ? cmaes<>(fitness,cmaparams,print_fitness) : cmaes<>(fitness,cmaparams);
 
