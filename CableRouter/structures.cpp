@@ -417,6 +417,7 @@ bool Grid::tryGet(unsigned long x, unsigned long y, cell& out_cell) {
 }
 
 // Like this: http://www.kgs.ku.edu/Tis/surf3/s3dmap1.html
+// and this http://http.developer.nvidia.com/GPUGems2/gpugems2_chapter08.html
 void Grid::floodFindDistancesToEdge() {
     priority_queue<pair<cell,coord>, vector<pair<cell,coord>>,CompareForFlood> pq(CompareForFlood(), this->edgeNodes());
 
