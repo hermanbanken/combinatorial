@@ -114,7 +114,7 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
     int notImprovedCount = 0;
     double currentFitness = 0;
 
-    for(unsigned int complexity = min_points; complexity <= this->points && notImprovedCount < 3; complexity++){
+    for(unsigned int complexity = min_points; complexity <= this->points && notImprovedCount++ < 3; complexity++){
         // Make straight line
         if(complexity == min_points){
             line = straightLine(this->start, this->end, complexity);
