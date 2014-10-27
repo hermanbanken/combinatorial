@@ -117,6 +117,9 @@ void Sampler::sample8ConnectedGridNodesAndEdges(int noPoints) {
                     if (boolGrid[x - 1][y - 1])
                         createEdge(&graph.nodes[nodeGrid[x][y]], &graph.nodes[nodeGrid[x - 1][y - 1]]);
                 }
+                if (x+1 < noPointsX and y+1 < noPointsY)
+                    if (boolGrid[x - 1][y - 1])
+                        createEdge(&graph.nodes[nodeGrid[x][y]], &graph.nodes[nodeGrid[x + 1][y + 1]]);
             }
             if(y != 0) {
                 if (boolGrid[x][y - 1])

@@ -323,8 +323,6 @@ double Graph::angleAwareThetaStar(Graph::Node &start, Graph::Node &goal, Grid &g
                     f_score[neighbour->id] = tentative_g_score + aStarCostEstimate(*neighbour, goal);
                     open.emplace(make_pair(neighbour->id, f_score[neighbour->id]));
                 }
-
-                continue;
             }
 
             // Path 1
