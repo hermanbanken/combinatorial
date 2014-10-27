@@ -132,7 +132,12 @@ int actual(int argc, char const *argv[]) {
                             fitness = grid->cost(line, Projection::identity());
                             std::cout << "> Done" << endl;
 
-                            cout << "=" << algorithm << ' ' << fitness << ' ' << time_preprocess / CLOCKS_PER_SEC <<  ' ' << time_solve / CLOCKS_PER_SEC << endl;
+                            cout << "=" << algorithm << ' ' << fitness << ' ' << time_preprocess / CLOCKS_PER_SEC <<  ' ' << time_solve / CLOCKS_PER_SEC;
+                            if(algorithm == 'g'){
+                                cout << " " << ga_algo << " " << min_complexity << " " << complexity;
+                            }
+
+                            cout << endl;
                             cout << "?";
                             printLine(cout, line, grid->backToInputProjection());
 
