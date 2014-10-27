@@ -62,6 +62,8 @@ int actual(int argc, char const *argv[]) {
         Solvers::Solver* solver;
         unsigned int num_nodes = NO_GRAPH_NODES;
         unsigned int complexity = GA_COMPLEXITY;
+        unsigned int min_complexity = 0;
+        unsigned int ga_algo = BIPOP_CMAES;
         double time_preprocess = 0;
 
         do {
@@ -76,12 +78,12 @@ int actual(int argc, char const *argv[]) {
 
                     // Run algorithms
                     TTY std::cout << "> Which algorithm to run: " << endl <<
-                            "> - [g] CMA-ES"             << endl <<
-                            "> - [d] Dijkstra"           << endl <<
-                            "> - [s] A*"                 << endl <<
-                            "> - [t] Theta*"             << endl <<
-                            "> - [a] Theta* with angles" << endl <<
-                            "> Do [g]: ";
+                                     "> - [g] CMA-ES"             << endl <<
+                                     "> - [d] Dijkstra"           << endl <<
+                                     "> - [s] A*"                 << endl <<
+                                     "> - [t] Theta*"             << endl <<
+                                     "> - [a] Theta* with angles" << endl <<
+                                     "> Do [g]: ";
                     std::cin >> algorithm;
                     std::cout << endl;
 
@@ -91,6 +93,10 @@ int actual(int argc, char const *argv[]) {
                     } else {
                         TTY std::cout << "> Parameter <max corners>: [ex: " << complexity << "]";
                         std::cin >> complexity;
+                        TTY std::cout << "> Parameter <min corners>: [ex: " << min_complexity << "]";
+                        std::cin >> min_complexity;
+                        TTY std::cout << "> Parameter <ES algorithm>: [ex: " << ga_algo << "]";
+                        std::cin >> ga_algo;
                     }
                     std::cout << endl;
 

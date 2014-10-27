@@ -12,8 +12,11 @@ using namespace std;
 using namespace libcmaes;
 using namespace Solvers;
 
-Solvers::GA::GA(unsigned int points) {
+Solvers::GA::GA(unsigned int points, unsigned int starting_points, bool print_progress, int algo) {
     this->points = points;
+    this->algo = algo;
+    this->min_points = starting_points;
+    this->print_progress = print_progress;
 }
 
 vector<coordinate> GA::straightLine(coordinate start, coordinate end, unsigned long points) {
@@ -104,9 +107,9 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
     int notImprovedCount = 0;
     double currentFitness = 0;
 
-    for(unsigned int complexity = 0; complexity <= this->points && notImprovedCount < 3; complexity++){
+    for(unsigned int complexity = min_points; complexity <= this->points && notImprovedCount < 3; complexity++){
         // Make straight line
-        if(complexity == 0){
+        if(complexity == min_points){
             line = straightLine(this->start, this->end, complexity);
             currentFitness = grid->cost(line, id);
             results[complexity].set_fvalue(currentFitness);
@@ -117,8 +120,10 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
             // Config
             vector<double> x0 = lineCandidate(line);
             CMAParameters<> cmaparams(complexity*2,&x0.at(2), max(grid->maxX(id)/2, grid->maxY(id)/2));
+            cmaparams.set_algo(this->algo);
             cmaparams.set_mt_feval(true); // multi threading
 
+            cout << "Running GA(" << this->algo << ") with complexity " << complexity << endl;
             // Run
             CMASolutions cmasols = cmaes<>(fitness,cmaparams);
 
