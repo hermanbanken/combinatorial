@@ -104,6 +104,13 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
         return grid->cost(this->start, x, N, this->end, id);
     };
 
+    ProgressFunc<CMAParameters<>,CMASolutions> print_fitness = [](const CMAParameters<> &cmaparams, const CMASolutions &cmasols)
+    {
+        std::cerr << cmasols.niter() << " " << cmasols.best_candidate().get_fvalue() << std::endl;
+        return 0;
+    };
+
+
     int notImprovedCount = 0;
     double currentFitness = 0;
 
@@ -125,7 +132,7 @@ void GA::solve(Grid* grid, vector<coordinate> &line, double &time) {
 
             cout << "Running GA(" << this->algo << ") with complexity " << complexity << endl;
             // Run
-            CMASolutions cmasols = cmaes<>(fitness,cmaparams);
+            CMASolutions cmasols = this->print_progress ? cmaes<>(fitness,cmaparams,print_fitness) : cmaes<>(fitness,cmaparams);
 
             // Keep track if we still improve by increasing complexity
             if(cmasols.best_candidate().get_fvalue() < currentFitness){

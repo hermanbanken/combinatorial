@@ -111,7 +111,7 @@ int actual(int argc, char const *argv[]) {
                         case 'a':   cout << "Theta* with angles" << endl;
                                     solver = new Solvers::AngleAwareThetaStarSolver(num_nodes); break;
                         default:    cout << "CMA-ES" << endl;
-                                    solver = new Solvers::GA(complexity);
+                                    solver = new Solvers::GA(complexity, min_complexity, false, ga_algo);
                     }
 
                     solver->preprocess(grid, time_preprocess);
