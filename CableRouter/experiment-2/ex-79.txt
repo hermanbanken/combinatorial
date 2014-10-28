@@ -1,3 +1,4 @@
-matrix-four.txt
+matrix-complex.txt
+d 5
 r d 3200
 10 400 1052 400

@@ -1,3 +1,4 @@
 matrix-clear.txt
+d 5
 r t 800
 10 475 1052 475
