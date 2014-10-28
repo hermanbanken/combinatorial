@@ -2,12 +2,13 @@
 ':' //; exec "$(command -v nodejs || command -v node)" "$0" "$@"
 
 // Call with:
-// cat ex-0-run-* | grep "=g" | ./summary.js
-// cat ex-1-run-* | grep "=g" | ./summary.js
-// cat ex-2-run-* | grep "=g" | ./summary.js
-// cat ex-3-run-* | grep "=g" | ./summary.js
-// cat ex-4-run-* | grep "=g" | ./summary.js
-// For all 5 columns
+// ./convert-out-files.js | sh
+// for n in {400,800,1600,3200}; do; cat ex-problem-0-{s,t,a,d}-n-$n-run-*.out | grep "^=" | sed "s/$/ $n/"; done | ./summary.js
+// for n in {400,800,1600,3200}; do; cat ex-problem-1-{s,t,a,d}-n-$n-run-*.out | grep "^=" | sed "s/$/ $n/"; done | ./summary.js
+// for n in {400,800,1600,3200}; do; cat ex-problem-2-{s,t,a,d}-n-$n-run-*.out | grep "^=" | sed "s/$/ $n/"; done | ./summary.js
+// for n in {400,800,1600,3200}; do; cat ex-problem-3-{s,t,a,d}-n-$n-run-*.out | grep "^=" | sed "s/$/ $n/"; done | ./summary.js
+// for n in {400,800,1600,3200}; do; cat ex-problem-4-{s,t,a,d}-n-$n-run-*.out | grep "^=" | sed "s/$/ $n/"; done | ./summary.js
+// For all 5 problems
 
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
@@ -17,13 +18,21 @@ var buffer = [];
 
 process.stdin.on('data', function (line) {
 	Array.prototype.push.apply(buffer, line.toString().trim().split(/\s|\n/g));
-	while(buffer.length > 6){
-		var point = buffer.splice(0, 7);
-		data[point[4]] = data[point[4]] || { runtime: [], fitness: [] };
-		data[point[4]].runtime.push(parseFloat(point[3]));
-		data[point[4]].fitness.push(parseFloat(point[1]));
+	while(buffer.length > 5){
+		var point = buffer.splice(0, 5);
+		add(point[0].charAt(1), parseInt(point[4]), parseFloat(point[1]), parseFloat(point[2]), parseFloat(point[3]));
 	}
 });
+
+function add(algo, nodes, fitness, pretime, runtime){
+	if(!data[algo])
+		data[algo] = {};
+	if(!data[algo][nodes])
+		data[algo][nodes] = { fitness: fitness, pretime: [], runtime: [] };
+
+	data[algo][nodes].pretime.push(pretime);
+	data[algo][nodes].runtime.push(runtime);
+}
 
 function avg(ar){
 	return sum(ar) / ar.length;
@@ -48,10 +57,30 @@ function min(ar){
 
 process.stdin.on('end', function() {
   console.log("algo\ta-runt.\ts-runt.\tmin-fitn.\ta-fitn.  \ts-fitn.");
-  for(n in data){
-  	console.log([n, avg(data[n].runtime), dev(data[n].runtime), min(data[n].fitness), avg(data[n].fitness), dev(data[n].fitness)].map(function(n, i){
-  		return i == 0 ? n : n.toFixed(3);
-  	}).join("\t"));
+
+  var counts = [400,800,1600,3200];
+  console.log("\t"+counts.join("\t\t\t\t")+"\t\t\t\t");
+  var sub = "";
+  for(var i = 0; i < 4; i++)
+  	sub+="\tfitn.\tavg pre\tdev pre\tavg run\tdev run";
+  console.log(sub);
+
+  for(algo in data){
+  	var line = algo;
+  	for(nodes in data[algo]){
+  		line += 
+  			"\t"+data[algo][nodes].fitness.toFixed(4) +
+  			"\t"+avg(data[algo][nodes].pretime).toFixed(4) +
+  			"\t"+dev(data[algo][nodes].pretime).toFixed(4) +
+  			"\t"+avg(data[algo][nodes].runtime).toFixed(4) +
+  			"\t"+dev(data[algo][nodes].runtime).toFixed(4);
+  	}
+  	console.log(line);
   }
+
+  // 	console.log([n, avg(data[n].runtime), dev(data[n].runtime), min(data[n].fitness), avg(data[n].fitness), dev(data[n].fitness)].map(function(n, i){
+  // 		return i == 0 ? n : n.toFixed(3);
+  // 	}).join("\t"));
+  // }
   process.exit();
 });
