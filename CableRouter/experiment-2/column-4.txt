@@ -1,475 +1,475 @@
 matrix-four.txt
 d 5
 d 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 400
-10 475 1052 475
+10 400 1052 400
 
 matrix-four.txt
 d 5
 t 400
-10 475 1052 475
-
-c
-matrix-four.txt
-d 5
-t 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 400
-10 475 1052 475
+10 400 1052 400
+
+c
+matrix-four.txt
+d 5
+t 400
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 400
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 800
-10 475 1052 475
+10 400 1052 400
 
 matrix-four.txt
 d 5
 t 800
-10 475 1052 475
-
-c
-matrix-four.txt
-d 5
-t 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 800
-10 475 1052 475
+10 400 1052 400
+
+c
+matrix-four.txt
+d 5
+t 800
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 800
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 1600
-10 475 1052 475
+10 400 1052 400
 
 matrix-four.txt
 d 5
 t 1600
-10 475 1052 475
-
-c
-matrix-four.txt
-d 5
-t 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 1600
-10 475 1052 475
+10 400 1052 400
+
+c
+matrix-four.txt
+d 5
+t 1600
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 1600
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 d 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 s 3200
-10 475 1052 475
+10 400 1052 400
 
 matrix-four.txt
 d 5
 t 3200
-10 475 1052 475
-
-c
-matrix-four.txt
-d 5
-t 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 t 3200
-10 475 1052 475
+10 400 1052 400
+
+c
+matrix-four.txt
+d 5
+t 3200
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 3200
-10 475 1052 475
+10 400 1052 400
 
 c
 matrix-four.txt
 d 5
 a 3200
-10 475 1052 475
+10 400 1052 400
 

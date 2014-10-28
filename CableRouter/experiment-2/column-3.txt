@@ -459,7 +459,7 @@ c
 matrix-three.txt
 d 5
 a 3200
-10 475 1052 475
+10 400 1052 500
 
 c
 matrix-three.txt
