@@ -1,0 +1,3 @@
+matrix-clear.txt
+r d 1600
+10 475 1052 475
