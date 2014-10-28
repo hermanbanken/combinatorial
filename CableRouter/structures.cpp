@@ -250,13 +250,15 @@ bool Grid::lineOfSight(double x0, double y0, double x1, double y1, const Project
             a_cos = cos(angle),
             a_sin = sin(angle);
 
+    cell from = getCell(x0, y0, p);
+
     /* Obstacles and off map */
     for(double a = 0; a < grid_distance; a++) {
         double cx = x0 + a_cos * a;
         double cy = y0 + a_sin * a;
 
         cell c = getCell(cx, cy, p);
-        if (!c.mapped or c.pipeline or c.bomb) {
+        if (!c.mapped or (c.pipeline && !from.pipeline) or (c.bomb && !from.bomb)) {
             return false;
         }
     }

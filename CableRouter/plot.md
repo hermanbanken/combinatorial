@@ -10,3 +10,6 @@ Run the following:
     gnuplot> set zlabel "z"
     gnuplot> set output "printme.png"
     gnuplot> splot 'matrix2.bin' binary format='%float32%float32%float32%int16%int8%int8' using 1:2:3:3 with dots palette
+
+    gnuplot> plot 'matrix-1754.bin' binary format='%float32%float32%float32%int16%int8%int8' using 1:2:3 with dots palette,\
+     'line.dat' using 1:2:(4) with lines palette

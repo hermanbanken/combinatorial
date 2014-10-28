@@ -33,6 +33,7 @@ int main(int argc, char const *argv[]) {
         short d = depth;
         char s = soil;
         char o = obst;
+        z = obst;
         fwrite(&x, sizeof(float), 1, out);
         fwrite(&y, sizeof(float), 1, out);
         fwrite(&z, sizeof(float), 1, out);

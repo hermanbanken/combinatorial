@@ -141,8 +141,8 @@ int actual(int argc, char const *argv[]) {
                             cout << "?";
                             printLine(cout, line, grid->backToInputProjection());
 
-                            //grid->plot(std::cout, line);
-
+                            grid->plot(std::cout, line);
+    
                             TTY std::cout << "> Continue? (else hit ctrl-D)" << endl;
                         } else {
                             std::cin.clear();
