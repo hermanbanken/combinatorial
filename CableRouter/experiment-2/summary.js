@@ -68,12 +68,16 @@ process.stdin.on('end', function() {
   for(algo in data){
   	var line = algo;
   	for(nodes in data[algo]){
+  		var ap = avg(data[algo][nodes].pretime),
+  			dp = dev(data[algo][nodes].pretime),
+  			ar = avg(data[algo][nodes].runtime),
+  			dr = dev(data[algo][nodes].runtime);
   		line += 
-  			"\t"+data[algo][nodes].fitness.toFixed(4) +
-  			"\t"+avg(data[algo][nodes].pretime).toFixed(4) +
-  			"\t"+dev(data[algo][nodes].pretime).toFixed(4) +
-  			"\t"+avg(data[algo][nodes].runtime).toFixed(4) +
-  			"\t"+dev(data[algo][nodes].runtime).toFixed(4);
+  			"\t"+data[algo][nodes].fitness.toPrecision(4) +
+  			"\t"+(ap < 1 ? ap.toExponential(3) : ap.toPrecision(4)) +
+  			"\t"+(dp < 1 ? dp.toExponential(3) : dp.toPrecision(4)) +
+  			"\t"+(ar < 1 ? ar.toExponential(3) : ar.toPrecision(4)) +
+  			"\t"+(dr < 1 ? dr.toExponential(3) : dr.toPrecision(4));
   	}
   	console.log(line);
   }
