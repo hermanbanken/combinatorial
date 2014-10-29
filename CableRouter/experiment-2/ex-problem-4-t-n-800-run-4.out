@@ -1,0 +1,13 @@
+> CableRouter
+> Reading matrix-complex.txt
+
+Initialized grid vector with 213 x 213 cells.
+
+
+> Using solver Theta*
+
+> Finding line from (10,400) to (1052,400)
+> Running... 
+> Done
+=t 1.44934e+06 0.011693 0.029037
+?(1026.96,418.393)->(912.857,456.429)->(266.25,304.286)->(0,418.393)

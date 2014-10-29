@@ -1,0 +1,20 @@
+> CableRouter
+> Reading matrix-clear.txt
+
+Initialized grid vector with 214 x 214 cells.
+
+
+> Using solver Dijkstra
+Sampling:
+		point sampling took: 0.00013 sec
+		node creating took: 0.000388 sec
+		edge creating took: 5.11512 sec
+	total sampling: 5.11564 sec
+
+> Finding line from (10,475) to (1052,475)
+> Running... 
+206.357,91.7143
+0,91.7143
+> Done
+=d 1064.2 5.12528 0.101772
+?(1031.79,458.571)->(0,458.571)

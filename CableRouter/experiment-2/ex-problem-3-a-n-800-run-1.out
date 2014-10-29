@@ -1,0 +1,13 @@
+> CableRouter
+> Reading matrix-three.txt
+
+Initialized grid vector with 213 x 213 cells.
+
+
+> Using solver Theta* with angles
+
+> Finding line from (10,475) to (1052,475)
+> Running... 
+> Done
+=a 14620.3 0.012423 0.006106
+?(1026.96,456.429)->(532.5,418.393)->(0,456.429)

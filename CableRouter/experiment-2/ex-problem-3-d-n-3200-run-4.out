@@ -1,0 +1,21 @@
+> CableRouter
+> Reading matrix-three.txt
+
+Initialized grid vector with 213 x 213 cells.
+
+
+> Using solver Dijkstra
+Sampling:
+		point sampling took: 0.000512 sec
+		node creating took: 0.001518 sec
+		edge creating took: 82.2621 sec
+	total sampling: 82.2641 sec
+
+> Finding line from (10,475) to (1052,475)
+> Running... 
+209.196,95.0893
+106.5,83.6786
+3.80357,95.0893
+> Done
+=d 131180 82.2717 13.4859
+?(1045.98,475.446)->(532.5,418.393)->(19.0179,475.446)

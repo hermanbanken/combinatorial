@@ -62,7 +62,7 @@ process.stdin.on('end', function() {
   console.log("\t"+counts.join("\t\t\t\t")+"\t\t\t\t");
   var sub = "";
   for(var i = 0; i < 4; i++)
-  	sub+="\tfitn.\tavg pre\tdev pre\tavg run\tdev run";
+  	sub+="\t& fitn.\t& avg pre\t& dev pre\t& avg run\t& dev run";
   console.log(sub);
 
   for(algo in data){
@@ -73,13 +73,13 @@ process.stdin.on('end', function() {
   			ar = avg(data[algo][nodes].runtime),
   			dr = dev(data[algo][nodes].runtime);
   		line += 
-  			"\t"+data[algo][nodes].fitness.toPrecision(4) +
-  			"\t"+(ap < 1 ? ap.toExponential(3) : ap.toPrecision(4)) +
-  			"\t"+(dp < 1 ? dp.toExponential(3) : dp.toPrecision(4)) +
-  			"\t"+(ar < 1 ? ar.toExponential(3) : ar.toPrecision(4)) +
-  			"\t"+(dr < 1 ? dr.toExponential(3) : dr.toPrecision(4));
+  			"\t& "+data[algo][nodes].fitness.toPrecision(4) +
+  			"\t& "+(ap < 1 ? ap.toExponential(3) : ap.toPrecision(4)) +
+  			"\t& "+(dp < 1 ? dp.toExponential(3) : dp.toPrecision(4)) +
+  			"\t& "+(ar < 1 ? ar.toExponential(3) : ar.toPrecision(4)) +
+  			"\t& "+(dr < 1 ? dr.toExponential(3) : dr.toPrecision(4));
   	}
-  	console.log(line);
+  	console.log(line + "\\\\");
   }
 
   // 	console.log([n, avg(data[n].runtime), dev(data[n].runtime), min(data[n].fitness), avg(data[n].fitness), dev(data[n].fitness)].map(function(n, i){
