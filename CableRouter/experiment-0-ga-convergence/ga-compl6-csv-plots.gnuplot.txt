@@ -1,0 +1,42 @@
+/Projects/Combinatorial/data/matrix-1824.txt
+d
+5
+r g 6 5 2
+2 2 613 570
+
+/Projects/Combinatorial/data/matrix-1754.txt
+d 5
+r g 6 5 2
+2 2 721 2
+
+r g 6 5 2
+2 2 721 2
+
+
+gnuplot
+set term png
+set xrange [*:*]
+set logscale y
+set yrange [3000:1e+7]
+set output "combined.png"
+
+set style line 1 lt 1 lc rgb "red" 	lw 2
+set style line 2 lt 1 lc rgb "yellow" 	lw 2
+set style line 3 lt 1 lc rgb "blue"	lw 2
+set style line 4 lt 2 lc rgb "red" 	lw 2
+set style line 5 lt 2 lc rgb "yellow" 	lw 2
+set style line 6 lt 2 lc  rgb "blue"	lw 2
+
+set label 1 'CMA-ES' at -0.4, 3000 tc rgb "red"
+set label 2 'IPOP-CMA-ES' at -0.4, 3776.77 tc rgb "yellow"
+set label 3 'BIPOP-CMA-ES' at -0.4, 4754.67 tc rgb "blue"
+set label 4 'active CMA-ES' at -0.4, 5985.78 tc rgb "red"
+set label 5 'active IPOP-CMA-ES'  at -0.4, 7535.65 tc rgb "yellow"
+set label 6 'active BIPOP-CMA-ES' at -0.4, 9486.83 tc rgb "blue"
+
+plot "run-ga-vanilla-compl6.csv" using 0:2 with lines,\
+     "run-ga-ipop-compl6.csv" using 0:2 with lines,\
+     "run-ga-bipop-compl6.csv" using 0:2 with lines,\
+     "run-ga-aVanilla-compl6.csv" using 0:2 with lines,\
+     "run-ga-aBiPop-compl6.csv" using 0:2 with lines,\
+     "run-ga-aIpop-compl6.csv" using 0:2 with lines

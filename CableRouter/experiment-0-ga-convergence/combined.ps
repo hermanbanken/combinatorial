@@ -1,0 +1,5176 @@
+%!PS-Adobe-2.0
+%%Title: combined.ps
+%%Creator: gnuplot 4.6 patchlevel 6
+%%CreationDate: Thu Oct 30 14:26:11 2014
+%%DocumentFonts: (atend)
+%%BoundingBox: 50 50 554 770
+%%Orientation: Landscape
+%%Pages: (atend)
+%%EndComments
+%%BeginProlog
+/gnudict 256 dict def
+gnudict begin
+%
+% The following true/false flags may be edited by hand if desired.
+% The unit line width and grayscale image gamma correction may also be changed.
+%
+/Color false def
+/Blacktext false def
+/Solid false def
+/Dashlength 1 def
+/Landscape true def
+/Level1 false def
+/Rounded false def
+/ClipToBoundingBox false def
+/SuppressPDFMark false def
+/TransparentPatterns false def
+/gnulinewidth 5.000 def
+/userlinewidth gnulinewidth def
+/Gamma 1.0 def
+/BackgroundColor {-1.000 -1.000 -1.000} def
+%
+/vshift -46 def
+/dl1 {
+  10.0 Dashlength mul mul
+  Rounded { currentlinewidth 0.75 mul sub dup 0 le { pop 0.01 } if } if
+} def
+/dl2 {
+  10.0 Dashlength mul mul
+  Rounded { currentlinewidth 0.75 mul add } if
+} def
+/hpt_ 31.5 def
+/vpt_ 31.5 def
+/hpt hpt_ def
+/vpt vpt_ def
+/doclip {
+  ClipToBoundingBox {
+    newpath 50 50 moveto 554 50 lineto 554 770 lineto 50 770 lineto closepath
+    clip
+  } if
+} def
+%
+% Gnuplot Prolog Version 4.6 (September 2012)
+%
+%/SuppressPDFMark true def
+%
+/M {moveto} bind def
+/L {lineto} bind def
+/R {rmoveto} bind def
+/V {rlineto} bind def
+/N {newpath moveto} bind def
+/Z {closepath} bind def
+/C {setrgbcolor} bind def
+/f {rlineto fill} bind def
+/g {setgray} bind def
+/Gshow {show} def   % May be redefined later in the file to support UTF-8
+/vpt2 vpt 2 mul def
+/hpt2 hpt 2 mul def
+/Lshow {currentpoint stroke M 0 vshift R 
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/Rshow {currentpoint stroke M dup stringwidth pop neg vshift R
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/Cshow {currentpoint stroke M dup stringwidth pop -2 div vshift R 
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
+/UP {dup vpt_ mul /vpt exch def hpt_ mul /hpt exch def
+  /hpt2 hpt 2 mul def /vpt2 vpt 2 mul def} def
+/DL {Color {setrgbcolor Solid {pop []} if 0 setdash}
+ {pop pop pop 0 setgray Solid {pop []} if 0 setdash} ifelse} def
+/BL {stroke userlinewidth 2 mul setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+/AL {stroke userlinewidth 2 div setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+/UL {dup gnulinewidth mul /userlinewidth exch def
+	dup 1 lt {pop 1} if 10 mul /udl exch def} def
+/PL {stroke userlinewidth setlinewidth
+	Rounded {1 setlinejoin 1 setlinecap} if} def
+3.8 setmiterlimit
+% Default Line colors
+/LCw {1 1 1} def
+/LCb {0 0 0} def
+/LCa {0 0 0} def
+/LC0 {1 0 0} def
+/LC1 {0 1 0} def
+/LC2 {0 0 1} def
+/LC3 {1 0 1} def
+/LC4 {0 1 1} def
+/LC5 {1 1 0} def
+/LC6 {0 0 0} def
+/LC7 {1 0.3 0} def
+/LC8 {0.5 0.5 0.5} def
+% Default Line Types
+/LTw {PL [] 1 setgray} def
+/LTb {BL [] LCb DL} def
+/LTa {AL [1 udl mul 2 udl mul] 0 setdash LCa setrgbcolor} def
+/LT0 {PL [] LC0 DL} def
+/LT1 {PL [4 dl1 2 dl2] LC1 DL} def
+/LT2 {PL [2 dl1 3 dl2] LC2 DL} def
+/LT3 {PL [1 dl1 1.5 dl2] LC3 DL} def
+/LT4 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
+/LT5 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC5 DL} def
+/LT6 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC6 DL} def
+/LT7 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC7 DL} def
+/LT8 {PL [2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 4 dl2] LC8 DL} def
+/Pnt {stroke [] 0 setdash gsave 1 setlinecap M 0 0 V stroke grestore} def
+/Dia {stroke [] 0 setdash 2 copy vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath stroke
+  Pnt} def
+/Pls {stroke [] 0 setdash vpt sub M 0 vpt2 V
+  currentpoint stroke M
+  hpt neg vpt neg R hpt2 0 V stroke
+ } def
+/Box {stroke [] 0 setdash 2 copy exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath stroke
+  Pnt} def
+/Crs {stroke [] 0 setdash exch hpt sub exch vpt add M
+  hpt2 vpt2 neg V currentpoint stroke M
+  hpt2 neg 0 R hpt2 vpt2 V stroke} def
+/TriU {stroke [] 0 setdash 2 copy vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath stroke
+  Pnt} def
+/Star {2 copy Pls Crs} def
+/BoxF {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath fill} def
+/TriUF {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath fill} def
+/TriD {stroke [] 0 setdash 2 copy vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath stroke
+  Pnt} def
+/TriDF {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath fill} def
+/DiaF {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath fill} def
+/Pent {stroke [] 0 setdash 2 copy gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath stroke grestore Pnt} def
+/PentF {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath fill grestore} def
+/Circle {stroke [] 0 setdash 2 copy
+  hpt 0 360 arc stroke Pnt} def
+/CircleF {stroke [] 0 setdash hpt 0 360 arc fill} def
+/C0 {BL [] 0 setdash 2 copy moveto vpt 90 450 arc} bind def
+/C1 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C2 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C3 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C4 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 180 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C5 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc
+	2 copy moveto
+	2 copy vpt 180 270 arc closepath fill
+	vpt 0 360 arc} bind def
+/C6 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C7 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 270 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C8 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 270 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C9 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 270 450 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C10 {BL [] 0 setdash 2 copy 2 copy moveto vpt 270 360 arc closepath fill
+	2 copy moveto
+	2 copy vpt 90 180 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C11 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 180 arc closepath fill
+	2 copy moveto
+	2 copy vpt 270 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C12 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 180 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C13 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 0 90 arc closepath fill
+	2 copy moveto
+	2 copy vpt 180 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/C14 {BL [] 0 setdash 2 copy moveto
+	2 copy vpt 90 360 arc closepath fill
+	vpt 0 360 arc} bind def
+/C15 {BL [] 0 setdash 2 copy vpt 0 360 arc closepath fill
+	vpt 0 360 arc closepath} bind def
+/Rec {newpath 4 2 roll moveto 1 index 0 rlineto 0 exch rlineto
+	neg 0 rlineto closepath} bind def
+/Square {dup Rec} bind def
+/Bsquare {vpt sub exch vpt sub exch vpt2 Square} bind def
+/S0 {BL [] 0 setdash 2 copy moveto 0 vpt rlineto BL Bsquare} bind def
+/S1 {BL [] 0 setdash 2 copy vpt Square fill Bsquare} bind def
+/S2 {BL [] 0 setdash 2 copy exch vpt sub exch vpt Square fill Bsquare} bind def
+/S3 {BL [] 0 setdash 2 copy exch vpt sub exch vpt2 vpt Rec fill Bsquare} bind def
+/S4 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt Square fill Bsquare} bind def
+/S5 {BL [] 0 setdash 2 copy 2 copy vpt Square fill
+	exch vpt sub exch vpt sub vpt Square fill Bsquare} bind def
+/S6 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt vpt2 Rec fill Bsquare} bind def
+/S7 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt vpt2 Rec fill
+	2 copy vpt Square fill Bsquare} bind def
+/S8 {BL [] 0 setdash 2 copy vpt sub vpt Square fill Bsquare} bind def
+/S9 {BL [] 0 setdash 2 copy vpt sub vpt vpt2 Rec fill Bsquare} bind def
+/S10 {BL [] 0 setdash 2 copy vpt sub vpt Square fill 2 copy exch vpt sub exch vpt Square fill
+	Bsquare} bind def
+/S11 {BL [] 0 setdash 2 copy vpt sub vpt Square fill 2 copy exch vpt sub exch vpt2 vpt Rec fill
+	Bsquare} bind def
+/S12 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill Bsquare} bind def
+/S13 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill
+	2 copy vpt Square fill Bsquare} bind def
+/S14 {BL [] 0 setdash 2 copy exch vpt sub exch vpt sub vpt2 vpt Rec fill
+	2 copy exch vpt sub exch vpt Square fill Bsquare} bind def
+/S15 {BL [] 0 setdash 2 copy Bsquare fill Bsquare} bind def
+/D0 {gsave translate 45 rotate 0 0 S0 stroke grestore} bind def
+/D1 {gsave translate 45 rotate 0 0 S1 stroke grestore} bind def
+/D2 {gsave translate 45 rotate 0 0 S2 stroke grestore} bind def
+/D3 {gsave translate 45 rotate 0 0 S3 stroke grestore} bind def
+/D4 {gsave translate 45 rotate 0 0 S4 stroke grestore} bind def
+/D5 {gsave translate 45 rotate 0 0 S5 stroke grestore} bind def
+/D6 {gsave translate 45 rotate 0 0 S6 stroke grestore} bind def
+/D7 {gsave translate 45 rotate 0 0 S7 stroke grestore} bind def
+/D8 {gsave translate 45 rotate 0 0 S8 stroke grestore} bind def
+/D9 {gsave translate 45 rotate 0 0 S9 stroke grestore} bind def
+/D10 {gsave translate 45 rotate 0 0 S10 stroke grestore} bind def
+/D11 {gsave translate 45 rotate 0 0 S11 stroke grestore} bind def
+/D12 {gsave translate 45 rotate 0 0 S12 stroke grestore} bind def
+/D13 {gsave translate 45 rotate 0 0 S13 stroke grestore} bind def
+/D14 {gsave translate 45 rotate 0 0 S14 stroke grestore} bind def
+/D15 {gsave translate 45 rotate 0 0 S15 stroke grestore} bind def
+/DiaE {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V closepath stroke} def
+/BoxE {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V closepath stroke} def
+/TriUE {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V closepath stroke} def
+/TriDE {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V closepath stroke} def
+/PentE {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  closepath stroke grestore} def
+/CircE {stroke [] 0 setdash 
+  hpt 0 360 arc stroke} def
+/Opaque {gsave closepath 1 setgray fill grestore 0 setgray closepath} def
+/DiaW {stroke [] 0 setdash vpt add M
+  hpt neg vpt neg V hpt vpt neg V
+  hpt vpt V hpt neg vpt V Opaque stroke} def
+/BoxW {stroke [] 0 setdash exch hpt sub exch vpt add M
+  0 vpt2 neg V hpt2 0 V 0 vpt2 V
+  hpt2 neg 0 V Opaque stroke} def
+/TriUW {stroke [] 0 setdash vpt 1.12 mul add M
+  hpt neg vpt -1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt 1.62 mul V Opaque stroke} def
+/TriDW {stroke [] 0 setdash vpt 1.12 mul sub M
+  hpt neg vpt 1.62 mul V
+  hpt 2 mul 0 V
+  hpt neg vpt -1.62 mul V Opaque stroke} def
+/PentW {stroke [] 0 setdash gsave
+  translate 0 hpt M 4 {72 rotate 0 hpt L} repeat
+  Opaque stroke grestore} def
+/CircW {stroke [] 0 setdash 
+  hpt 0 360 arc Opaque stroke} def
+/BoxFill {gsave Rec 1 setgray fill grestore} def
+/Density {
+  /Fillden exch def
+  currentrgbcolor
+  /ColB exch def /ColG exch def /ColR exch def
+  /ColR ColR Fillden mul Fillden sub 1 add def
+  /ColG ColG Fillden mul Fillden sub 1 add def
+  /ColB ColB Fillden mul Fillden sub 1 add def
+  ColR ColG ColB setrgbcolor} def
+/BoxColFill {gsave Rec PolyFill} def
+/PolyFill {gsave Density fill grestore grestore} def
+/h {rlineto rlineto rlineto gsave closepath fill grestore} bind def
+%
+% PostScript Level 1 Pattern Fill routine for rectangles
+% Usage: x y w h s a XX PatternFill
+%	x,y = lower left corner of box to be filled
+%	w,h = width and height of box
+%	  a = angle in degrees between lines and x-axis
+%	 XX = 0/1 for no/yes cross-hatch
+%
+/PatternFill {gsave /PFa [ 9 2 roll ] def
+  PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
+  PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+  clip
+  currentlinewidth 0.5 mul setlinewidth
+  /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
+  0 0 M PFa 5 get rotate PFs -2 div dup translate
+  0 1 PFs PFa 4 get div 1 add floor cvi
+	{PFa 4 get mul 0 M 0 PFs V} for
+  0 PFa 6 get ne {
+	0 1 PFs PFa 4 get div 1 add floor cvi
+	{PFa 4 get mul 0 2 1 roll M PFs 0 V} for
+ } if
+  stroke grestore} def
+%
+/languagelevel where
+ {pop languagelevel} {1} ifelse
+ 2 lt
+	{/InterpretLevel1 true def}
+	{/InterpretLevel1 Level1 def}
+ ifelse
+%
+% PostScript level 2 pattern fill definitions
+%
+/Level2PatternFill {
+/Tile8x8 {/PaintType 2 /PatternType 1 /TilingType 1 /BBox [0 0 8 8] /XStep 8 /YStep 8}
+	bind def
+/KeepColor {currentrgbcolor [/Pattern /DeviceRGB] setcolorspace} bind def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 8 8 L 0 8 M 8 0 L stroke} 
+>> matrix makepattern
+/Pat1 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 8 8 L 0 8 M 8 0 L stroke
+	0 4 M 4 8 L 8 4 L 4 0 L 0 4 L stroke}
+>> matrix makepattern
+/Pat2 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 0 M 0 8 L
+	8 8 L 8 0 L 0 0 L fill}
+>> matrix makepattern
+/Pat3 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -4 8 M 8 -4 L
+	0 12 M 12 0 L stroke}
+>> matrix makepattern
+/Pat4 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -4 0 M 8 12 L
+	0 -4 M 12 8 L stroke}
+>> matrix makepattern
+/Pat5 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -2 8 M 4 -4 L
+	0 12 M 8 -4 L 4 12 M 10 0 L stroke}
+>> matrix makepattern
+/Pat6 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop -2 0 M 4 12 L
+	0 -4 M 8 12 L 4 -4 M 10 8 L stroke}
+>> matrix makepattern
+/Pat7 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 8 -2 M -4 4 L
+	12 0 M -4 8 L 12 4 M 0 10 L stroke}
+>> matrix makepattern
+/Pat8 exch def
+<< Tile8x8
+ /PaintProc {0.5 setlinewidth pop 0 -2 M 12 4 L
+	-4 0 M 12 8 L -4 4 M 8 10 L stroke}
+>> matrix makepattern
+/Pat9 exch def
+/Pattern1 {PatternBgnd KeepColor Pat1 setpattern} bind def
+/Pattern2 {PatternBgnd KeepColor Pat2 setpattern} bind def
+/Pattern3 {PatternBgnd KeepColor Pat3 setpattern} bind def
+/Pattern4 {PatternBgnd KeepColor Landscape {Pat5} {Pat4} ifelse setpattern} bind def
+/Pattern5 {PatternBgnd KeepColor Landscape {Pat4} {Pat5} ifelse setpattern} bind def
+/Pattern6 {PatternBgnd KeepColor Landscape {Pat9} {Pat6} ifelse setpattern} bind def
+/Pattern7 {PatternBgnd KeepColor Landscape {Pat8} {Pat7} ifelse setpattern} bind def
+} def
+%
+%
+%End of PostScript Level 2 code
+%
+/PatternBgnd {
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+} def
+%
+% Substitute for Level 2 pattern fill codes with
+% grayscale if Level 2 support is not selected.
+%
+/Level1PatternFill {
+/Pattern1 {0.250 Density} bind def
+/Pattern2 {0.500 Density} bind def
+/Pattern3 {0.750 Density} bind def
+/Pattern4 {0.125 Density} bind def
+/Pattern5 {0.375 Density} bind def
+/Pattern6 {0.625 Density} bind def
+/Pattern7 {0.875 Density} bind def
+} def
+%
+% Now test for support of Level 2 code
+%
+Level1 {Level1PatternFill} {Level2PatternFill} ifelse
+%
+/Symbol-Oblique /Symbol findfont [1 0 .167 1 0 0] makefont
+dup length dict begin {1 index /FID eq {pop pop} {def} ifelse} forall
+currentdict end definefont pop
+Level1 SuppressPDFMark or 
+{} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (combined.ps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.6 patchlevel 6)
+  /Author (hbanken)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Thu Oct 30 14:26:11 2014)
+  /DOCINFO pdfmark
+end
+} ifelse
+end
+%%EndProlog
+%%Page: 1 1
+gnudict begin
+gsave
+doclip
+50 50 translate
+0.100 0.100 scale
+90 rotate
+0 -5040 translate
+0 setgray
+newpath
+(Helvetica) findfont 140 scalefont setfont
+BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {gsave BackgroundColor C clippath fill grestore} if
+1.000 UL
+LTb
+938 720 M
+31 0 V
+5978 0 R
+-31 0 V
+938 971 M
+31 0 V
+5978 0 R
+-31 0 V
+938 1090 M
+63 0 V
+5946 0 R
+-63 0 V
+-6030 0 R
+( 10000) Rshow
+1.000 UL
+LTb
+938 1460 M
+31 0 V
+5978 0 R
+-31 0 V
+938 1948 M
+31 0 V
+5978 0 R
+-31 0 V
+938 2199 M
+31 0 V
+5978 0 R
+-31 0 V
+938 2318 M
+63 0 V
+5946 0 R
+-63 0 V
+-6030 0 R
+( 100000) Rshow
+1.000 UL
+LTb
+938 2688 M
+31 0 V
+5978 0 R
+-31 0 V
+938 3176 M
+31 0 V
+5978 0 R
+-31 0 V
+938 3427 M
+31 0 V
+5978 0 R
+-31 0 V
+938 3546 M
+63 0 V
+5946 0 R
+-63 0 V
+-6030 0 R
+( 1e+06) Rshow
+1.000 UL
+LTb
+938 3916 M
+31 0 V
+5978 0 R
+-31 0 V
+938 4404 M
+31 0 V
+5978 0 R
+-31 0 V
+938 4655 M
+31 0 V
+5978 0 R
+-31 0 V
+938 4774 M
+63 0 V
+5946 0 R
+-63 0 V
+-6030 0 R
+( 1e+07) Rshow
+1.000 UL
+LTb
+938 448 M
+0 63 V
+0 4360 R
+0 -63 V
+938 308 M
+( 0) Cshow
+1.000 UL
+LTb
+2244 448 M
+0 63 V
+0 4360 R
+0 -63 V
+0 -4500 R
+( 5000) Cshow
+1.000 UL
+LTb
+3551 448 M
+0 63 V
+0 4360 R
+0 -63 V
+0 -4500 R
+( 10000) Cshow
+1.000 UL
+LTb
+4857 448 M
+0 63 V
+0 4360 R
+0 -63 V
+0 -4500 R
+( 15000) Cshow
+1.000 UL
+LTb
+6163 448 M
+0 63 V
+0 4360 R
+0 -63 V
+0 -4500 R
+( 20000) Cshow
+1.000 UL
+LTb
+1.000 UL
+LTb
+938 4871 N
+938 448 L
+6009 0 V
+0 4423 V
+-6009 0 V
+Z stroke
+LCb setrgbcolor
+112 2659 M
+currentpoint gsave translate -270 rotate 0 0 M
+(Best fitness found [f]) Cshow
+grestore
+LTb
+LCb setrgbcolor
+3942 98 M
+(Iterations [n]) Cshow
+LTb
+1.000 UP
+1.000 UL
+LTb
+% Begin plot #1
+1.000 UL
+LT0
+gsave 938 4871 N 0 0 V 16 0 V 0 -66 V 1 -975 V -2 1041 V 0.20 PolyFill
+gsave 955 3830 N 0 975 V 15 -4 V 0 -1621 V 0.20 PolyFill
+gsave 971 3180 N 0 1621 V 16 0 V 0 -2082 V 0.20 PolyFill
+gsave 988 2719 N 0 2082 V 16 0 V 0 -2891 V 0.20 PolyFill
+gsave 1005 1910 N 0 2891 V 16 0 V 0 -3834 V 0.20 PolyFill
+gsave 1022 967 N 0 3834 V 15 0 V 0 -4061 V 0.20 PolyFill
+gsave 1038 740 N 0 4061 V 16 0 V 0 -4127 V 0.20 PolyFill
+gsave 1055 674 N 0 4127 V 16 0 V 0 -4129 V 0.20 PolyFill
+gsave 1072 672 N 0 4129 V 15 0 V 0 -4146 V 0.20 PolyFill
+gsave 1088 655 N 0 4146 V 16 0 V 0 -4209 V 0.20 PolyFill
+gsave 1105 592 N 0 4209 V 16 0 V 0 -4215 V 0.20 PolyFill
+gsave 1122 586 N 0 4215 V 16 0 V 0 -4222 V 0.20 PolyFill
+gsave 1139 579 N 0 4222 V 15 0 V 0 -4234 V 0.20 PolyFill
+gsave 1155 567 N 0 4234 V 16 0 V 0 -4238 V 0.20 PolyFill
+gsave 1172 563 N 0 4238 V 16 0 V 0 -4239 V 0.20 PolyFill
+gsave 1189 562 N 0 4239 V 16 0 V 0 -4245 V 0.20 PolyFill
+gsave 1206 556 N 0 4245 V 15 0 V 0 -4268 V 0.20 PolyFill
+gsave 1222 533 N 0 4268 V 16 0 V 0 -4269 V 0.20 PolyFill
+gsave 1239 532 N 0 4269 V 16 0 V 0 -4272 V 0.20 PolyFill
+gsave 1256 529 N 0 4272 V 15 0 V 0 -4273 V 0.20 PolyFill
+gsave 1272 528 N 0 4273 V 16 0 V 0 -4273 V 0.20 PolyFill
+gsave 1289 528 N 0 4273 V 16 0 V 0 -4273 V 0.20 PolyFill
+gsave 1306 528 N 0 4273 V 16 0 V 0 -4273 V 0.20 PolyFill
+gsave 1323 528 N 0 4273 V 15 0 V 0 -4273 V 0.20 PolyFill
+gsave 1339 528 N 0 4273 V 16 0 V 0 -4273 V 0.20 PolyFill
+gsave 1356 528 N 0 4273 V 16 0 V 0 -4273 V 0.20 PolyFill
+gsave 1373 528 N 0 4273 V 15 0 V 0 -4273 V 0.20 PolyFill
+gsave 1389 528 N 0 4273 V 16 0 V 0 -4273 V 0.20 PolyFill
+gsave 1406 528 N 0 4273 V 16 0 V 0 -4274 V 0.20 PolyFill
+gsave 1423 527 N 0 4274 V 16 0 V 0 -4274 V 0.20 PolyFill
+gsave 1440 527 N 0 4274 V 15 0 V 0 -4274 V 0.20 PolyFill
+gsave 1456 527 N 0 4274 V 16 0 V 0 -4274 V 0.20 PolyFill
+gsave 1473 527 N 0 4274 V 16 0 V 0 -4274 V 0.20 PolyFill
+gsave 1490 527 N 0 4274 V 16 0 V 0 -4274 V 0.20 PolyFill
+gsave 1507 527 N 0 4274 V 15 0 V 0 -4274 V 0.20 PolyFill
+gsave 1523 527 N 0 4274 V 16 0 V 0 -4275 V 0.20 PolyFill
+gsave 1540 526 N 0 4275 V 16 0 V 0 -4277 V 0.20 PolyFill
+gsave 1557 524 N 0 4277 V 15 0 V 0 -4278 V 0.20 PolyFill
+gsave 1573 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1590 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1607 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1624 523 N 0 4278 V 15 0 V 0 -4278 V 0.20 PolyFill
+gsave 1640 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1657 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1674 523 N 0 4278 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1690 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1707 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1724 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1741 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1757 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1774 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1791 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1807 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1824 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+% End plot #1
+% Begin plot #2
+1.000 UL
+LT1
+gsave 938 4871 N 0 0 V 16 0 V 0 -66 V 1 -1068 V -2 1134 V 0.20 PolyFill
+gsave 955 3737 N 0 1068 V 15 -4 V 0 -2110 V 0.20 PolyFill
+gsave 971 2691 N 0 2110 V 16 0 V 0 -2593 V 0.20 PolyFill
+gsave 988 2208 N 0 2593 V 16 0 V 0 -2812 V 0.20 PolyFill
+gsave 1005 1989 N 0 2812 V 16 0 V 0 -3674 V 0.20 PolyFill
+gsave 1022 1127 N 0 3674 V 15 0 V 0 -4048 V 0.20 PolyFill
+gsave 1038 753 N 0 4048 V 16 0 V 0 -4155 V 0.20 PolyFill
+gsave 1055 646 N 0 4155 V 16 0 V 0 -4206 V 0.20 PolyFill
+gsave 1072 595 N 0 4206 V 15 0 V 0 -4227 V 0.20 PolyFill
+gsave 1088 574 N 0 4227 V 16 0 V 0 -4254 V 0.20 PolyFill
+gsave 1105 547 N 0 4254 V 16 0 V 0 -4263 V 0.20 PolyFill
+gsave 1122 538 N 0 4263 V 16 0 V 0 -4268 V 0.20 PolyFill
+gsave 1139 533 N 0 4268 V 15 0 V 0 -4272 V 0.20 PolyFill
+gsave 1155 529 N 0 4272 V 16 0 V 0 -4273 V 0.20 PolyFill
+gsave 1172 528 N 0 4273 V 16 0 V 0 -4275 V 0.20 PolyFill
+gsave 1189 526 N 0 4275 V 16 0 V 0 -4276 V 0.20 PolyFill
+gsave 1206 525 N 0 4276 V 15 0 V 0 -4276 V 0.20 PolyFill
+gsave 1222 525 N 0 4276 V 16 0 V 0 -4277 V 0.20 PolyFill
+gsave 1239 524 N 0 4277 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1256 523 N 0 4278 V 15 0 V 0 -4278 V 0.20 PolyFill
+gsave 1272 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1289 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1306 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1323 523 N 0 4278 V 15 0 V 0 -4278 V 0.20 PolyFill
+gsave 1339 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1356 523 N 0 4278 V 16 0 V 0 -4278 V 0.20 PolyFill
+gsave 1373 523 N 0 4278 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1389 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1406 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1423 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1440 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1456 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1473 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1490 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1507 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1523 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1540 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1557 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1573 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1590 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1607 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1624 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1640 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1657 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1674 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1690 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1707 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1724 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1741 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1757 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1774 522 N 0 4279 V 16 0 V 0 -4279 V 0.20 PolyFill
+gsave 1791 522 N 0 4279 V 15 0 V 0 -4279 V 0.20 PolyFill
+gsave 1807 522 N 0 4279 V 16 0 V 0 -4280 V 0.20 PolyFill
+gsave 1824 521 N 0 4280 V 16 0 V 0 -4280 V 0.20 PolyFill
+% End plot #2
+% Begin plot #3
+1.000 UL
+LT2
+gsave 938 4871 N 0 0 V 16 0 V 0 -79 V 1 -927 V -8 1006 V 0.20 PolyFill
+gsave 955 3865 N 0 927 V 15 -35 V 0 -1909 V 0.20 PolyFill
+gsave 971 2848 N 0 1909 V 16 -1 V 0 -2576 V 0.20 PolyFill
+gsave 988 2180 N 0 2576 V 16 0 V 0 -3916 V 0.20 PolyFill
+gsave 1005 840 N 0 3916 V 16 0 V 0 -4021 V 0.20 PolyFill
+gsave 1022 735 N 0 4021 V 15 0 V 0 -4071 V 0.20 PolyFill
+gsave 1038 685 N 0 4071 V 16 -6 V 0 -4117 V 0.20 PolyFill
+gsave 1055 633 N 0 4117 V 16 -1 V 0 -4150 V 0.20 PolyFill
+gsave 1072 599 N 0 4150 V 15 0 V 0 -4167 V 0.20 PolyFill
+gsave 1088 582 N 0 4167 V 16 0 V 0 -4172 V 0.20 PolyFill
+gsave 1105 577 N 0 4172 V 16 0 V 0 -4174 V 0.20 PolyFill
+gsave 1122 575 N 0 4174 V 16 0 V 0 -4175 V 0.20 PolyFill
+gsave 1139 574 N 0 4175 V 15 0 V 0 -4192 V 0.20 PolyFill
+gsave 1155 557 N 0 4192 V 16 0 V 0 -4193 V 0.20 PolyFill
+gsave 1172 556 N 0 4193 V 16 0 V 0 -4198 V 0.20 PolyFill
+gsave 1189 551 N 0 4198 V 16 0 V 0 -4210 V 0.20 PolyFill
+gsave 1206 539 N 0 4210 V 15 0 V 0 -4214 V 0.20 PolyFill
+gsave 1222 535 N 0 4214 V 16 0 V 0 -4215 V 0.20 PolyFill
+gsave 1239 534 N 0 4215 V 16 0 V 0 -4217 V 0.20 PolyFill
+gsave 1256 532 N 0 4217 V 15 0 V 0 -4222 V 0.20 PolyFill
+gsave 1272 527 N 0 4222 V 16 0 V 0 -4223 V 0.20 PolyFill
+gsave 1289 526 N 0 4223 V 16 0 V 0 -4224 V 0.20 PolyFill
+gsave 1306 525 N 0 4224 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1323 524 N 0 4225 V 15 0 V 0 -4225 V 0.20 PolyFill
+gsave 1339 524 N 0 4225 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1356 524 N 0 4225 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1373 524 N 0 4225 V 15 0 V 0 -4225 V 0.20 PolyFill
+gsave 1389 524 N 0 4225 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1406 524 N 0 4225 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1423 524 N 0 4225 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1440 524 N 0 4225 V 15 0 V 0 -4225 V 0.20 PolyFill
+gsave 1456 524 N 0 4225 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1473 524 N 0 4225 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1490 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1507 523 N 0 4226 V 15 0 V 0 -4226 V 0.20 PolyFill
+gsave 1523 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1540 523 N 0 4226 V 16 0 V 0 -4227 V 0.20 PolyFill
+gsave 1557 522 N 0 4227 V 15 0 V 0 -4227 V 0.20 PolyFill
+gsave 1573 522 N 0 4227 V 16 0 V 0 -4227 V 0.20 PolyFill
+gsave 1590 522 N 0 4227 V 16 0 V 0 -4227 V 0.20 PolyFill
+gsave 1607 522 N 0 4227 V 16 0 V 0 -4227 V 0.20 PolyFill
+gsave 1624 522 N 0 4227 V 15 0 V 0 -4227 V 0.20 PolyFill
+gsave 1640 522 N 0 4227 V 16 0 V 0 -4228 V 0.20 PolyFill
+gsave 1657 521 N 0 4228 V 16 0 V 0 -4228 V 0.20 PolyFill
+gsave 1674 521 N 0 4228 V 15 0 V 0 -4228 V 0.20 PolyFill
+gsave 1690 521 N 0 4228 V 16 0 V 0 -4228 V 0.20 PolyFill
+gsave 1707 521 N 0 4228 V 16 0 V 0 -4228 V 0.20 PolyFill
+gsave 1724 521 N 0 4228 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1741 520 N 0 4229 V 15 0 V 0 -4229 V 0.20 PolyFill
+gsave 1757 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1774 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1791 520 N 0 4229 V 15 0 V 0 -4229 V 0.20 PolyFill
+gsave 1807 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1824 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1841 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1858 520 N 0 4229 V 15 -607 V 0 -3622 V 0.20 PolyFill
+gsave 1874 520 N 0 3622 V 16 -23 V 0 -3599 V 0.20 PolyFill
+gsave 1891 520 N 0 3599 V 16 0 V 0 -3600 V 0.20 PolyFill
+gsave 1908 519 N 0 3600 V 16 0 V 0 -3600 V 0.20 PolyFill
+gsave 1925 519 N 0 3600 V 15 -203 V 0 -3397 V 0.20 PolyFill
+gsave 1941 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 1958 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 1975 519 N 0 3397 V 15 0 V 0 -3397 V 0.20 PolyFill
+gsave 1991 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 2008 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 2025 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 2042 519 N 0 3397 V 15 0 V 0 -3397 V 0.20 PolyFill
+gsave 2058 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 2075 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 2092 519 N 0 3397 V 15 0 V 0 -3397 V 0.20 PolyFill
+gsave 2108 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 2125 519 N 0 3397 V 16 0 V 0 -3397 V 0.20 PolyFill
+gsave 2142 519 N 0 3397 V 16 -354 V 0 -3043 V 0.20 PolyFill
+gsave 2159 519 N 0 3043 V 15 0 V 0 -3043 V 0.20 PolyFill
+gsave 2175 519 N 0 3043 V 16 0 V 0 -3043 V 0.20 PolyFill
+gsave 2192 519 N 0 3043 V 16 0 V 0 -3043 V 0.20 PolyFill
+gsave 2209 519 N 0 3043 V 15 0 V 0 -3043 V 0.20 PolyFill
+gsave 2225 519 N 0 3043 V 16 0 V 0 -3043 V 0.20 PolyFill
+gsave 2242 519 N 0 3043 V 16 0 V 0 -3043 V 0.20 PolyFill
+gsave 2259 519 N 0 3043 V 16 0 V 0 -3043 V 0.20 PolyFill
+gsave 2276 519 N 0 3043 V 15 0 V 0 -3043 V 0.20 PolyFill
+gsave 2292 519 N 0 3043 V 16 0 V 0 -3043 V 0.20 PolyFill
+gsave 2309 519 N 0 3043 V 16 0 V 0 -3043 V 0.20 PolyFill
+gsave 2326 519 N 0 3043 V 16 0 V 0 -3043 V 0.20 PolyFill
+gsave 2343 519 N 0 3043 V 15 0 V 0 -3043 V 0.20 PolyFill
+gsave 2359 519 N 0 3043 V 16 -17 V 0 -3026 V 0.20 PolyFill
+gsave 2376 519 N 0 3026 V 16 0 V 0 -3026 V 0.20 PolyFill
+gsave 2393 519 N 0 3026 V 15 -8 V 0 -3018 V 0.20 PolyFill
+gsave 2409 519 N 0 3018 V 16 0 V 0 -3018 V 0.20 PolyFill
+gsave 2426 519 N 0 3018 V 16 -34 V 0 -2984 V 0.20 PolyFill
+gsave 2443 519 N 0 2984 V 16 0 V 0 -2984 V 0.20 PolyFill
+gsave 2460 519 N 0 2984 V 15 0 V 0 -2984 V 0.20 PolyFill
+gsave 2476 519 N 0 2984 V 16 0 V 0 -2984 V 0.20 PolyFill
+gsave 2493 519 N 0 2984 V 16 0 V 0 -2984 V 0.20 PolyFill
+gsave 2510 519 N 0 2984 V 15 -88 V 0 -2896 V 0.20 PolyFill
+gsave 2526 519 N 0 2896 V 16 0 V 0 -2896 V 0.20 PolyFill
+gsave 2543 519 N 0 2896 V 16 -11 V 0 -2885 V 0.20 PolyFill
+gsave 2560 519 N 0 2885 V 16 0 V 0 -2885 V 0.20 PolyFill
+gsave 2577 519 N 0 2885 V 15 0 V 0 -2885 V 0.20 PolyFill
+gsave 2593 519 N 0 2885 V 16 0 V 0 -2885 V 0.20 PolyFill
+gsave 2610 519 N 0 2885 V 16 -223 V 0 -2662 V 0.20 PolyFill
+gsave 2627 519 N 0 2662 V 16 -1 V 0 -2661 V 0.20 PolyFill
+gsave 2644 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2660 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2677 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2694 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2710 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2727 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2744 519 N 0 2661 V 16 -1431 V 0 -1230 V 0.20 PolyFill
+gsave 2761 519 N 0 1230 V 15 -1218 V 0 -12 V 0.20 PolyFill
+gsave 2777 519 N 0 12 V 16 -8 V 0 -4 V 0.20 PolyFill
+gsave 2794 519 N 0 4 V 16 -2 V 0 -2 V 0.20 PolyFill
+gsave 2811 519 N 0 2 V 15 -1 V 0 -1 V 0.20 PolyFill
+gsave 2827 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 2844 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 2861 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 2878 519 N 0 1 V 15 0 V 0 -1 V 0.20 PolyFill
+gsave 2894 519 N 0 1 V 16 -1 V 0 0 V 0.20 PolyFill
+gsave 2911 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2928 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 2944 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2961 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2978 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2995 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 3011 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3028 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3045 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3062 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 3078 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3095 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3112 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 3128 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3145 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3162 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3179 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 3195 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3212 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3229 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+% End plot #3
+% Begin plot #4
+1.000 UL
+LT3
+gsave 938 4871 N 0 0 V 16 0 V 0 -83 V 1 -1015 V -11 1098 V 0.20 PolyFill
+gsave 955 3773 N 0 1015 V 15 -29 V 0 -2141 V 0.20 PolyFill
+gsave 971 2618 N 0 2141 V 16 -1 V 0 -3523 V 0.20 PolyFill
+gsave 988 1235 N 0 3523 V 16 -1 V 0 -4107 V 0.20 PolyFill
+gsave 1005 650 N 0 4107 V 16 -1 V 0 -4146 V 0.20 PolyFill
+gsave 1022 610 N 0 4146 V 15 0 V 0 -4185 V 0.20 PolyFill
+gsave 1038 571 N 0 4185 V 16 -7 V 0 -4190 V 0.20 PolyFill
+gsave 1055 559 N 0 4190 V 16 0 V 0 -4206 V 0.20 PolyFill
+gsave 1072 543 N 0 4206 V 15 0 V 0 -4212 V 0.20 PolyFill
+gsave 1088 537 N 0 4212 V 16 0 V 0 -4218 V 0.20 PolyFill
+gsave 1105 531 N 0 4218 V 16 0 V 0 -4222 V 0.20 PolyFill
+gsave 1122 527 N 0 4222 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1139 523 N 0 4226 V 15 0 V 0 -4227 V 0.20 PolyFill
+gsave 1155 522 N 0 4227 V 16 0 V 0 -4228 V 0.20 PolyFill
+gsave 1172 521 N 0 4228 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1189 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1206 520 N 0 4229 V 15 0 V 0 -4229 V 0.20 PolyFill
+gsave 1222 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1239 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1256 520 N 0 4229 V 15 -6 V 0 -4223 V 0.20 PolyFill
+gsave 1272 520 N 0 4223 V 16 0 V 0 -4223 V 0.20 PolyFill
+gsave 1289 520 N 0 4223 V 16 0 V 0 -4223 V 0.20 PolyFill
+gsave 1306 520 N 0 4223 V 16 0 V 0 -4223 V 0.20 PolyFill
+gsave 1323 520 N 0 4223 V 15 0 V 0 -4223 V 0.20 PolyFill
+gsave 1339 520 N 0 4223 V 16 0 V 0 -4223 V 0.20 PolyFill
+gsave 1356 520 N 0 4223 V 16 0 V 0 -4223 V 0.20 PolyFill
+gsave 1373 520 N 0 4223 V 15 0 V 0 -4224 V 0.20 PolyFill
+gsave 1389 519 N 0 4224 V 16 0 V 0 -4224 V 0.20 PolyFill
+gsave 1406 519 N 0 4224 V 16 -4 V 0 -4220 V 0.20 PolyFill
+gsave 1423 519 N 0 4220 V 16 0 V 0 -4220 V 0.20 PolyFill
+gsave 1440 519 N 0 4220 V 15 0 V 0 -4220 V 0.20 PolyFill
+gsave 1456 519 N 0 4220 V 16 0 V 0 -4220 V 0.20 PolyFill
+gsave 1473 519 N 0 4220 V 16 0 V 0 -4220 V 0.20 PolyFill
+gsave 1490 519 N 0 4220 V 16 0 V 0 -4220 V 0.20 PolyFill
+gsave 1507 519 N 0 4220 V 15 0 V 0 -4220 V 0.20 PolyFill
+gsave 1523 519 N 0 4220 V 16 0 V 0 -4220 V 0.20 PolyFill
+gsave 1540 519 N 0 4220 V 16 0 V 0 -4220 V 0.20 PolyFill
+gsave 1557 519 N 0 4220 V 15 -34 V 0 -4186 V 0.20 PolyFill
+gsave 1573 519 N 0 4186 V 16 0 V 0 -4186 V 0.20 PolyFill
+gsave 1590 519 N 0 4186 V 16 -33 V 0 -4153 V 0.20 PolyFill
+gsave 1607 519 N 0 4153 V 16 0 V 0 -4153 V 0.20 PolyFill
+gsave 1624 519 N 0 4153 V 15 0 V 0 -4153 V 0.20 PolyFill
+gsave 1640 519 N 0 4153 V 16 0 V 0 -4153 V 0.20 PolyFill
+gsave 1657 519 N 0 4153 V 16 0 V 0 -4153 V 0.20 PolyFill
+gsave 1674 519 N 0 4153 V 15 0 V 0 -4153 V 0.20 PolyFill
+gsave 1690 519 N 0 4153 V 16 0 V 0 -4153 V 0.20 PolyFill
+gsave 1707 519 N 0 4153 V 16 0 V 0 -4153 V 0.20 PolyFill
+gsave 1724 519 N 0 4153 V 16 0 V 0 -4153 V 0.20 PolyFill
+gsave 1741 519 N 0 4153 V 15 0 V 0 -4153 V 0.20 PolyFill
+gsave 1757 519 N 0 4153 V 16 0 V 0 -4153 V 0.20 PolyFill
+gsave 1774 519 N 0 4153 V 16 -191 V 0 -3962 V 0.20 PolyFill
+gsave 1791 519 N 0 3962 V 15 0 V 0 -3962 V 0.20 PolyFill
+gsave 1807 519 N 0 3962 V 16 0 V 0 -3962 V 0.20 PolyFill
+gsave 1824 519 N 0 3962 V 16 0 V 0 -3962 V 0.20 PolyFill
+gsave 1841 519 N 0 3962 V 16 0 V 0 -3962 V 0.20 PolyFill
+gsave 1858 519 N 0 3962 V 15 -323 V 0 -3639 V 0.20 PolyFill
+gsave 1874 519 N 0 3639 V 16 -193 V 0 -3446 V 0.20 PolyFill
+gsave 1891 519 N 0 3446 V 16 -34 V 0 -3412 V 0.20 PolyFill
+gsave 1908 519 N 0 3412 V 16 0 V 0 -3412 V 0.20 PolyFill
+gsave 1925 519 N 0 3412 V 15 -334 V 0 -3078 V 0.20 PolyFill
+gsave 1941 519 N 0 3078 V 16 -78 V 0 -3000 V 0.20 PolyFill
+gsave 1958 519 N 0 3000 V 16 -26 V 0 -2974 V 0.20 PolyFill
+gsave 1975 519 N 0 2974 V 15 -67 V 0 -2907 V 0.20 PolyFill
+gsave 1991 519 N 0 2907 V 16 -7 V 0 -2900 V 0.20 PolyFill
+gsave 2008 519 N 0 2900 V 16 0 V 0 -2900 V 0.20 PolyFill
+gsave 2025 519 N 0 2900 V 16 0 V 0 -2900 V 0.20 PolyFill
+gsave 2042 519 N 0 2900 V 15 0 V 0 -2900 V 0.20 PolyFill
+gsave 2058 519 N 0 2900 V 16 -1 V 0 -2899 V 0.20 PolyFill
+gsave 2075 519 N 0 2899 V 16 0 V 0 -2899 V 0.20 PolyFill
+gsave 2092 519 N 0 2899 V 15 0 V 0 -2899 V 0.20 PolyFill
+gsave 2108 519 N 0 2899 V 16 0 V 0 -2899 V 0.20 PolyFill
+gsave 2125 519 N 0 2899 V 16 0 V 0 -2899 V 0.20 PolyFill
+gsave 2142 519 N 0 2899 V 16 -12 V 0 -2887 V 0.20 PolyFill
+gsave 2159 519 N 0 2887 V 15 0 V 0 -2887 V 0.20 PolyFill
+gsave 2175 519 N 0 2887 V 16 -225 V 0 -2662 V 0.20 PolyFill
+gsave 2192 519 N 0 2662 V 16 0 V 0 -2662 V 0.20 PolyFill
+gsave 2209 519 N 0 2662 V 15 -1 V 0 -2661 V 0.20 PolyFill
+gsave 2225 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2242 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2259 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2276 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2292 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2309 519 N 0 2661 V 16 -118 V 0 -2543 V 0.20 PolyFill
+gsave 2326 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 2343 519 N 0 2543 V 15 -90 V 0 -2453 V 0.20 PolyFill
+gsave 2359 519 N 0 2453 V 16 0 V 0 -2453 V 0.20 PolyFill
+gsave 2376 519 N 0 2453 V 16 0 V 0 -2453 V 0.20 PolyFill
+gsave 2393 519 N 0 2453 V 15 0 V 0 -2453 V 0.20 PolyFill
+gsave 2409 519 N 0 2453 V 16 0 V 0 -2453 V 0.20 PolyFill
+gsave 2426 519 N 0 2453 V 16 -60 V 0 -2393 V 0.20 PolyFill
+gsave 2443 519 N 0 2393 V 16 0 V 0 -2393 V 0.20 PolyFill
+gsave 2460 519 N 0 2393 V 15 -596 V 0 -1797 V 0.20 PolyFill
+gsave 2476 519 N 0 1797 V 16 -1777 V 0 -20 V 0.20 PolyFill
+gsave 2493 519 N 0 20 V 16 0 V 0 -20 V 0.20 PolyFill
+gsave 2510 519 N 0 20 V 15 0 V 0 -20 V 0.20 PolyFill
+gsave 2526 519 N 0 20 V 16 0 V 0 -20 V 0.20 PolyFill
+gsave 2543 519 N 0 20 V 16 0 V 0 -20 V 0.20 PolyFill
+gsave 2560 519 N 0 20 V 16 0 V 0 -20 V 0.20 PolyFill
+gsave 2577 519 N 0 20 V 15 0 V 0 -20 V 0.20 PolyFill
+gsave 2593 519 N 0 20 V 16 -19 V 0 -1 V 0.20 PolyFill
+gsave 2610 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 2627 519 N 0 1 V 16 -1 V 0 0 V 0.20 PolyFill
+gsave 2644 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 2660 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2677 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2694 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 2710 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2727 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2744 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2761 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 2777 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2794 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2811 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 2827 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2844 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2861 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2878 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 2894 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2911 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2928 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 2944 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2961 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2978 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 2995 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 3011 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3028 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3045 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3062 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 3078 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3095 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 3112 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 3128 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+% End plot #4
+% Begin plot #5
+1.000 UL
+LT4
+gsave 938 4871 N 0 0 V 16 0 V 0 -81 V 1 -779 V -7 860 V 0.20 PolyFill
+gsave 955 4011 N 0 779 V 15 -28 V 0 -1633 V 0.20 PolyFill
+gsave 971 3129 N 0 1633 V 16 -2 V 0 -2608 V 0.20 PolyFill
+gsave 988 2152 N 0 2608 V 16 0 V 0 -3492 V 0.20 PolyFill
+gsave 1005 1268 N 0 3492 V 16 0 V 0 -4096 V 0.20 PolyFill
+gsave 1022 664 N 0 4096 V 15 -11 V 0 -4135 V 0.20 PolyFill
+gsave 1038 614 N 0 4135 V 16 0 V 0 -4165 V 0.20 PolyFill
+gsave 1055 584 N 0 4165 V 16 0 V 0 -4176 V 0.20 PolyFill
+gsave 1072 573 N 0 4176 V 15 0 V 0 -4180 V 0.20 PolyFill
+gsave 1088 569 N 0 4180 V 16 0 V 0 -4180 V 0.20 PolyFill
+gsave 1105 569 N 0 4180 V 16 0 V 0 -4181 V 0.20 PolyFill
+gsave 1122 568 N 0 4181 V 16 0 V 0 -4184 V 0.20 PolyFill
+gsave 1139 565 N 0 4184 V 15 0 V 0 -4185 V 0.20 PolyFill
+gsave 1155 564 N 0 4185 V 16 0 V 0 -4201 V 0.20 PolyFill
+gsave 1172 548 N 0 4201 V 16 0 V 0 -4201 V 0.20 PolyFill
+gsave 1189 548 N 0 4201 V 16 0 V 0 -4209 V 0.20 PolyFill
+gsave 1206 540 N 0 4209 V 15 0 V 0 -4215 V 0.20 PolyFill
+gsave 1222 534 N 0 4215 V 16 0 V 0 -4217 V 0.20 PolyFill
+gsave 1239 532 N 0 4217 V 16 0 V 0 -4218 V 0.20 PolyFill
+gsave 1256 531 N 0 4218 V 15 0 V 0 -4218 V 0.20 PolyFill
+gsave 1272 531 N 0 4218 V 16 0 V 0 -4218 V 0.20 PolyFill
+gsave 1289 531 N 0 4218 V 16 0 V 0 -4220 V 0.20 PolyFill
+gsave 1306 529 N 0 4220 V 16 0 V 0 -4223 V 0.20 PolyFill
+gsave 1323 526 N 0 4223 V 15 0 V 0 -4224 V 0.20 PolyFill
+gsave 1339 525 N 0 4224 V 16 0 V 0 -4224 V 0.20 PolyFill
+gsave 1356 525 N 0 4224 V 16 0 V 0 -4224 V 0.20 PolyFill
+gsave 1373 525 N 0 4224 V 15 0 V 0 -4224 V 0.20 PolyFill
+gsave 1389 525 N 0 4224 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1406 524 N 0 4225 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1423 524 N 0 4225 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1440 524 N 0 4225 V 15 0 V 0 -4226 V 0.20 PolyFill
+gsave 1456 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1473 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1490 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1507 523 N 0 4226 V 15 0 V 0 -4226 V 0.20 PolyFill
+gsave 1523 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1540 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1557 523 N 0 4226 V 15 0 V 0 -4226 V 0.20 PolyFill
+gsave 1573 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1590 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1607 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1624 523 N 0 4226 V 15 0 V 0 -4226 V 0.20 PolyFill
+gsave 1640 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1657 523 N 0 4226 V 16 0 V 0 -4226 V 0.20 PolyFill
+gsave 1674 523 N 0 4226 V 15 -16 V 0 -4210 V 0.20 PolyFill
+gsave 1690 523 N 0 4210 V 16 0 V 0 -4211 V 0.20 PolyFill
+gsave 1707 522 N 0 4211 V 16 0 V 0 -4211 V 0.20 PolyFill
+gsave 1724 522 N 0 4211 V 16 -41 V 0 -4170 V 0.20 PolyFill
+gsave 1741 522 N 0 4170 V 15 0 V 0 -4170 V 0.20 PolyFill
+gsave 1757 522 N 0 4170 V 16 0 V 0 -4170 V 0.20 PolyFill
+gsave 1774 522 N 0 4170 V 16 0 V 0 -4170 V 0.20 PolyFill
+gsave 1791 522 N 0 4170 V 15 0 V 0 -4170 V 0.20 PolyFill
+gsave 1807 522 N 0 4170 V 16 0 V 0 -4170 V 0.20 PolyFill
+gsave 1824 522 N 0 4170 V 16 0 V 0 -4170 V 0.20 PolyFill
+gsave 1841 522 N 0 4170 V 16 -1144 V 0 -3026 V 0.20 PolyFill
+gsave 1858 522 N 0 3026 V 15 -56 V 0 -2970 V 0.20 PolyFill
+gsave 1874 522 N 0 2970 V 16 -63 V 0 -2907 V 0.20 PolyFill
+gsave 1891 522 N 0 2907 V 16 -12 V 0 -2895 V 0.20 PolyFill
+gsave 1908 522 N 0 2895 V 16 -22 V 0 -2873 V 0.20 PolyFill
+gsave 1925 522 N 0 2873 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 1941 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 1958 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 1975 521 N 0 2874 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 1991 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2008 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2025 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2042 521 N 0 2874 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 2058 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2075 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2092 521 N 0 2874 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 2108 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2125 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2142 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2159 521 N 0 2874 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 2175 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2192 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2209 521 N 0 2874 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 2225 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2242 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2259 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2276 521 N 0 2874 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 2292 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2309 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2326 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2343 521 N 0 2874 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 2359 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2376 521 N 0 2874 V 16 0 V 0 -2874 V 0.20 PolyFill
+gsave 2393 521 N 0 2874 V 15 0 V 0 -2874 V 0.20 PolyFill
+gsave 2409 521 N 0 2874 V 16 -24 V 0 -2850 V 0.20 PolyFill
+gsave 2426 521 N 0 2850 V 16 0 V 0 -2850 V 0.20 PolyFill
+gsave 2443 521 N 0 2850 V 16 0 V 0 -2850 V 0.20 PolyFill
+gsave 2460 521 N 0 2850 V 15 0 V 0 -2850 V 0.20 PolyFill
+gsave 2476 521 N 0 2850 V 16 -100 V 0 -2750 V 0.20 PolyFill
+gsave 2493 521 N 0 2750 V 16 -37 V 0 -2713 V 0.20 PolyFill
+gsave 2510 521 N 0 2713 V 15 -4 V 0 -2709 V 0.20 PolyFill
+gsave 2526 521 N 0 2709 V 16 0 V 0 -2709 V 0.20 PolyFill
+gsave 2543 521 N 0 2709 V 16 0 V 0 -2709 V 0.20 PolyFill
+gsave 2560 521 N 0 2709 V 16 0 V 0 -2709 V 0.20 PolyFill
+gsave 2577 521 N 0 2709 V 15 0 V 0 -2709 V 0.20 PolyFill
+gsave 2593 521 N 0 2709 V 16 -10 V 0 -2699 V 0.20 PolyFill
+gsave 2610 521 N 0 2699 V 16 -17 V 0 -2682 V 0.20 PolyFill
+gsave 2627 521 N 0 2682 V 16 -6 V 0 -2676 V 0.20 PolyFill
+gsave 2644 521 N 0 2676 V 15 -7 V 0 -2669 V 0.20 PolyFill
+gsave 2660 521 N 0 2669 V 16 -6 V 0 -2663 V 0.20 PolyFill
+gsave 2677 521 N 0 2663 V 16 -1 V 0 -2662 V 0.20 PolyFill
+gsave 2694 521 N 0 2662 V 15 -2 V 0 -2660 V 0.20 PolyFill
+gsave 2710 521 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2727 521 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2744 521 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2761 521 N 0 2660 V 15 0 V 0 -2660 V 0.20 PolyFill
+gsave 2777 521 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2794 521 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2811 521 N 0 2660 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2827 520 N 0 2661 V 16 -1 V 0 -2660 V 0.20 PolyFill
+gsave 2844 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2861 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2878 520 N 0 2660 V 15 0 V 0 -2660 V 0.20 PolyFill
+gsave 2894 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2911 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2928 520 N 0 2660 V 15 0 V 0 -2660 V 0.20 PolyFill
+gsave 2944 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2961 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2978 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 2995 520 N 0 2660 V 15 0 V 0 -2660 V 0.20 PolyFill
+gsave 3011 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 3028 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 3045 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 3062 520 N 0 2660 V 15 0 V 0 -2660 V 0.20 PolyFill
+gsave 3078 520 N 0 2660 V 16 0 V 0 -2660 V 0.20 PolyFill
+gsave 3095 520 N 0 2660 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3112 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3128 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3145 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3162 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3179 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3195 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3212 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3229 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3245 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3262 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3279 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3296 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3312 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3329 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3346 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3363 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3379 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3396 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3413 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3429 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3446 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3463 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3480 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3496 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3513 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3530 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3546 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3563 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3580 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3597 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3613 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3630 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3647 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3663 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3680 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3697 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3714 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3730 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3747 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3764 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3781 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3797 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3814 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3831 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3847 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3864 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3881 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3898 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3914 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3931 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3948 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3964 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3981 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3998 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4015 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4031 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4048 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4065 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4081 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4098 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4115 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4132 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4148 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4165 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4182 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4199 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4215 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4232 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4249 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4265 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4282 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4299 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4316 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4332 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4349 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4366 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4382 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4399 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4416 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4433 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4449 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4466 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4483 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4500 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4516 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4533 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4550 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4566 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4583 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4600 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4617 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4633 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4650 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4667 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4683 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4700 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4717 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4734 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4750 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4767 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4784 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4800 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4817 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4834 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4851 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4867 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4884 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4901 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4918 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4934 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4951 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4968 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4984 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5001 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5018 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5035 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 5051 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5068 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5085 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 5101 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5118 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5135 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5152 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 5168 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5185 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 5202 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 5218 519 N 0 2661 V 16 -48 V 0 -2613 V 0.20 PolyFill
+gsave 5235 519 N 0 2613 V 16 -8 V 0 -2605 V 0.20 PolyFill
+gsave 5252 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5269 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 5285 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5302 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5319 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5336 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 5352 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5369 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5386 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 5402 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5419 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5436 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5453 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 5469 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5486 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5503 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 5519 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 5536 519 N 0 2605 V 16 -62 V 0 -2543 V 0.20 PolyFill
+gsave 5553 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5570 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5586 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5603 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5620 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5637 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5653 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5670 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5687 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5703 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5720 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5737 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5754 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5770 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5787 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5804 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5820 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5837 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5854 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5871 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5887 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5904 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5921 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5937 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5954 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5971 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5988 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 6004 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 6021 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 6038 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 6055 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 6071 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 6088 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 6105 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 6121 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 6138 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 6155 519 N 0 2543 V 16 -71 V 0 -2472 V 0.20 PolyFill
+gsave 6172 519 N 0 2472 V 15 0 V 0 -2472 V 0.20 PolyFill
+gsave 6188 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6205 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6222 519 N 0 2472 V 15 0 V 0 -2472 V 0.20 PolyFill
+gsave 6238 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6255 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6272 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6289 519 N 0 2472 V 15 0 V 0 -2472 V 0.20 PolyFill
+gsave 6305 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6322 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6339 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6356 519 N 0 2472 V 15 0 V 0 -2472 V 0.20 PolyFill
+gsave 6372 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6389 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6406 519 N 0 2472 V 15 0 V 0 -2472 V 0.20 PolyFill
+gsave 6422 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6439 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6456 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6473 519 N 0 2472 V 15 0 V 0 -2472 V 0.20 PolyFill
+gsave 6489 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6506 519 N 0 2472 V 16 0 V 0 -2472 V 0.20 PolyFill
+gsave 6523 519 N 0 2472 V 15 -2408 V 0 -64 V 0.20 PolyFill
+gsave 6539 519 N 0 64 V 16 -19 V 0 -45 V 0.20 PolyFill
+gsave 6556 519 N 0 45 V 16 0 V 0 -45 V 0.20 PolyFill
+gsave 6573 519 N 0 45 V 16 0 V 0 -45 V 0.20 PolyFill
+gsave 6590 519 N 0 45 V 15 0 V 0 -45 V 0.20 PolyFill
+gsave 6606 519 N 0 45 V 16 0 V 0 -45 V 0.20 PolyFill
+gsave 6623 519 N 0 45 V 16 0 V 0 -45 V 0.20 PolyFill
+gsave 6640 519 N 0 45 V 15 -19 V 0 -26 V 0.20 PolyFill
+gsave 6656 519 N 0 26 V 16 -5 V 0 -21 V 0.20 PolyFill
+gsave 6673 519 N 0 21 V 16 -14 V 0 -7 V 0.20 PolyFill
+gsave 6690 519 N 0 7 V 16 0 V 0 -7 V 0.20 PolyFill
+gsave 6707 519 N 0 7 V 15 0 V 0 -7 V 0.20 PolyFill
+gsave 6723 519 N 0 7 V 16 0 V 0 -7 V 0.20 PolyFill
+gsave 6740 519 N 0 7 V 16 -1 V 0 -6 V 0.20 PolyFill
+gsave 6757 519 N 0 6 V 16 0 V 0 -6 V 0.20 PolyFill
+gsave 6774 519 N 0 6 V 15 -1 V 0 -5 V 0.20 PolyFill
+gsave 6790 519 N 0 5 V 16 0 V 0 -5 V 0.20 PolyFill
+gsave 6807 519 N 0 5 V 16 -4 V 0 -1 V 0.20 PolyFill
+gsave 6824 519 N 0 1 V 15 0 V 0 -1 V 0.20 PolyFill
+gsave 6840 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 6857 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 6874 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 6891 519 N 0 1 V 15 0 V 0 -1 V 0.20 PolyFill
+gsave 6907 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 6924 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 6941 519 N 0 1 V 5 0 V 0 -1 V 0.20 PolyFill
+% End plot #5
+% Begin plot #6
+1.000 UL
+LT5
+gsave 938 4871 N 0 0 V 16 0 V 0 -76 V 1 -869 V -11 945 V 0.20 PolyFill
+gsave 955 3926 N 0 869 V 15 -37 V 0 -1928 V 0.20 PolyFill
+gsave 971 2830 N 0 1928 V 16 -2 V 0 -2772 V 0.20 PolyFill
+gsave 988 1984 N 0 2772 V 16 -1 V 0 -3849 V 0.20 PolyFill
+gsave 1005 906 N 0 3849 V 16 0 V 0 -4099 V 0.20 PolyFill
+gsave 1022 656 N 0 4099 V 15 0 V 0 -4151 V 0.20 PolyFill
+gsave 1038 604 N 0 4151 V 16 -2 V 0 -4153 V 0.20 PolyFill
+gsave 1055 600 N 0 4153 V 16 0 V 0 -4177 V 0.20 PolyFill
+gsave 1072 576 N 0 4177 V 15 -1 V 0 -4187 V 0.20 PolyFill
+gsave 1088 565 N 0 4187 V 16 -2 V 0 -4202 V 0.20 PolyFill
+gsave 1105 548 N 0 4202 V 16 0 V 0 -4215 V 0.20 PolyFill
+gsave 1122 535 N 0 4215 V 16 0 V 0 -4223 V 0.20 PolyFill
+gsave 1139 527 N 0 4223 V 15 0 V 0 -4223 V 0.20 PolyFill
+gsave 1155 527 N 0 4223 V 16 0 V 0 -4224 V 0.20 PolyFill
+gsave 1172 526 N 0 4224 V 16 0 V 0 -4224 V 0.20 PolyFill
+gsave 1189 526 N 0 4224 V 16 0 V 0 -4225 V 0.20 PolyFill
+gsave 1206 525 N 0 4225 V 15 0 V 0 -4226 V 0.20 PolyFill
+gsave 1222 524 N 0 4226 V 16 0 V 0 -4227 V 0.20 PolyFill
+gsave 1239 523 N 0 4227 V 16 0 V 0 -4227 V 0.20 PolyFill
+gsave 1256 523 N 0 4227 V 15 -1 V 0 -4227 V 0.20 PolyFill
+gsave 1272 522 N 0 4227 V 16 0 V 0 -4228 V 0.20 PolyFill
+gsave 1289 521 N 0 4228 V 16 0 V 0 -4228 V 0.20 PolyFill
+gsave 1306 521 N 0 4228 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1323 520 N 0 4229 V 15 0 V 0 -4229 V 0.20 PolyFill
+gsave 1339 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1356 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1373 520 N 0 4229 V 15 0 V 0 -4229 V 0.20 PolyFill
+gsave 1389 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1406 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1423 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1440 520 N 0 4229 V 15 0 V 0 -4229 V 0.20 PolyFill
+gsave 1456 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1473 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1490 520 N 0 4229 V 16 0 V 0 -4229 V 0.20 PolyFill
+gsave 1507 520 N 0 4229 V 15 0 V 0 -4229 V 0.20 PolyFill
+gsave 1523 520 N 0 4229 V 16 0 V 0 -4230 V 0.20 PolyFill
+gsave 1540 519 N 0 4230 V 16 0 V 0 -4230 V 0.20 PolyFill
+gsave 1557 519 N 0 4230 V 15 0 V 0 -4230 V 0.20 PolyFill
+gsave 1573 519 N 0 4230 V 16 0 V 0 -4230 V 0.20 PolyFill
+gsave 1590 519 N 0 4230 V 16 0 V 0 -4230 V 0.20 PolyFill
+gsave 1607 519 N 0 4230 V 16 0 V 0 -4230 V 0.20 PolyFill
+gsave 1624 519 N 0 4230 V 15 0 V 0 -4230 V 0.20 PolyFill
+gsave 1640 519 N 0 4230 V 16 0 V 0 -4230 V 0.20 PolyFill
+gsave 1657 519 N 0 4230 V 16 -24 V 0 -4206 V 0.20 PolyFill
+gsave 1674 519 N 0 4206 V 15 0 V 0 -4206 V 0.20 PolyFill
+gsave 1690 519 N 0 4206 V 16 0 V 0 -4206 V 0.20 PolyFill
+gsave 1707 519 N 0 4206 V 16 0 V 0 -4206 V 0.20 PolyFill
+gsave 1724 519 N 0 4206 V 16 -39 V 0 -4167 V 0.20 PolyFill
+gsave 1741 519 N 0 4167 V 15 0 V 0 -4167 V 0.20 PolyFill
+gsave 1757 519 N 0 4167 V 16 0 V 0 -4167 V 0.20 PolyFill
+gsave 1774 519 N 0 4167 V 16 -3 V 0 -4164 V 0.20 PolyFill
+gsave 1791 519 N 0 4164 V 15 0 V 0 -4164 V 0.20 PolyFill
+gsave 1807 519 N 0 4164 V 16 0 V 0 -4164 V 0.20 PolyFill
+gsave 1824 519 N 0 4164 V 16 0 V 0 -4164 V 0.20 PolyFill
+gsave 1841 519 N 0 4164 V 16 -1135 V 0 -3029 V 0.20 PolyFill
+gsave 1858 519 N 0 3029 V 15 -90 V 0 -2939 V 0.20 PolyFill
+gsave 1874 519 N 0 2939 V 16 0 V 0 -2939 V 0.20 PolyFill
+gsave 1891 519 N 0 2939 V 16 -7 V 0 -2932 V 0.20 PolyFill
+gsave 1908 519 N 0 2932 V 16 0 V 0 -2932 V 0.20 PolyFill
+gsave 1925 519 N 0 2932 V 15 0 V 0 -2932 V 0.20 PolyFill
+gsave 1941 519 N 0 2932 V 16 0 V 0 -2932 V 0.20 PolyFill
+gsave 1958 519 N 0 2932 V 16 0 V 0 -2932 V 0.20 PolyFill
+gsave 1975 519 N 0 2932 V 15 0 V 0 -2932 V 0.20 PolyFill
+gsave 1991 519 N 0 2932 V 16 -42 V 0 -2890 V 0.20 PolyFill
+gsave 2008 519 N 0 2890 V 16 0 V 0 -2890 V 0.20 PolyFill
+gsave 2025 519 N 0 2890 V 16 0 V 0 -2890 V 0.20 PolyFill
+gsave 2042 519 N 0 2890 V 15 0 V 0 -2890 V 0.20 PolyFill
+gsave 2058 519 N 0 2890 V 16 0 V 0 -2890 V 0.20 PolyFill
+gsave 2075 519 N 0 2890 V 16 0 V 0 -2890 V 0.20 PolyFill
+gsave 2092 519 N 0 2890 V 15 0 V 0 -2890 V 0.20 PolyFill
+gsave 2108 519 N 0 2890 V 16 0 V 0 -2890 V 0.20 PolyFill
+gsave 2125 519 N 0 2890 V 16 0 V 0 -2890 V 0.20 PolyFill
+gsave 2142 519 N 0 2890 V 16 -51 V 0 -2839 V 0.20 PolyFill
+gsave 2159 519 N 0 2839 V 15 0 V 0 -2839 V 0.20 PolyFill
+gsave 2175 519 N 0 2839 V 16 0 V 0 -2839 V 0.20 PolyFill
+gsave 2192 519 N 0 2839 V 16 0 V 0 -2839 V 0.20 PolyFill
+gsave 2209 519 N 0 2839 V 15 0 V 0 -2839 V 0.20 PolyFill
+gsave 2225 519 N 0 2839 V 16 0 V 0 -2839 V 0.20 PolyFill
+gsave 2242 519 N 0 2839 V 16 0 V 0 -2839 V 0.20 PolyFill
+gsave 2259 519 N 0 2839 V 16 0 V 0 -2839 V 0.20 PolyFill
+gsave 2276 519 N 0 2839 V 15 0 V 0 -2839 V 0.20 PolyFill
+gsave 2292 519 N 0 2839 V 16 -39 V 0 -2800 V 0.20 PolyFill
+gsave 2309 519 N 0 2800 V 16 0 V 0 -2800 V 0.20 PolyFill
+gsave 2326 519 N 0 2800 V 16 0 V 0 -2800 V 0.20 PolyFill
+gsave 2343 519 N 0 2800 V 15 -49 V 0 -2751 V 0.20 PolyFill
+gsave 2359 519 N 0 2751 V 16 -40 V 0 -2711 V 0.20 PolyFill
+gsave 2376 519 N 0 2711 V 16 0 V 0 -2711 V 0.20 PolyFill
+gsave 2393 519 N 0 2711 V 15 0 V 0 -2711 V 0.20 PolyFill
+gsave 2409 519 N 0 2711 V 16 0 V 0 -2711 V 0.20 PolyFill
+gsave 2426 519 N 0 2711 V 16 -35 V 0 -2676 V 0.20 PolyFill
+gsave 2443 519 N 0 2676 V 16 -15 V 0 -2661 V 0.20 PolyFill
+gsave 2460 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2476 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2493 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2510 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2526 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2543 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2560 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2577 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2593 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2610 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2627 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2644 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2660 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2677 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2694 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2710 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2727 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2744 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2761 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2777 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2794 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2811 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2827 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2844 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2861 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2878 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2894 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2911 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2928 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 2944 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2961 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2978 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 2995 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3011 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3028 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3045 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3062 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3078 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3095 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3112 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3128 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3145 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3162 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3179 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3195 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3212 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3229 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3245 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3262 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3279 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3296 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3312 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3329 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3346 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3363 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3379 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3396 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3413 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3429 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3446 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3463 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3480 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3496 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3513 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3530 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3546 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3563 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3580 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3597 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3613 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3630 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3647 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3663 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3680 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3697 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3714 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3730 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3747 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3764 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3781 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3797 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3814 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3831 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3847 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3864 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3881 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3898 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3914 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3931 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3948 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 3964 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3981 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 3998 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4015 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4031 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4048 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4065 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4081 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4098 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4115 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4132 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4148 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4165 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4182 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4199 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4215 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4232 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4249 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4265 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4282 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4299 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4316 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4332 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4349 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4366 519 N 0 2661 V 15 0 V 0 -2661 V 0.20 PolyFill
+gsave 4382 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4399 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4416 519 N 0 2661 V 16 0 V 0 -2661 V 0.20 PolyFill
+gsave 4433 519 N 0 2661 V 15 -56 V 0 -2605 V 0.20 PolyFill
+gsave 4449 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4466 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4483 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4500 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 4516 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4533 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4550 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 4566 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4583 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4600 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4617 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 4633 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4650 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4667 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 4683 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4700 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4717 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4734 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 4750 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4767 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4784 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 4800 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4817 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4834 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4851 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 4867 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4884 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4901 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4918 519 N 0 2605 V 15 0 V 0 -2605 V 0.20 PolyFill
+gsave 4934 519 N 0 2605 V 16 0 V 0 -2605 V 0.20 PolyFill
+gsave 4951 519 N 0 2605 V 16 -62 V 0 -2543 V 0.20 PolyFill
+gsave 4968 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 4984 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5001 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5018 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5035 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5051 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5068 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5085 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5101 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5118 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5135 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5152 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5168 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5185 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5202 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5218 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5235 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5252 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5269 519 N 0 2543 V 15 0 V 0 -2543 V 0.20 PolyFill
+gsave 5285 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5302 519 N 0 2543 V 16 0 V 0 -2543 V 0.20 PolyFill
+gsave 5319 519 N 0 2543 V 16 -71 V 0 -2472 V 0.20 PolyFill
+gsave 5336 519 N 0 2472 V 15 0 V 0 -2472 V 0.20 PolyFill
+gsave 5352 519 N 0 2472 V 16 -100 V 0 -2372 V 0.20 PolyFill
+gsave 5369 519 N 0 2372 V 16 0 V 0 -2372 V 0.20 PolyFill
+gsave 5386 519 N 0 2372 V 15 0 V 0 -2372 V 0.20 PolyFill
+gsave 5402 519 N 0 2372 V 16 0 V 0 -2372 V 0.20 PolyFill
+gsave 5419 519 N 0 2372 V 16 -503 V 0 -1869 V 0.20 PolyFill
+gsave 5436 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5453 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5469 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5486 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5503 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5519 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5536 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5553 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5570 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5586 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5603 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5620 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5637 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5653 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5670 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5687 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5703 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5720 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5737 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5754 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5770 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5787 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5804 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5820 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5837 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5854 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5871 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5887 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5904 519 N 0 1869 V 16 0 V 0 -1869 V 0.20 PolyFill
+gsave 5921 519 N 0 1869 V 15 0 V 0 -1869 V 0.20 PolyFill
+gsave 5937 519 N 0 1869 V 16 -413 V 0 -1456 V 0.20 PolyFill
+gsave 5954 519 N 0 1456 V 16 0 V 0 -1456 V 0.20 PolyFill
+gsave 5971 519 N 0 1456 V 16 0 V 0 -1456 V 0.20 PolyFill
+gsave 5988 519 N 0 1456 V 15 0 V 0 -1456 V 0.20 PolyFill
+gsave 6004 519 N 0 1456 V 16 0 V 0 -1456 V 0.20 PolyFill
+gsave 6021 519 N 0 1456 V 16 -469 V 0 -987 V 0.20 PolyFill
+gsave 6038 519 N 0 987 V 16 -983 V 0 -4 V 0.20 PolyFill
+gsave 6055 519 N 0 4 V 15 -1 V 0 -3 V 0.20 PolyFill
+gsave 6071 519 N 0 3 V 16 0 V 0 -3 V 0.20 PolyFill
+gsave 6088 519 N 0 3 V 16 0 V 0 -3 V 0.20 PolyFill
+gsave 6105 519 N 0 3 V 15 0 V 0 -3 V 0.20 PolyFill
+gsave 6121 519 N 0 3 V 16 0 V 0 -3 V 0.20 PolyFill
+gsave 6138 519 N 0 3 V 16 0 V 0 -3 V 0.20 PolyFill
+gsave 6155 519 N 0 3 V 16 0 V 0 -3 V 0.20 PolyFill
+gsave 6172 519 N 0 3 V 15 0 V 0 -3 V 0.20 PolyFill
+gsave 6188 519 N 0 3 V 16 0 V 0 -3 V 0.20 PolyFill
+gsave 6205 519 N 0 3 V 16 -2 V 0 -1 V 0.20 PolyFill
+gsave 6222 519 N 0 1 V 15 0 V 0 -1 V 0.20 PolyFill
+gsave 6238 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 6255 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 6272 519 N 0 1 V 16 0 V 0 -1 V 0.20 PolyFill
+gsave 6289 519 N 0 1 V 15 -1 V 0 0 V 0.20 PolyFill
+gsave 6305 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6322 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6339 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6356 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6372 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6389 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6406 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6422 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6439 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6456 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6473 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6489 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6506 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6523 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6539 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6556 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6573 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6590 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6606 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6623 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6640 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6656 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6673 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6690 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6707 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6723 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6740 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6757 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6774 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6790 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6807 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6824 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6840 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6857 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6874 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6891 519 N 0 0 V 15 0 V 0 0 V 0.20 PolyFill
+gsave 6907 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6924 519 N 0 0 V 16 0 V 0 0 V 0.20 PolyFill
+gsave 6941 519 N 0 0 V 5 0 V 0 0 V 0.20 PolyFill
+% End plot #6
+% Begin plot #7
+1.000 UL
+LT0
+953 4871 M
+2 -1041 V
+16 -650 V
+17 -461 V
+17 -809 V
+17 -943 V
+16 -227 V
+17 -66 V
+17 -2 V
+16 -17 V
+17 -63 V
+17 -6 V
+17 -7 V
+16 -12 V
+17 -4 V
+17 -1 V
+17 -6 V
+16 -23 V
+17 -1 V
+17 -3 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 -2 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+% End plot #7
+% Begin plot #8
+stroke
+LT3
+953 4871 M
+2 -1134 V
+971 2691 L
+17 -483 V
+17 -219 V
+17 -862 V
+16 -374 V
+17 -107 V
+17 -51 V
+16 -21 V
+17 -27 V
+17 -9 V
+17 -5 V
+16 -4 V
+17 -1 V
+17 -2 V
+17 -1 V
+16 0 V
+17 -1 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+% End plot #8
+% Begin plot #9
+stroke
+LT1
+947 4871 M
+8 -1006 V
+971 2848 L
+17 -668 V
+1005 840 L
+17 -105 V
+16 -50 V
+17 -52 V
+17 -34 V
+16 -17 V
+17 -5 V
+17 -2 V
+17 -1 V
+16 -17 V
+17 -1 V
+17 -5 V
+17 -12 V
+16 -4 V
+17 -1 V
+17 -2 V
+16 -5 V
+17 -1 V
+17 -1 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 2744 519 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+% End plot #9
+% Begin plot #10
+stroke
+LT4
+944 4871 M
+955 3773 L
+971 2618 L
+988 1235 L
+17 -585 V
+17 -40 V
+16 -39 V
+17 -12 V
+17 -16 V
+16 -6 V
+17 -6 V
+17 -4 V
+17 -4 V
+16 -1 V
+17 -1 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+stroke 2727 519 M
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+% End plot #10
+% Begin plot #11
+stroke
+LT2
+948 4871 M
+7 -860 V
+16 -882 V
+17 -977 V
+17 -884 V
+17 -604 V
+16 -50 V
+17 -30 V
+17 -11 V
+16 -4 V
+17 0 V
+17 -1 V
+17 -3 V
+16 -1 V
+17 -16 V
+17 0 V
+17 -8 V
+16 -6 V
+17 -2 V
+17 -1 V
+16 0 V
+17 0 V
+17 -2 V
+17 -3 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+stroke 2677 521 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 4416 519 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 6155 519 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+6 0 V
+% End plot #11
+% Begin plot #12
+stroke
+LT5
+944 4871 M
+11 -945 V
+971 2830 L
+17 -846 V
+1005 906 L
+17 -250 V
+16 -52 V
+17 -4 V
+17 -24 V
+16 -11 V
+17 -17 V
+17 -13 V
+17 -8 V
+16 0 V
+17 -1 V
+17 0 V
+17 -1 V
+16 -1 V
+17 -1 V
+17 0 V
+16 -1 V
+17 -1 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 2744 519 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 4483 519 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 6222 519 M
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+6 0 V
+% End plot #12
+% Begin plot #13
+stroke
+LT0
+955 4871 M
+0 -66 V
+16 -4 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+% End plot #13
+% Begin plot #14
+stroke
+LT3
+955 4871 M
+0 -66 V
+16 -4 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+% End plot #14
+% Begin plot #15
+stroke
+LT1
+955 4871 M
+0 -79 V
+16 -35 V
+17 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 -6 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -607 V
+17 -23 V
+17 0 V
+17 0 V
+16 -203 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -354 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -17 V
+17 0 V
+16 -8 V
+17 0 V
+17 -34 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -88 V
+17 0 V
+17 -11 V
+17 0 V
+16 0 V
+17 0 V
+17 -223 V
+17 -1 V
+16 0 V
+17 0 V
+stroke 2677 3180 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -1431 V
+2777 531 L
+17 -8 V
+17 -2 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+% End plot #15
+% Begin plot #16
+stroke
+LT4
+955 4871 M
+0 -83 V
+16 -29 V
+17 -1 V
+17 -1 V
+17 -1 V
+16 0 V
+17 -7 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -6 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -4 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -34 V
+17 0 V
+17 -33 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -191 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -323 V
+17 -193 V
+17 -34 V
+17 0 V
+16 -334 V
+17 -78 V
+17 -26 V
+16 -67 V
+17 -7 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -12 V
+16 0 V
+17 -225 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -118 V
+17 0 V
+16 -90 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -60 V
+17 0 V
+16 -596 V
+2493 539 L
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -19 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+% End plot #16
+% Begin plot #17
+stroke
+LT2
+955 4871 M
+0 -81 V
+16 -28 V
+17 -2 V
+17 0 V
+17 0 V
+16 -11 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -16 V
+17 0 V
+17 0 V
+17 -41 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -1144 V
+16 -56 V
+17 -63 V
+17 -12 V
+17 -22 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -24 V
+17 0 V
+17 0 V
+16 0 V
+17 -100 V
+17 -37 V
+16 -4 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -10 V
+17 -17 V
+17 -6 V
+16 -7 V
+17 -6 V
+stroke 2677 3184 M
+17 -1 V
+16 -2 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 4416 3180 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -48 V
+17 -8 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -62 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 6155 3062 M
+17 -71 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+6539 583 L
+17 -19 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -19 V
+17 -5 V
+17 -14 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 -1 V
+17 0 V
+17 -4 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+6 0 V
+% End plot #17
+% Begin plot #18
+stroke
+LT5
+955 4871 M
+0 -76 V
+16 -37 V
+17 -2 V
+17 -1 V
+17 0 V
+16 0 V
+17 -2 V
+17 0 V
+16 -1 V
+17 -2 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -24 V
+16 0 V
+17 0 V
+17 0 V
+17 -39 V
+16 0 V
+17 0 V
+17 -3 V
+16 0 V
+17 0 V
+17 0 V
+17 -1135 V
+16 -90 V
+17 0 V
+17 -7 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -42 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -51 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -39 V
+17 0 V
+17 0 V
+16 -49 V
+17 -40 V
+17 0 V
+16 0 V
+17 0 V
+17 -35 V
+17 -15 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+stroke 2677 3180 M
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 4416 3180 M
+17 0 V
+16 -56 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -62 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -71 V
+16 0 V
+17 -100 V
+17 0 V
+16 0 V
+17 0 V
+17 -503 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -413 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -469 V
+17 -983 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+stroke 6155 522 M
+17 0 V
+16 0 V
+17 0 V
+17 -2 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+6 0 V
+% End plot #18
+% Begin plot #19
+stroke
+3.000 UL
+LT0
+LCb setrgbcolor
+4700 4738 M
+(CMA-ES) Lshow
+LT0
+6380 4738 M
+399 0 V
+954 4871 M
+1 -202 V
+16 -153 V
+17 -332 V
+17 -29 V
+17 -5 V
+16 -2 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -15 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+% End plot #19
+% Begin plot #20
+stroke
+LT3
+LCb setrgbcolor
+4700 4598 M
+(active CMA-ES) Lshow
+LT3
+6380 4598 M
+399 0 V
+954 4871 M
+1 -194 V
+16 -203 V
+17 -331 V
+17 -144 V
+17 -4 V
+16 -1 V
+17 -23 V
+17 0 V
+16 0 V
+17 0 V
+17 -13 V
+17 -7 V
+16 -4 V
+17 -13 V
+17 -6 V
+17 -2 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+% End plot #20
+% Begin plot #21
+stroke
+LT1
+LCb setrgbcolor
+4700 4458 M
+(IPOP-CMA-ES) Lshow
+LT1
+6380 4458 M
+399 0 V
+954 4871 M
+1 -254 V
+16 -417 V
+17 -77 V
+17 -10 V
+17 -80 V
+16 -47 V
+17 -328 V
+17 0 V
+16 0 V
+17 -31 V
+17 -25 V
+17 -26 V
+16 -7 V
+17 -6 V
+17 -15 V
+17 -27 V
+16 -3 V
+17 -4 V
+17 -2 V
+16 -3 V
+17 -3 V
+17 -2 V
+17 -1 V
+16 0 V
+17 0 V
+17 -19 V
+16 -6 V
+17 -3 V
+17 0 V
+17 -8 V
+16 0 V
+17 -7 V
+17 -2 V
+17 -5 V
+16 -1 V
+17 -2 V
+17 -3 V
+16 -5 V
+17 -2 V
+17 -19 V
+17 -2 V
+16 -3 V
+17 0 V
+17 -5 V
+16 -6 V
+17 -58 V
+17 -11 V
+17 -56 V
+16 -50 V
+17 0 V
+17 -49 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 -36 V
+17 -82 V
+17 0 V
+16 -35 V
+17 -68 V
+17 -8 V
+16 -17 V
+17 -64 V
+17 0 V
+17 -738 V
+16 -98 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+2142 656 L
+17 -109 V
+16 0 V
+17 -19 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -2 V
+16 0 V
+17 0 V
+17 -2 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+% End plot #21
+% Begin plot #22
+stroke
+LT4
+LCb setrgbcolor
+4700 4318 M
+(active IPOP-CMA-ES) Lshow
+LT4
+6380 4318 M
+399 0 V
+954 4871 M
+1 -267 V
+16 -425 V
+17 -165 V
+17 -50 V
+17 -174 V
+16 -165 V
+17 -40 V
+17 -63 V
+16 -7 V
+17 -13 V
+17 -13 V
+17 -21 V
+16 -7 V
+17 0 V
+17 -32 V
+17 -5 V
+16 -4 V
+17 -1 V
+17 -2 V
+16 0 V
+17 -2 V
+17 -1 V
+17 -8 V
+16 0 V
+17 -22 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -108 V
+17 0 V
+17 -36 V
+17 -9 V
+16 -24 V
+17 0 V
+17 0 V
+16 -27 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -42 V
+17 0 V
+16 -53 V
+17 -22 V
+17 -1 V
+17 0 V
+16 -195 V
+1891 721 L
+17 -175 V
+17 -11 V
+16 -11 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+% End plot #22
+% Begin plot #23
+stroke
+LT2
+LCb setrgbcolor
+4700 4178 M
+(BIPOP-CMA-ES) Lshow
+LT2
+6380 4178 M
+399 0 V
+954 4871 M
+1 -187 V
+16 -384 V
+17 -158 V
+17 -156 V
+17 -298 V
+16 -114 V
+17 -28 V
+17 -34 V
+16 -24 V
+17 -15 V
+17 -24 V
+17 -4 V
+16 -16 V
+17 0 V
+17 0 V
+17 0 V
+16 -15 V
+17 0 V
+17 -95 V
+16 0 V
+17 0 V
+17 -27 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -31 V
+16 -31 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -19 V
+17 -18 V
+16 -9 V
+17 -4 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -50 V
+17 0 V
+17 -5 V
+16 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 -47 V
+16 0 V
+17 0 V
+17 -12 V
+17 -1 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+stroke 2644 3062 M
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -70 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -6 V
+16 0 V
+17 0 V
+17 -30 V
+16 -44 V
+17 -104 V
+17 -24 V
+17 -130 V
+16 -164 V
+17 0 V
+17 0 V
+17 -8 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -151 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -824 V
+17 -942 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -6 V
+17 -5 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 -2 V
+17 0 V
+16 0 V
+stroke 4382 550 M
+17 0 V
+17 0 V
+17 -5 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -15 V
+17 -4 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+stroke 6121 519 M
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+6 0 V
+% End plot #23
+% Begin plot #24
+stroke
+LT5
+LCb setrgbcolor
+4700 4038 M
+(active BIPOP-CMA-ES) Lshow
+LT5
+6380 4038 M
+399 0 V
+955 4871 M
+0 -169 V
+16 -387 V
+17 -163 V
+17 -16 V
+17 -18 V
+16 -303 V
+17 -212 V
+17 -35 V
+16 -14 V
+17 -6 V
+17 -17 V
+17 -33 V
+16 -16 V
+17 -19 V
+17 -21 V
+17 -11 V
+16 -16 V
+17 -5 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -3 V
+17 0 V
+16 0 V
+17 -8 V
+17 -3 V
+17 0 V
+16 -50 V
+17 -73 V
+17 -89 V
+16 -3 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -12 V
+17 -34 V
+17 -2 V
+16 -7 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -18 V
+17 -43 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+stroke 2644 3062 M
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -40 V
+16 0 V
+17 0 V
+17 -31 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -8 V
+16 0 V
+17 0 V
+17 -28 V
+16 0 V
+17 0 V
+17 -7 V
+17 0 V
+16 0 V
+17 -13 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -291 V
+16 0 V
+17 -93 V
+17 0 V
+17 0 V
+16 -90 V
+17 -32 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -133 V
+17 0 V
+3530 572 L
+16 -46 V
+17 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 -1 V
+16 0 V
+17 -2 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 -1 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 -1 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+stroke 5269 519 M
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+17 0 V
+16 0 V
+17 0 V
+17 0 V
+6 0 V
+% End plot #24
+stroke
+1.000 UL
+LTb
+938 4871 N
+938 448 L
+6009 0 V
+0 4423 V
+-6009 0 V
+Z stroke
+1.000 UP
+1.000 UL
+LTb
+stroke
+grestore
+end
+showpage
+%%Trailer
+%%DocumentFonts: Helvetica
+%%Pages: 1
