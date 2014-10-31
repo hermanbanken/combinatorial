@@ -9,10 +9,13 @@ unset xtics
 unset ytics
 set key off
 unset colorbox
+set zrange [0:4]
 
 set output outfile
 
-plot matrix binary format='%float32%float32%float32%int16%int8%int8' using 1:2:3 with points pt 12 ps 2 palette, line using 1:2:(4) with linespoints lw 2 palette
+
+set palette defined ( 0 "white", 1 "brown", 2 "red", 3 "blue", 4 "black")
+plot 'points.dat' using 1:2:3 with dots palette, matrix binary format='%float32%float32%float32%int16%int8%int8' using 1:2:3 with points pt 12 ps 2 palette, line using 1:2:(4) with linespoints lw 2 palette
 
 
 # for n in {400,800,1600,3200}; do; for alg in {s,t,a,d}; do; gnuplot -e "matrix='matrix-clear.bin'; line='ex-problem-0-$alg-n-$n-run-1.line'; outfile='line-0-$alg-n-$n.png'" line.plot; done; done
